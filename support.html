@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pro-curo support and knowledge base — getting started guides, how-to articles, FAQs, version history, and troubleshooting for Pro-curo tissue traceability software.">
+  <title>Support &amp; Knowledge Base | Pro-curo — Tissue Traceability Software</title>
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== Support Page Styles ===== */
+    .kb-search {
+      max-width: 640px;
+      margin: 0 auto 48px;
+      position: relative;
+    }
+    .kb-search input {
+      width: 100%;
+      padding: 16px 20px 16px 52px;
+      font-size: 1.1rem;
+      border: 2px solid #dde3ea;
+      border-radius: 12px;
+      background: #fff;
+      color: #2c3e50;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    .kb-search input:focus {
+      outline: none;
+      border-color: #1F4E79;
+      box-shadow: 0 0 0 3px rgba(31,78,121,0.1);
+    }
+    .kb-search .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.3rem;
+      color: #8899aa;
+      pointer-events: none;
+    }
+    .kb-search .search-clear {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      color: #8899aa;
+      cursor: pointer;
+      display: none;
+      padding: 4px;
+    }
+    .kb-search .search-clear:hover { color: #2c3e50; }
+    .kb-no-results {
+      text-align: center;
+      padding: 48px 20px;
+      color: #667788;
+      display: none;
+    }
+
+    /* Topic navigation */
+    .kb-topics {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+    .kb-topic-card {
+      background: #fff;
+      border: 1px solid #e8ecf0;
+      border-radius: 12px;
+      padding: 28px 24px;
+      text-align: center;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .kb-topic-card:hover {
+      border-color: #1F4E79;
+      box-shadow: 0 4px 16px rgba(31,78,121,0.1);
+      transform: translateY(-2px);
+      color: inherit;
+    }
+    .kb-topic-card .topic-icon {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .kb-topic-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    .kb-topic-card p {
+      font-size: 0.9rem;
+      color: #667788;
+      margin: 0;
+    }
+
+    /* Article sections */
+    .kb-section {
+      margin-bottom: 56px;
+      scroll-margin-top: 100px;
+    }
+    .kb-section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e8ecf0;
+    }
+    .kb-section-header .section-icon {
+      font-size: 1.6rem;
+    }
+    .kb-section-header h2 {
+      font-size: 1.6rem;
+      margin: 0;
+    }
+
+    /* Expandable articles */
+    .kb-article {
+      background: #fff;
+      border: 1px solid #e8ecf0;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .kb-article:hover {
+      border-color: #c5d0db;
+    }
+    .kb-article-header {
+      padding: 18px 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fdfdfe;
+      user-select: none;
+    }
+    .kb-article-header h3 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin: 0;
+      color: #1a2a3a;
+    }
+    .kb-article-header .toggle-icon {
+      font-size: 1.2rem;
+      color: #8899aa;
+      transition: transform 0.25s;
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+    .kb-article.open .kb-article-header .toggle-icon {
+      transform: rotate(180deg);
+    }
+    .kb-article-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .kb-article.open .kb-article-body {
+      max-height: 5000px;
+    }
+    .kb-article-content {
+      padding: 0 24px 24px;
+      line-height: 1.75;
+      color: #3d4f60;
+    }
+    .kb-article-content p {
+      margin-bottom: 14px;
+    }
+    .kb-article-content ul {
+      margin: 0 0 14px 20px;
+      list-style: disc;
+    }
+    .kb-article-content ul li {
+      margin-bottom: 6px;
+    }
+    .kb-article-content .kb-screenshot {
+      margin: 16px 0;
+      border-radius: 8px;
+      border: 1px solid #e8ecf0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      max-width: 600px;
+      cursor: pointer;
+    }
+    .kb-article-content .kb-tip {
+      background: #eef6ff;
+      border-left: 4px solid #1F4E79;
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+      font-size: 0.95rem;
+    }
+    .kb-article-content .kb-warning {
+      background: #fff8ee;
+      border-left: 4px solid #e6a817;
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+      font-size: 0.95rem;
+    }
+
+    /* Version timeline */
+    .version-timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+    .version-timeline::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #1F4E79, #6ba3d6);
+      border-radius: 2px;
+    }
+    .version-entry {
+      position: relative;
+      margin-bottom: 40px;
+    }
+    .version-entry::before {
+      content: '';
+      position: absolute;
+      left: -33px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      background: #1F4E79;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px #1F4E79;
+    }
+    .version-entry.current::before {
+      background: #27ae60;
+      box-shadow: 0 0 0 2px #27ae60;
+    }
+    .version-entry h3 {
+      font-size: 1.3rem;
+      margin-bottom: 4px;
+    }
+    .version-entry .version-date {
+      font-size: 0.9rem;
+      color: #8899aa;
+      margin-bottom: 12px;
+    }
+    .version-entry .version-badge {
+      display: inline-block;
+      background: #27ae60;
+      color: #fff;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .version-entry p {
+      color: #3d4f60;
+      margin-bottom: 12px;
+    }
+    .version-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .version-features li {
+      list-style: none;
+      padding-left: 20px;
+      position: relative;
+      font-size: 0.93rem;
+      color: #4a5c6e;
+    }
+    .version-features li::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      color: #1F4E79;
+      font-weight: bold;
+    }
+
+    /* Quick contact bar */
+    .support-contact-bar {
+      background: #f5f8fb;
+      border: 1px solid #e0e7ee;
+      border-radius: 12px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .support-contact-bar p {
+      margin: 0;
+      font-size: 1.05rem;
+      color: #3d4f60;
+    }
+    .support-contact-bar .contact-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+      .kb-topics {
+        grid-template-columns: 1fr;
+      }
+      .version-features {
+        grid-template-columns: 1fr;
+      }
+      .support-contact-bar {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="img/logo-icon.jpg" alt="Pro-curo logo">
+        <span>Pro-curo</span>
+      </a>
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="whats-new.html">What's New</a></li>
+          <li><a href="support.html" class="active">Support</a></li>
+          <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" style="padding: 64px 0 48px;">
+    <div class="container" style="flex-direction: column; text-align: center;">
+      <div class="hero-content" style="max-width: 700px; margin: 0 auto;">
+        <h1>Support &amp; <span>Knowledge Base</span></h1>
+        <p class="lead">Find answers, learn how to get the most from Pro-curo, and explore guides covering every feature — from getting started to advanced administration.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Search ===== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container" style="display: block;">
+
+      <div class="kb-search">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" id="kb-search-input" placeholder="Search the knowledge base..." autocomplete="off">
+        <button class="search-clear" id="kb-search-clear" aria-label="Clear search">&times;</button>
+      </div>
+
+      <div class="kb-no-results" id="kb-no-results">
+        <p style="font-size: 1.2rem; margin-bottom: 8px;">No matching articles found</p>
+        <p>Try different keywords or <a href="contact.html">contact our support team</a>.</p>
+      </div>
+
+      <!-- ===== Quick Contact Bar ===== -->
+      <div class="support-contact-bar">
+        <p><strong>Need direct help?</strong> Our support team is here for you during UK business hours.</p>
+        <div class="contact-actions">
+          <a href="tel:+441403473839" class="btn btn-outline" style="padding: 10px 20px; font-size: 0.9rem;">Call +44 (0)1403 473839</a>
+          <a href="mailto:info@pro-curo.com" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">Email Support</a>
+        </div>
+      </div>
+
+      <!-- ===== Topic Cards ===== -->
+      <div class="kb-topics" id="kb-topics">
+        <a href="#getting-started" class="kb-topic-card">
+          <span class="topic-icon">&#127937;</span>
+          <h3>Getting Started</h3>
+          <p>First-time setup, logging on, and navigating the main screen</p>
+        </a>
+        <a href="#locations" class="kb-topic-card">
+          <span class="topic-icon">&#128205;</span>
+          <h3>Locations</h3>
+          <p>Setting up buildings, rooms, freezers, shelves, racks, and boxes</p>
+        </a>
+        <a href="#samples" class="kb-topic-card">
+          <span class="topic-icon">&#129514;</span>
+          <h3>Samples</h3>
+          <p>Adding, editing, splitting, moving, booking in/out, and disposing</p>
+        </a>
+        <a href="#projects" class="kb-topic-card">
+          <span class="topic-icon">&#128203;</span>
+          <h3>Projects</h3>
+          <p>Project setup, user permissions, and sample assignment</p>
+        </a>
+        <a href="#labels" class="kb-topic-card">
+          <span class="topic-icon">&#127991;</span>
+          <h3>Labels &amp; Barcodes</h3>
+          <p>Label designer, barcode printing, and RFID integration</p>
+        </a>
+        <a href="#reports" class="kb-topic-card">
+          <span class="topic-icon">&#128202;</span>
+          <h3>Reports &amp; Search</h3>
+          <p>Query builder, data exports, system reports, and advanced search</p>
+        </a>
+        <a href="#admin" class="kb-topic-card">
+          <span class="topic-icon">&#9881;&#65039;</span>
+          <h3>Administration</h3>
+          <p>Users, sample types, system settings, and database management</p>
+        </a>
+        <a href="#version-history" class="kb-topic-card">
+          <span class="topic-icon">&#128197;</span>
+          <h3>Version History</h3>
+          <p>What changed in each major version — from V2 through to V5</p>
+        </a>
+        <a href="#faq" class="kb-topic-card">
+          <span class="topic-icon">&#10067;</span>
+          <h3>FAQs</h3>
+          <p>Answers to the most common questions about Pro-curo</p>
+        </a>
+      </div>
+
+
+      <!-- ============================================================
+           GETTING STARTED
+           ============================================================ -->
+      <div class="kb-section" id="getting-started">
+        <div class="kb-section-header">
+          <span class="section-icon">&#127937;</span>
+          <h2>Getting Started</h2>
+        </div>
+
+        <div class="kb-article" data-keywords="login logon password username first time sign in access">
+          <div class="kb-article-header">
+            <h3>Logging on for the first time</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Every user must log on to Pro-curo using their unique username, which should be supplied by your system administrator.</p>
+              <p>Select your username from the dropdown list by either clicking into it and scrolling, or typing the first letter of your name to jump to it. When you log on for the first time your password will be set to <em>"password"</em> — the system will prompt you to change this immediately.</p>
+              <div class="kb-tip">
+                <strong>Tip:</strong> If your administrator has enabled advanced security, your password will need to contain at least 6 characters (including a number) and must be changed every 30 days. Otherwise you can choose any password format.
+              </div>
+              <p>You can change your password at any time by clicking the "Change password" link on the logon screen. You'll need to enter your current password, then your new password, and confirm it.</p>
+              <div class="kb-warning">
+                <strong>Forgotten password?</strong> Ask your administrator to reset it — they can force a password change which will default your password back to your login name.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="main screen interface navigation menu ribbon toolbar icons tabs">
+          <div class="kb-article-header">
+            <h3>Understanding the main screen</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Once logged in, the main screen is where you'll spend most of your time. All functions and features are accessed through the menu bar, ribbon toolbar, and right-click context menus.</p>
+              <p>The main screen is divided into key areas:</p>
+              <ul>
+                <li><strong>Tab bar</strong> — Switch between Locations &amp; Samples, Administration, Mobile &amp; Scanning, and Reporting. Standard users typically won't see the Administration tab.</li>
+                <li><strong>Ribbon bar</strong> — Contains icon shortcuts for the most common actions (New, Edit, Split, Move, Book In/Out, etc.).</li>
+                <li><strong>Locations panel (left)</strong> — Shows your institute's storage hierarchy as a tree view. There are three fixed top-level locations: Pro-curo (root), My Samples, and Pro-curo / Disposed.</li>
+                <li><strong>Samples panel (right)</strong> — Shows a list or grid view of samples within the selected location. Right-click here for the quick-access samples menu.</li>
+                <li><strong>Project filter</strong> — A dropdown to filter samples by project, showing only the relevant subset.</li>
+              </ul>
+              <img src="img/dashboard.jpg" alt="Pro-curo main screen showing locations tree and sample list" class="kb-screenshot">
+              <div class="kb-tip">
+                <strong>Tip:</strong> Check the "Include sub locations" box to see all samples within a freezer and its shelves, racks, draws, and boxes — regardless of depth. Check "Include retired samples" to show retired records (highlighted in orange).
+              </div>
+              <p><strong>In Pro-curo V5</strong>, the main screen has been redesigned as a modern web-based dashboard with interactive widgets, real-time KPIs, and a responsive layout that works on any device.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="company details setup initial first configure system settings">
+          <div class="kb-article-header">
+            <h3>Initial system setup</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Before you begin using Pro-curo, several items should be configured by your administrator:</p>
+              <ul>
+                <li><strong>Company details</strong> — Go to File &rarr; Setup &rarr; Company Details and enter your organisation's name and contact information. This appears on printed reports and labels.</li>
+                <li><strong>Users</strong> — Set up an account for everyone who will use the system (File &rarr; Setup &rarr; Users). Define what each user can do — from full administrator rights to restricted access for specific tasks such as adding or disposing of samples.</li>
+                <li><strong>Sample types</strong> — Define the tissue and sample types your laboratory handles (e.g., Plasma, Cells, DNA, Tissue). These populate dropdown lists when registering new samples.</li>
+                <li><strong>Projects</strong> — Create projects to organise samples by department, study, or client. Projects control visibility — users only see samples in projects they're approved for.</li>
+                <li><strong>Disposal reasons</strong> — Set up the reasons a sample might be disposed of (e.g., expired, used for research, patient withdrawn). These appear in the sample's history for audit purposes.</li>
+              </ul>
+              <div class="kb-tip">
+                <strong>Tip:</strong> Once a user has been removed from the system, they cannot be re-added with the same username. This is because their actions are permanently linked to that login name for audit trail integrity.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ============================================================
+           LOCATIONS
+           ============================================================ -->
+      <div class="kb-section" id="locations">
+        <div class="kb-section-header">
+          <span class="section-icon">&#128205;</span>
+          <h2>Locations</h2>
+        </div>
+
+        <div class="kb-article" data-keywords="location add new create building room freezer shelf rack drawer box hierarchy structure">
+          <div class="kb-article-header">
+            <h3>Adding and organising locations</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Pro-curo lets you model your entire storage infrastructure as a hierarchy of locations. All locations are listed under the root "Pro-curo" location, and the hierarchy can include buildings, rooms, freezers, shelves, racks, draws, and boxes.</p>
+              <p>You don't need the full set at every level — for example, you can have a building with just a freezer directly inside it if that matches your real-world layout.</p>
+              <p><strong>To add a new location:</strong></p>
+              <ul>
+                <li>Click on the parent location in the Locations panel (e.g., click your room to add a freezer within it).</li>
+                <li>Click the "New" icon in the Locations &amp; Samples ribbon, or right-click and select "New location...".</li>
+                <li>Choose the location type (Building, Room, Freezer, Shelf, Rack, Drawer, Box).</li>
+                <li>Enter a descriptive name — for example "Lab 1.1" for a room, or "-80 Freezer F001" for a freezer.</li>
+              </ul>
+              <img src="img/locations.jpg" alt="Pro-curo location tree showing hierarchical structure" class="kb-screenshot">
+              <div class="kb-tip">
+                <strong>Enterprise edition:</strong> When creating a Box location, you can define its layout — single dimension (e.g., 10 positions), or two-dimensional grids with alphanumeric (A1–J10) or numeric (1–100) sub-locations. The system automatically creates all sub-positions for you.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="location duplicate copy move rename delete manage edit">
+          <div class="kb-article-header">
+            <h3>Managing locations (duplicate, move, rename, delete)</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Pro-curo provides several tools to help you manage your location structure efficiently:</p>
+              <ul>
+                <li><strong>Duplicate</strong> — Copy a location's structure (including all sub-locations) to quickly build out similar shelves, racks, or draws. This is particularly useful when setting up a freezer with a standard layout. Note: duplicating a location does not copy the samples within it, only the structure.</li>
+                <li><strong>Move</strong> — Relocate a location to a different parent. You can only move within the correct hierarchy (e.g., you cannot put a room under a freezer). If the location contains samples, all their history records will be updated to reflect the change.</li>
+                <li><strong>Rename</strong> — Change a location's name at any time. All sample history records within that location will be updated to show the new name.</li>
+                <li><strong>Delete</strong> — Remove a location, but only if it contains no samples. A location may appear empty if you are not approved for all projects — check with your administrator.</li>
+              </ul>
+              <p>All of these actions are available from both the ribbon bar and the right-click context menu in the Locations panel.</p>
+              <div class="kb-tip">
+                <strong>Tip:</strong> The icons used for buildings, rooms, boxes, etc. can be customised to better reflect your institute's storage types. Contact the Pro-curo technical team for guidance.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="location label print barcode 2d datamatrix qr code">
+          <div class="kb-article-header">
+            <h3>Printing location labels</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>You can print labels for any location in your hierarchy. These labels can include 2D Datamatrix barcodes representing the unique location name, which can be scanned with the Pro-curo Mobile application running on a portable barcode terminal.</p>
+              <p>To print a location label, select the location in the tree, then click "Print label" in the ribbon or right-click menu. Choose your printer and label template from the Select Label dialog box.</p>
+              <p>Printed location labels speed up the process of moving samples remotely and improve traceability confidence by reducing the risk of a user selecting the wrong location manually.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ============================================================
+           SAMPLES
+           ============================================================ -->
+      <div class="kb-section" id="samples">
+        <div class="kb-section-header">
+          <span class="section-icon">&#129514;</span>
+          <h2>Samples</h2>
+        </div>
+
+        <div class="kb-article" data-keywords="sample add new register create entry data fields information project batch donor">
+          <div class="kb-article-header">
+            <h3>Adding new samples</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>To add a new sample, navigate to the location where you want to store it, then click "New" in the Samples section of the ribbon (or right-click in the samples panel and select "New sample...").</p>
+              <p>The Sample Information screen contains the following preformatted fields:</p>
+              <ul>
+                <li><strong>Project</strong> — Assign the sample to a project. This is mandatory and controls who can see and work with the sample.</li>
+                <li><strong>Sample type</strong> — Select the tissue or material type (e.g., Blood, Plasma, Cells, DNA). This is mandatory and can be pre-loaded with your organisation's types.</li>
+                <li><strong>Batch number</strong> — Typically used as a patient ID or donor ID, linking all samples from the same source.</li>
+                <li><strong>External reference</strong> — Any unique identifier already on the sample, such as a pre-printed barcode. Pro-curo enforces 100% uniqueness on this field.</li>
+                <li><strong>Mass</strong> — Record the sample's volume or weight, with a selectable unit of measurement.</li>
+                <li><strong>Re-agent %</strong> — The percentage of the sample that is re-agent rather than actual tissue.</li>
+                <li><strong>Location &amp; Sub-location</strong> — The exact position within your storage hierarchy, right down to the box position.</li>
+                <li><strong>Notes</strong> — Free-text field for additional information.</li>
+              </ul>
+              <img src="img/samples.jpg" alt="Pro-curo sample management screen" class="kb-screenshot">
+              <p>You can also attach documents to individual samples or to entire batches using the "Sample document links" and "Batch document links" tabs.</p>
+              <div class="kb-tip">
+                <strong>Tip:</strong> Use "Add and duplicate" when registering multiple similar samples — it creates the first sample then prompts for how many additional copies to create, saving significant data entry time.
+              </div>
+              <p>Every sample is assigned a unique Pro-curo sample number (starting with "S") that cannot be reused or repeated, making it ideal for barcode identification.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="user fields custom definable dropdown mandatory configurable data capture">
+          <div class="kb-article-header">
+            <h3>Custom user-definable fields</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>In addition to the standard fields, Pro-curo provides 20 user-definable fields per sample, allowing you to capture data specific to your organisation's requirements:</p>
+              <ul>
+                <li><strong>Fields 1–10:</strong> Can be pre-loaded with dropdown lists of possible values (e.g., Gender, Consent status, Storage type). These can be set to "strict dropdown only" or allow free text entry as well.</li>
+                <li><strong>Fields 11–15:</strong> Free-flow text fields where users can enter anything.</li>
+                <li><strong>Fields 16–18:</strong> Alphanumeric fields.</li>
+                <li><strong>Fields 19–20:</strong> Calendar/date fields, ensuring consistent date formatting.</li>
+              </ul>
+              <p>Field headings can be renamed to match your terminology (e.g., "User field 01" becomes "Gender" or "Consent Date"). Fields can also be marked as mandatory — the sample cannot be saved unless they are completed.</p>
+              <p>Configure these under File &rarr; Setup &rarr; User Fields.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="sample edit change modify update information">
+          <div class="kb-article-header">
+            <h3>Editing samples</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>To edit a sample's information, highlight it in the samples panel and click "Edit" in the ribbon, or double-click the sample, or right-click and select "Edit sample...". You can modify any field — all changes are recorded in the sample's full audit history.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="split aliquot sample divide portion create child parent processing">
+          <div class="kb-article-header">
+            <h3>Splitting (aliquoting) samples</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>The Split function lets you create new child samples from an existing parent sample — useful for aliquoting or processing tissue into multiple portions.</p>
+              <p>During a split you decide:</p>
+              <ul>
+                <li>How many new samples to create</li>
+                <li>What sample type the new samples will be</li>
+                <li>Their individual mass/volume</li>
+                <li>Where to store them</li>
+                <li>What happens to the original (keep, retire, or dispose)</li>
+              </ul>
+              <p>Full parent–child audit trails are automatically recorded. This is particularly time-saving when, for example, spinning down whole blood into 25 samples of Plasma, or extracting DNA from a tissue section.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="sample move relocate transfer book in out booked temporary remove location">
+          <div class="kb-article-header">
+            <h3>Moving samples and booking in/out</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p><strong>Moving samples:</strong> Select one or more samples (use Ctrl+click or Shift+click for multiple selection), then click "Move" in the ribbon. A location picker will appear — select the new destination and click OK. You can also move entire locations with all their contents.</p>
+              <p><strong>Booking out:</strong> When samples are temporarily removed from storage (e.g., for lab work), highlight them and click "Book out". The samples' background colour changes from white to brown, indicating they are out of storage. This maintains the chain of custody without losing track of the sample.</p>
+              <p><strong>Booking in:</strong> When samples are returned to storage, highlight them and click "Book in". The background returns to white.</p>
+              <div class="kb-tip">
+                <strong>Tip:</strong> All booking and movement operations are recorded in the sample's history with a timestamp and the user who performed the action — critical for HTA audit compliance.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="sample retire dispose disposal reason end of life archive history">
+          <div class="kb-article-header">
+            <h3>Retiring and disposing of samples</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p><strong>Retiring</strong> a sample removes it from the active view but preserves all history. Retired samples appear in orange if "Include retired samples" is checked. This is useful for samples no longer in active use but whose records must be retained (e.g., for the HTA's 30-year retention requirement).</p>
+              <p><strong>Disposing</strong> moves the sample to "Pro-curo / Disposed" and records a disposal reason (which you set up in File &rarr; Setup &rarr; Disposal Reasons). The full sample history remains intact for compliance audits.</p>
+              <div class="kb-warning">
+                <strong>Important:</strong> Under the Human Tissue Act, tissue sample records may need to be retained for up to 30 years. Pro-curo's retire and dispose functions ensure records are never actually deleted, maintaining full traceability throughout the retention period.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="sample history audit trail view log changes who what when traceability">
+          <div class="kb-article-header">
+            <h3>Viewing sample history (audit trail)</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Every action performed on a sample is recorded: who did it, what they changed, and when. To view a sample's complete history, right-click it and select "View history..." or use the ribbon icon.</p>
+              <p>The history records all events including: creation, edits, movements, book in/out, splits, retirement, and disposal — giving you a complete, unbroken chain of custody from intake to final disposition.</p>
+              <p>This audit trail is essential for HTA compliance inspections and can be exported or printed as needed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ============================================================
+           PROJECTS
+           ============================================================ -->
+      <div class="kb-section" id="projects">
+        <div class="kb-section-header">
+          <span class="section-icon">&#128203;</span>
+          <h2>Projects</h2>
+        </div>
+
+        <div class="kb-article" data-keywords="project add create setup department client site group organise">
+          <div class="kb-article-header">
+            <h3>Setting up projects</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Projects let you organise samples by department, study, client, or site. Every sample must be assigned to a project, which also controls access — users only see samples in projects they are approved for.</p>
+              <p>To create a project, go to the Project Information screen and enter:</p>
+              <ul>
+                <li><strong>Project title</strong> — A descriptive name for the study or department.</li>
+                <li><strong>Project sponsor</strong> — The funding body or responsible party.</li>
+                <li><strong>Contact</strong> — The project owner or lead contact.</li>
+                <li><strong>Address details</strong> — Postal address, telephone, fax.</li>
+                <li><strong>Notes</strong> — Any additional context about the project.</li>
+              </ul>
+              <p>Once a project is created, you must add approved users and configure user-definable fields specific to that project's data requirements.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="project users permissions approved access restrict visibility who can see">
+          <div class="kb-article-header">
+            <h3>Managing project access and permissions</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Each project has an "Approved users" list. Only users on this list can view, add, or modify samples belonging to that project. A user can be approved for multiple projects, and a project can have multiple approved users.</p>
+              <p>In the V4+ versions, project permissions are managed within the Users screen (under Administration), making it easier for administrators to see and manage all of a user's project access in one place.</p>
+              <p>When a user selects a project from the Project filter dropdown on the main screen, only samples belonging to that project are displayed, and the column layout may change based on the project's user-definable field configuration.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ============================================================
+           LABELS & BARCODES
+           ============================================================ -->
+      <div class="kb-section" id="labels">
+        <div class="kb-section-header">
+          <span class="section-icon">&#127991;</span>
+          <h2>Labels &amp; Barcodes</h2>
+        </div>
+
+        <div class="kb-article" data-keywords="label designer template create design print barcode datamatrix 2d linear format size">
+          <div class="kb-article-header">
+            <h3>Using the graphical label designer</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Pro-curo includes a built-in graphical label designer for creating custom label templates. The designer is accessed from the main Setup menu and allows you to:</p>
+              <ul>
+                <li>Create unlimited label templates with custom names</li>
+                <li>Set the label height, width, and format</li>
+                <li>Add Linear barcodes, 2D Datamatrix codes, and text/database fields (including user-definable fields)</li>
+                <li>Preview labels at different magnification levels (x2, x4, x6, x8)</li>
+                <li>Test-print before deploying a template</li>
+              </ul>
+              <p>To print labels, highlight one or more samples (using Ctrl or Shift for multiple selection), click the Print button, select your printer and template, and the labels are produced. You can also import and export label designs to share them across installations.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="barcode rfid scanner portable terminal mobile handheld device zebra printer">
+          <div class="kb-article-header">
+            <h3>Barcode, RFID, and portable terminal integration</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Pro-curo integrates with barcode scanners and RFID readers for faster, more accurate sample tracking. The Pro-curo Mobile application runs on portable barcode terminals, enabling staff to:</p>
+              <ul>
+                <li>Scan location labels to navigate the storage hierarchy</li>
+                <li>Book samples in and out by scanning their barcodes</li>
+                <li>Move samples between locations remotely</li>
+                <li>Upload and download data to/from the main Pro-curo database</li>
+              </ul>
+              <p>Supported label printers include the Zebra GK420t range and similar thermal transfer printers. The mobile data manager provides offline capability, with auto-detection of connected devices and single-screen upload/download operations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ============================================================
+           REPORTS & SEARCH
+           ============================================================ -->
+      <div class="kb-section" id="reports">
+        <div class="kb-section-header">
+          <span class="section-icon">&#128202;</span>
+          <h2>Reports &amp; Search</h2>
+        </div>
+
+        <div class="kb-article" data-keywords="report system generate print export csv pdf data query builder visual drag drop custom">
+          <div class="kb-article-header">
+            <h3>Running reports and using the query builder</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Pro-curo includes built-in system reports that can be run from the Reporting tab. You can print sample lists, project summaries, location inventories, and audit trail reports.</p>
+              <p>The current sample list view can also be exported directly — click "Export grid" to save the visible data as a CSV file for use in Excel or other tools.</p>
+              <img src="img/querybuilder.jpg" alt="Pro-curo V5 query builder interface" class="kb-screenshot">
+              <p><strong>New in V5:</strong> The visual Query Builder lets you create custom data queries without writing any code. Drag and drop fields, apply filters and groupings, then export to CSV or generate polished PDF reports. You can save queries for re-use and schedule recurring reports.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="search find advanced filter global cross-entity sample project location document quick">
+          <div class="kb-article-header">
+            <h3>Search and filtering</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Pro-curo offers multiple ways to find what you're looking for:</p>
+              <ul>
+                <li><strong>Project filter</strong> — Use the dropdown on the main screen to narrow the view to a single project's samples.</li>
+                <li><strong>Built-in search</strong> — Access from the Search menu to find samples by number, batch, external reference, or any other field.</li>
+                <li><strong>Advanced SQL searches (V3+)</strong> — For power users, custom SQL queries can be run against the database for complex multi-criteria searches.</li>
+                <li><strong>V5 Global search</strong> — Search across samples, projects, locations, and documents simultaneously with instant results as you type and saved search presets.</li>
+              </ul>
+              <img src="img/search.jpg" alt="Pro-curo advanced search interface" class="kb-screenshot">
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="date alert notification reminder expiry review sample batch timer automatic">
+          <div class="kb-article-header">
+            <h3>Date alerts and notifications</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Date alerts let you set automatic reminders based on date fields in your samples. This is useful for tracking consent expiry dates, review dates, or any time-sensitive event.</p>
+              <p>To set up a date alert, go to File &rarr; Admin &rarr; Date Alerts. You can configure:</p>
+              <ul>
+                <li>Whether to alert on a single sample, an entire batch, or an entire project</li>
+                <li>Which date field to monitor (any of the user-definable date fields)</li>
+                <li>Whether to alert on a specific date or within a date range</li>
+              </ul>
+              <p>Active alerts appear in the Notification Bar at the bottom of the screen (V4+), highlighted in green when due. From V4 onwards, the date alert process runs automatically with enhanced integration into the notification system.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="import csv data external bulk migration wizard upload column mapping">
+          <div class="kb-article-header">
+            <h3>Importing external data</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Pro-curo can import sample data from external CSV files, making it easy to migrate from other systems or bulk-load records.</p>
+              <p>From V4 onwards, the import feature includes custom import profiles that map your CSV columns to Pro-curo fields. These profiles are stored per project and support both comma and colon delimiters.</p>
+              <img src="img/import-wizard.jpg" alt="Pro-curo CSV import wizard" class="kb-screenshot">
+              <p><strong>New in V5:</strong> The step-by-step Import Wizard provides drag-and-drop CSV upload, automatic column mapping, pre-import validation with error highlighting, and a clear summary of what was imported. You can also view import history and roll back if needed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ============================================================
+           ADMINISTRATION
+           ============================================================ -->
+      <div class="kb-section" id="admin">
+        <div class="kb-section-header">
+          <span class="section-icon">&#9881;&#65039;</span>
+          <h2>Administration</h2>
+        </div>
+
+        <div class="kb-article" data-keywords="user management add remove permissions rights administrator role access control">
+          <div class="kb-article-header">
+            <h3>Managing users and permissions</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Every person who uses Pro-curo must have their own login name and password. User accounts are managed under File &rarr; Setup &rarr; Users (or the Administration tab in V4+).</p>
+              <p>For each user, the administrator can control granular permissions including:</p>
+              <ul>
+                <li>Full administrator rights</li>
+                <li>Setup access (company, projects, sample types, etc.)</li>
+                <li>Sample operations (add, edit, split, move, retire, dispose)</li>
+                <li>Booking in/out</li>
+                <li>Label printing</li>
+                <li>Access to specific projects</li>
+                <li>Running the portable/mobile application</li>
+              </ul>
+              <div class="kb-warning">
+                <strong>Important:</strong> If you remove a user, they cannot be re-added. This is by design — the user's actions are permanently linked to their login name in the audit trail. Instead, you can limit their permissions or set their password to prevent access.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="sample type tissue add configure define plasma cells blood dna material">
+          <div class="kb-article-header">
+            <h3>Configuring sample types and measurement units</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Sample types define what kind of tissue or material each sample contains. These populate dropdown lists during sample entry and can be added or removed as needed.</p>
+              <p>Common sample types include: Plasma, Cells, Blood, DNA, Tissue, Serum, FFPE, and any other category relevant to your work.</p>
+              <p>Measurement units (ml, g, mg, etc.) are also configurable and can be added at any time via the setup menu or directly during sample entry by clicking the button next to the dropdown.</p>
+              <p>From V4, sample types can be filtered (allocated) per project, reducing the selection lists to show only types relevant to that specific study or department.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="column order data view selection display customise layout grid list arrange fields">
+          <div class="kb-article-header">
+            <h3>Customising column order and data display</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>You can rearrange the columns shown in the sample list view to prioritise the fields most relevant to your daily work. For example, if your team regularly uses External Reference and Batch Number, place those in the first few columns.</p>
+              <p>The Data View Selection screen lets you choose which columns are visible and their order. You can select all, deselect all, and move columns up or down in the list.</p>
+              <p>In the Enterprise edition's grid view, you can also select which data appears in the cell ID label and link label fields, and adjust cell scaling to "fit to display" for optimal viewing.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="database maintenance archive backup check repair sql server installation technical">
+          <div class="kb-article-header">
+            <h3>Database management and maintenance</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Pro-curo's database requires periodic maintenance to ensure optimal performance:</p>
+              <ul>
+                <li><strong>Archive</strong> — Move disposed samples to an archive database to keep the active database lean and fast.</li>
+                <li><strong>Check database</strong> — Run integrity checks to ensure data consistency.</li>
+                <li><strong>Maintenance</strong> — Compact and optimise the database.</li>
+                <li><strong>Removing record locks</strong> — Clear any locked records (e.g., after a crash).</li>
+              </ul>
+              <p>From V4, Pro-curo supports SQL Server databases with the option for custom database names, allowing multiple databases on the same SQL instance. The V4 installation is distributed as a single MSI file for easier deployment.</p>
+              <p><strong>V5</strong> uses PostgreSQL for enterprise-grade reliability and full-text search, with Docker-based deployment for consistent installations across cloud and on-premise environments.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="internal messaging message notification communicate users alert system notify">
+          <div class="kb-article-header">
+            <h3>Internal messaging</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Pro-curo includes a built-in internal messaging system that allows users to communicate within the application. Unread messages are indicated in the Notification Bar at the bottom of the screen (V4+).</p>
+              <p>This feature is useful for sending notes about specific samples or projects to colleagues without leaving the application.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ============================================================
+           VERSION HISTORY
+           ============================================================ -->
+      <div class="kb-section" id="version-history">
+        <div class="kb-section-header">
+          <span class="section-icon">&#128197;</span>
+          <h2>Version History</h2>
+        </div>
+
+        <div class="version-timeline">
+
+          <div class="version-entry current">
+            <h3>Pro-curo V5 <span class="version-badge">Current</span></h3>
+            <div class="version-date">2025 — Present</div>
+            <p>A complete rebuild as a modern web application. Pro-curo V5 moves from a Windows desktop application to a browser-based platform accessible from any device, built on React, Node.js, and PostgreSQL.</p>
+            <ul class="version-features">
+              <li>Web-based — access from any browser</li>
+              <li>Interactive dashboard with live KPIs</li>
+              <li>Visual query builder for custom reports</li>
+              <li>CSV import wizard with validation</li>
+              <li>Advanced cross-entity global search</li>
+              <li>React &amp; Ant Design front-end</li>
+              <li>PostgreSQL database</li>
+              <li>Docker containerised deployment</li>
+              <li>Cloud or on-premise hosting</li>
+              <li>Full audit trail with compliance focus</li>
+            </ul>
+          </div>
+
+          <div class="version-entry">
+            <h3>Pro-curo V4 (Enterprise)</h3>
+            <div class="version-date">2016 — 2025</div>
+            <p>A major update with a refreshed interface, enhanced usability, and expanded enterprise features. V4 introduced the tabbed ribbon interface, grid view improvements, and multi-language support.</p>
+            <ul class="version-features">
+              <li>Updated look and feel with ribbon tabs</li>
+              <li>Enhanced grid view with cell scaling</li>
+              <li>Notification bar (messages, alerts, counts)</li>
+              <li>Location external references for barcode audits</li>
+              <li>Enhanced date alert automation</li>
+              <li>Multi-language (French, Spanish, Dutch, Russian)</li>
+              <li>Per-user settings (printers, preferences)</li>
+              <li>Project-based sample type filtering</li>
+              <li>Custom CSV import profiles per project</li>
+              <li>Enhanced mobile data manager</li>
+              <li>SQL Server with custom database names</li>
+              <li>Single MSI installer</li>
+            </ul>
+          </div>
+
+          <div class="version-entry">
+            <h3>Pro-curo V3 (Lite, Pro &amp; Enterprise)</h3>
+            <div class="version-date">2010 — 2016</div>
+            <p>Introduced three product tiers and expanded the platform with barcode/RFID integration, portable terminal support, a graphical label designer, and the audit manager.</p>
+            <ul class="version-features">
+              <li>Three editions: Lite, Pro, Enterprise</li>
+              <li>Graphical label designer</li>
+              <li>2D Datamatrix barcode support</li>
+              <li>RFID integration</li>
+              <li>Portable terminal for mobile operations</li>
+              <li>Audit manager</li>
+              <li>Scanning integration</li>
+              <li>Advanced SQL search capability</li>
+              <li>Enhanced reporting and data exchange</li>
+              <li>MySamples personal view</li>
+            </ul>
+          </div>
+
+          <div class="version-entry">
+            <h3>Pro-curo V2</h3>
+            <div class="version-date">2008 — 2010</div>
+            <p>The original Pro-curo release. A Windows desktop application providing core sample management, location hierarchy, user management, and basic reporting for tissue traceability.</p>
+            <ul class="version-features">
+              <li>Windows desktop application</li>
+              <li>Hierarchical location management</li>
+              <li>Sample lifecycle tracking</li>
+              <li>User management and access control</li>
+              <li>Project-based sample organisation</li>
+              <li>20 user-definable fields</li>
+              <li>Label printing with barcode support</li>
+              <li>Date alerts and notifications</li>
+              <li>Basic reporting and CSV export</li>
+              <li>Sample disposal and retirement tracking</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ============================================================
+           FAQS
+           ============================================================ -->
+      <div class="kb-section" id="faq">
+        <div class="kb-section-header">
+          <span class="section-icon">&#10067;</span>
+          <h2>Frequently Asked Questions</h2>
+        </div>
+
+        <div class="kb-article" data-keywords="system requirements technical specification hardware software what do i need browser">
+          <div class="kb-article-header">
+            <h3>What are the system requirements for Pro-curo?</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p><strong>Pro-curo V5 (web-based):</strong> Any modern web browser (Chrome, Edge, Firefox, Safari) on any operating system. The server component runs on Docker and can be hosted in the cloud or on-premise.</p>
+              <p><strong>Pro-curo V4 and earlier (desktop):</strong> Windows operating system with .NET Framework. SQL Server database (or local database for single-user installations).</p>
+              <p>Contact us for detailed technical specifications for your deployment scenario.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="hta human tissue authority compliance regulation act directive audit inspection traceability">
+          <div class="kb-article-header">
+            <h3>Is Pro-curo compliant with the Human Tissue Act?</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Pro-curo was designed from the outset to support organisations regulated under the Human Tissue Act 2004 and the EU Tissue Directive (2004/23/EC). The system provides:</p>
+              <ul>
+                <li>Full donor-to-recipient traceability with unbroken chain of custody</li>
+                <li>Complete audit trail on every record — who, what, and when</li>
+                <li>30+ year data retention capability</li>
+                <li>Configurable user permissions and access controls</li>
+                <li>Disposal tracking with documented reasons</li>
+              </ul>
+              <p>Pro-curo is not classified as a medical device — it is a sample inventory and traceability system that helps your establishment meet HTA regulatory requirements.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="cloud on-premise hosted deployment where how install setup server infrastructure">
+          <div class="kb-article-header">
+            <h3>Can Pro-curo be hosted in the cloud or on-premise?</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Yes — Pro-curo V5 supports both deployment models. The Docker-based architecture means the application can run identically in a cloud environment (such as Microsoft Azure) or on your own on-premise servers.</p>
+              <p>Cloud hosting is ideal for organisations that want managed infrastructure, automatic backups, and anywhere-access. On-premise deployment suits organisations with strict data sovereignty requirements or existing server infrastructure.</p>
+              <p>You can also start with one model and migrate to the other later without losing any data.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="data migration upgrade move transfer existing version old import convert legacy">
+          <div class="kb-article-header">
+            <h3>How do I migrate from an older version of Pro-curo?</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Pro-curo has built-in migration tools for moving between versions:</p>
+              <ul>
+                <li><strong>V3 to V4:</strong> An automated database migration system upgrades your data from version 3.x.x.x to 4.0.0.0. Detailed step-by-step upgrade guides are available.</li>
+                <li><strong>V4 to V5:</strong> Contact us for a tailored migration plan — we'll help ensure your data, users, and settings transfer smoothly to the new web-based platform.</li>
+              </ul>
+              <p>We also support migration from other sample management systems via CSV import.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="support help contact assistance phone email hours training">
+          <div class="kb-article-header">
+            <h3>How do I get technical support?</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Our support team is available during UK business hours:</p>
+              <ul>
+                <li><strong>Phone:</strong> <a href="tel:+441403473839">+44 (0)1403 473839</a></li>
+                <li><strong>Email:</strong> <a href="mailto:info@pro-curo.com">info@pro-curo.com</a></li>
+              </ul>
+              <p>All customers with an active support contract receive priority support including software updates, bug fixes, and technical assistance. We also offer training sessions for new users and administrators — contact us to arrange a session tailored to your team's needs.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="trial demo free try test evaluate assessment demonstration">
+          <div class="kb-article-header">
+            <h3>Can I try Pro-curo before committing?</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>Yes — we offer personalised demonstrations where we walk you through the features most relevant to your organisation. We can also arrange a free trial period so your team can evaluate Pro-curo in your own environment.</p>
+              <p><a href="contact.html" class="btn btn-primary" style="display: inline-block; margin-top: 8px; padding: 10px 24px; font-size: 0.95rem;">Request a Demo</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kb-article" data-keywords="medical device classification regulation mhra ce marking software">
+          <div class="kb-article-header">
+            <h3>Is Pro-curo classified as a medical device?</h3>
+            <span class="toggle-icon">&#9660;</span>
+          </div>
+          <div class="kb-article-body">
+            <div class="kb-article-content">
+              <p>No. Pro-curo is a sample inventory management and traceability system. It does not diagnose, treat, monitor, or control any medical condition or physiological process, and therefore does not fall within the definition of a medical device under the Medical Devices Regulations 2002 or EU MDR.</p>
+              <p>Pro-curo manages the storage, tracking, and audit trail of tissue samples — it does not make clinical or diagnostic decisions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== CTA ===== -->
+  <section class="section section--blue">
+    <div class="container text-center">
+      <h2>Can't find what you're looking for?</h2>
+      <p style="max-width: 520px; margin: 16px auto 32px;">Get in touch with our team — we're happy to help with any question about Pro-curo, whether it's technical support, training, or general enquiries.</p>
+      <a href="contact.html" class="btn btn-white">Contact Support</a>
+    </div>
+  </section>
+
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo">
+            <img src="img/logo-icon.jpg" alt="Pro-curo logo">
+            <span>Pro-curo Software Limited</span>
+          </div>
+          <p>Tissue traceability and sample management software for HTA-licensed establishments and organisations regulated under the Human Tissue Act and EU Tissue Directive.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="whats-new.html">What's New</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="support.html">Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Get in Touch</h4>
+          <p>10 Roffye Court, Crawley Road<br>Horsham, West Sussex, RH12 4DT<br>United Kingdom</p>
+          <p><a href="tel:+441403473839">+44 (0)1403 473839</a></p>
+          <p><a href="mailto:info@pro-curo.com">info@pro-curo.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 Pro-curo Software Limited. All rights reserved. | Registered in England &amp; Wales No. 07510777 | VAT No. GB124 2717 38
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    /* ===== Knowledge Base: Expand/Collapse & Search ===== */
+    (function() {
+      // Expand/collapse articles
+      document.querySelectorAll('.kb-article-header').forEach(function(header) {
+        header.addEventListener('click', function() {
+          var article = this.closest('.kb-article');
+          article.classList.toggle('open');
+        });
+      });
+
+      // Search functionality
+      var searchInput = document.getElementById('kb-search-input');
+      var clearBtn = document.getElementById('kb-search-clear');
+      var noResults = document.getElementById('kb-no-results');
+      var topicCards = document.getElementById('kb-topics');
+      var sections = document.querySelectorAll('.kb-section');
+      var articles = document.querySelectorAll('.kb-article');
+
+      searchInput.addEventListener('input', function() {
+        var query = this.value.trim().toLowerCase();
+        clearBtn.style.display = query ? 'block' : 'none';
+
+        if (!query) {
+          // Show everything
+          topicCards.style.display = '';
+          noResults.style.display = 'none';
+          sections.forEach(function(s) { s.style.display = ''; });
+          articles.forEach(function(a) { a.style.display = ''; a.classList.remove('open'); });
+          return;
+        }
+
+        // Hide topic cards during search
+        topicCards.style.display = 'none';
+
+        var matchCount = 0;
+        var words = query.split(/\s+/);
+
+        articles.forEach(function(article) {
+          var title = article.querySelector('h3').textContent.toLowerCase();
+          var body = article.querySelector('.kb-article-content').textContent.toLowerCase();
+          var keywords = (article.getAttribute('data-keywords') || '').toLowerCase();
+          var text = title + ' ' + body + ' ' + keywords;
+
+          var match = words.every(function(w) { return text.indexOf(w) !== -1; });
+          article.style.display = match ? '' : 'none';
+          if (match) {
+            article.classList.add('open');
+            matchCount++;
+          } else {
+            article.classList.remove('open');
+          }
+        });
+
+        // Show/hide sections based on whether they have visible articles
+        sections.forEach(function(section) {
+          var visibleArticles = section.querySelectorAll('.kb-article[style=""],.kb-article:not([style])');
+          var hasVisible = false;
+          visibleArticles.forEach(function(a) {
+            if (a.style.display !== 'none') hasVisible = true;
+          });
+          section.style.display = hasVisible ? '' : 'none';
+        });
+
+        noResults.style.display = matchCount === 0 ? 'block' : 'none';
+      });
+
+      clearBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        searchInput.dispatchEvent(new Event('input'));
+        searchInput.focus();
+      });
+
+      // Smooth scroll for topic cards
+      document.querySelectorAll('.kb-topic-card').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+          var href = this.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            e.preventDefault();
+            var target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
