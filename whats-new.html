@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="What's new in Pro-curo Version 5 — a complete rebuild with an interactive dashboard, query builder, CSV import wizard, and modern technology stack.">
+  <title>What's New — Version 5 | Pro-curo</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Version 5 page-specific styles */
+    .v5-hero {
+      padding: 80px 0 60px;
+      background: linear-gradient(170deg, #e8f0fe 0%, #ffffff 60%);
+      text-align: center;
+    }
+
+    .v5-hero .badge {
+      display: inline-block;
+      background: #1F4E79;
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 8px 20px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .v5-hero h1 {
+      font-size: 2.75rem;
+      margin-bottom: 16px;
+    }
+
+    .v5-hero .lead {
+      font-size: 1.15rem;
+      color: #5a6a7a;
+      max-width: 640px;
+      margin: 0 auto 32px;
+      line-height: 1.8;
+    }
+
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .highlight-card {
+      background: #ffffff;
+      border: 1px solid #e8ecf1;
+      border-radius: 12px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: all 0.25s ease;
+    }
+
+    .highlight-card:hover {
+      border-color: #c8d8e8;
+      box-shadow: 0 8px 30px rgba(31,78,121,0.08);
+      transform: translateY(-4px);
+    }
+
+    .highlight-card .icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .highlight-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: #1F4E79;
+    }
+
+    .highlight-card p {
+      font-size: 0.9rem;
+      color: #5a6a7a;
+    }
+
+    .screenshot-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .screenshot-gallery img {
+      border-radius: 8px;
+      border: 1px solid #e8ecf1;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .screenshot-gallery img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 24px rgba(31,78,121,0.12);
+    }
+
+    @media (max-width: 992px) {
+      .highlight-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .screenshot-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .highlight-grid {
+        grid-template-columns: 1fr;
+      }
+      .screenshot-gallery {
+        grid-template-columns: 1fr 1fr;
+      }
+      .v5-hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="img/logo-icon.jpg" alt="Pro-curo logo">
+        <span>Pro-curo</span>
+      </a>
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="whats-new.html" class="active">What's New</a></li>
+          <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== V5 Hero ===== -->
+  <section class="v5-hero">
+    <div class="container">
+      <span class="badge">Version 5 — Now Available</span>
+      <h1>A complete <span style="color: #1F4E79;">rebuild</span></h1>
+      <p class="lead">Pro-curo Version 5 has been rebuilt from the ground up with a modern technology stack, a brand-new user interface, and powerful new features — designed to make your day-to-day work faster and easier.</p>
+      <div class="btn-group" style="justify-content: center;">
+        <a href="contact.html" class="btn btn-primary">Request a Demo</a>
+        <a href="features.html" class="btn btn-outline">See All Features</a>
+      </div>
+
+      <div class="highlight-grid">
+        <div class="highlight-card">
+          <div class="icon">&#127760;</div>
+          <h3>Web-Based</h3>
+          <p>Access from any device with a modern browser — no installation needed.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="icon">&#9729;&#65039;</div>
+          <h3>Cloud or On-Premise</h3>
+          <p>Deploy on our cloud or your own servers — your data, your choice.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="icon">&#128274;</div>
+          <h3>Enterprise Security</h3>
+          <p>Role-based access, JWT auth, and a full audit trail on every record.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="icon">&#128200;</div>
+          <h3>Live Dashboard</h3>
+          <p>Real-time KPIs, charts, and project summaries at a glance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Feature: Dashboard ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="feature-row">
+        <div class="feature-text">
+          <span class="tag">New</span>
+          <h3>Interactive Dashboard</h3>
+          <p>The all-new dashboard gives you a live overview of your operations the moment you log in. Customisable widgets display KPIs, project statuses, trend charts, and quick-access links to your most recent work — all updating in real time.</p>
+        </div>
+        <div class="feature-image">
+          <img src="img/dashboard.jpg" alt="Pro-curo V5 interactive dashboard">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Feature: Location Tree ===== -->
+  <section class="section section--grey">
+    <div class="container">
+      <div class="feature-row reverse">
+        <div class="feature-text">
+          <h3>Location Tree with Detail Panel</h3>
+          <p>Navigate your entire site hierarchy with an intuitive tree view. Clicking any location opens a detail panel showing linked samples, documents, notes, and history — no page reloads, no hunting through menus.</p>
+        </div>
+        <div class="feature-image">
+          <img src="img/locations.jpg" alt="Pro-curo location tree">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Feature: Sample Management ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="feature-row">
+        <div class="feature-text">
+          <h3>Sample Management</h3>
+          <p>Track samples through every stage of their lifecycle — from registration and storage through to analysis and disposal. Attach documents, photos, and chain-of-custody records, and use powerful filtering to find any sample in seconds.</p>
+        </div>
+        <div class="feature-image">
+          <img src="img/samples.jpg" alt="Pro-curo sample management">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Feature: Project Management ===== -->
+  <section class="section section--grey">
+    <div class="container">
+      <div class="feature-row reverse">
+        <div class="feature-text">
+          <h3>Project Management</h3>
+          <p>Organise work by project, client, or site. Assign tasks, set deadlines, and track progress — with everything linked to the right samples and locations. No more juggling spreadsheets and emails.</p>
+        </div>
+        <div class="feature-image">
+          <img src="img/projects.jpg" alt="Pro-curo project management">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Feature: Reports & Query Builder ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="feature-row">
+        <div class="feature-text">
+          <span class="tag">New</span>
+          <h3>Reports &amp; Query Builder</h3>
+          <p>Build custom data queries without writing a line of code. The visual query builder lets you filter, group, and sort your data with drag-and-drop simplicity, then export to CSV or generate polished PDF reports. Save and share your favourite queries with the team.</p>
+        </div>
+        <div class="feature-image">
+          <img src="img/querybuilder.jpg" alt="Pro-curo query builder">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Feature: Advanced Search ===== -->
+  <section class="section section--grey">
+    <div class="container">
+      <div class="feature-row reverse">
+        <div class="feature-text">
+          <h3>Advanced Search</h3>
+          <p>Find any record in seconds with cross-entity global search. Combine advanced filters, save frequent searches as presets, and get instant results as you type.</p>
+        </div>
+        <div class="feature-image">
+          <img src="img/search.jpg" alt="Pro-curo advanced search">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Feature: CSV Import Wizard ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="feature-row">
+        <div class="feature-text">
+          <span class="tag">New</span>
+          <h3>CSV Import Wizard</h3>
+          <p>Migrating data or importing bulk records is now straightforward. The step-by-step wizard maps your CSV columns to Pro-curo fields, validates your data before import, and gives you a clear summary of what was imported — with rollback if anything needs correcting.</p>
+        </div>
+        <div class="feature-image">
+          <img src="img/import-wizard.jpg" alt="Pro-curo CSV import wizard">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Technology Stack ===== -->
+  <section class="section section--grey">
+    <div class="container">
+      <div class="section-header">
+        <h2>Built on modern technology</h2>
+        <p>Version 5 has been engineered from scratch with a modern, enterprise-grade technology stack.</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">&#9881;&#65039;</div>
+          <h3>React &amp; Ant Design</h3>
+          <p>A fast, responsive front-end built with React and the Ant Design component library.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128421;</div>
+          <h3>Node.js &amp; JWT Auth</h3>
+          <p>Robust API backend with JWT authentication and role-based access control.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128451;</div>
+          <h3>PostgreSQL</h3>
+          <p>Enterprise-grade database with ACID compliance and full-text search.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128230;</div>
+          <h3>Docker Deployment</h3>
+          <p>Containerised for consistent, repeatable deployments — cloud or on-premise.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128196;</div>
+          <h3>PDF Reporting</h3>
+          <p>Generate professional PDF reports with customisable templates.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128203;</div>
+          <h3>Full Audit Trail</h3>
+          <p>Every change logged — who, what, when, and the previous value.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Screenshot Gallery ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>See it in action</h2>
+        <p>A selection of screenshots from Pro-curo Version 5.</p>
+      </div>
+      <div class="screenshot-gallery">
+        <img src="img/dashboard.jpg" alt="Dashboard">
+        <img src="img/dashboard-charts.jpg" alt="Dashboard charts">
+        <img src="img/locations.jpg" alt="Locations">
+        <img src="img/samples.jpg" alt="Samples">
+        <img src="img/projects.jpg" alt="Projects">
+        <img src="img/search.jpg" alt="Search">
+        <img src="img/reports.jpg" alt="Reports">
+        <img src="img/querybuilder.jpg" alt="Query builder">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="section section--blue">
+    <div class="container text-center">
+      <h2>Ready to upgrade to Version 5?</h2>
+      <p style="max-width: 520px; margin: 16px auto 32px;">Get in touch to arrange a personalised demo or discuss upgrading your current Pro-curo installation.</p>
+      <a href="contact.html" class="btn btn-white">Request a Demo</a>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo">
+            <img src="img/logo-icon.jpg" alt="Pro-curo logo">
+            <span>Pro-curo Software Limited</span>
+          </div>
+          <p>Tissue traceability and sample management software for HTA-licensed establishments and organisations regulated under the Human Tissue Act and EU Tissue Directive.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="whats-new.html">What's New</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Get in Touch</h4>
+          <p>10 Roffye Court, Crawley Road<br>Horsham, West Sussex, RH12 4DT<br>United Kingdom</p>
+          <p><a href="tel:+441403473839">+44 (0)1403 473839</a></p>
+          <p><a href="mailto:info@pro-curo.com">info@pro-curo.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 Pro-curo Software Limited. All rights reserved. | Registered in England &amp; Wales No. 07510777 | VAT No. GB124 2717 38
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
