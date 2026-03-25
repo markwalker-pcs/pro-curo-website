@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Industry news from trusted laboratory, life science, and tissue banking sources — curated for professionals working under the Human Tissue Act and EU Tissue Directive.">
+  <title>Industry News | Pro-curo</title>
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== News page styles ===== */
+    .news-hero {
+      padding: 80px 0 48px;
+      background: linear-gradient(170deg, #e8f0fe 0%, #ffffff 60%);
+      text-align: center;
+    }
+
+    .news-hero .badge {
+      display: inline-block;
+      background: #1F4E79;
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 8px 20px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .news-hero h1 {
+      font-size: 2.75rem;
+      margin-bottom: 16px;
+    }
+
+    .news-hero .lead {
+      font-size: 1.15rem;
+      color: #5a6a7a;
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* Filter bar */
+    .news-filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      background: #ffffff;
+      border: 1px solid #d0d8e0;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #4a5568;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      border-color: #1F4E79;
+      color: #1F4E79;
+    }
+
+    .filter-btn.active {
+      background: #1F4E79;
+      border-color: #1F4E79;
+      color: #ffffff;
+    }
+
+    /* News grid */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .news-card {
+      background: #ffffff;
+      border: 1px solid #e8ecf1;
+      border-radius: 12px;
+      padding: 28px 24px;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-card:hover {
+      border-color: #c8d8e8;
+      box-shadow: 0 8px 30px rgba(31,78,121,0.08);
+      transform: translateY(-4px);
+    }
+
+    .news-card-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #1F4E79;
+      background: #e8f0fe;
+      padding: 4px 12px;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      width: fit-content;
+    }
+
+    .news-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      line-height: 1.4;
+      color: #1a2a3a;
+    }
+
+    .news-card h3 a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .news-card h3 a:hover {
+      color: #1F4E79;
+    }
+
+    .news-card-excerpt {
+      font-size: 0.92rem;
+      color: #5a6a7a;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex-grow: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .news-card-meta {
+      font-size: 0.82rem;
+      color: #8a9aaa;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid #f0f3f7;
+    }
+
+    .news-card-link {
+      display: inline-block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #1F4E79;
+      margin-top: 12px;
+      transition: color 0.2s ease;
+    }
+
+    .news-card-link:hover {
+      color: #2a6ba6;
+    }
+
+    .news-card-link::after {
+      content: ' \2192';
+    }
+
+    /* Loading / empty states */
+    .news-loading {
+      text-align: center;
+      padding: 60px 0;
+      color: #8a9aaa;
+    }
+
+    .news-loading-spinner {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      border: 3px solid #e8ecf1;
+      border-top-color: #1F4E79;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .news-empty {
+      text-align: center;
+      padding: 60px 0;
+      color: #8a9aaa;
+    }
+
+    .news-error {
+      background: #fef3f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 16px 24px;
+      color: #991b1b;
+      margin-bottom: 24px;
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    /* Sources section */
+    .source-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .source-item {
+      background: #ffffff;
+      border: 1px solid #e8ecf1;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.25s ease;
+    }
+
+    .source-item:hover {
+      border-color: #c8d8e8;
+      box-shadow: 0 4px 16px rgba(31,78,121,0.06);
+    }
+
+    .source-item-icon {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .source-item h4 {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      color: #1F4E79;
+    }
+
+    .source-item p {
+      font-size: 0.8rem;
+      color: #8a9aaa;
+      margin-bottom: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .news-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .source-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+      .source-list {
+        grid-template-columns: 1fr 1fr;
+      }
+      .news-hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="img/logo-icon.jpg" alt="Pro-curo logo">
+        <span>Pro-curo</span>
+      </a>
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="whats-new.html">What's New</a></li>
+          <li><a href="industry-news.html" class="active">Industry News</a></li>
+          <li><a href="support.html">Support</a></li>
+          <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="news-hero">
+    <div class="container">
+      <span class="badge">Industry News</span>
+      <h1>Latest from the <span style="color: #1F4E79;">sector</span></h1>
+      <p class="lead">News and updates from trusted laboratory, life science, and tissue banking sources — curated for professionals working under the Human Tissue Act and EU Tissue Directive.</p>
+    </div>
+  </section>
+
+  <!-- ===== Filters & News Feed ===== -->
+  <section class="section">
+    <div class="container">
+
+      <div class="news-filters">
+        <button class="filter-btn active" data-filter="all">All Sources</button>
+        <button class="filter-btn" data-filter="hta">HTA</button>
+        <button class="filter-btn" data-filter="nhsbt">NHSBT</button>
+        <button class="filter-btn" data-filter="the-scientist">The Scientist</button>
+        <button class="filter-btn" data-filter="lab-manager">Lab Manager</button>
+        <button class="filter-btn" data-filter="biobanking">Biobanking</button>
+        <button class="filter-btn" data-filter="elife">eLife</button>
+      </div>
+
+      <div class="news-error" id="newsError">
+        Some feeds could not be loaded. Showing available articles below.
+      </div>
+
+      <div class="news-loading" id="newsLoading">
+        <div class="news-loading-spinner"></div>
+        <p>Loading the latest industry news&hellip;</p>
+      </div>
+
+      <div class="news-grid" id="newsGrid" style="display: none;"></div>
+
+      <div class="news-empty" id="newsEmpty" style="display: none;">
+        <p>No articles found. Please try again later or select a different source.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Our Sources ===== -->
+  <section class="section section--grey">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our sources</h2>
+        <p>We aggregate news from these trusted organisations and publications to keep you informed.</p>
+      </div>
+      <div class="source-list">
+        <div class="source-item">
+          <div class="source-item-icon">&#127963;&#65039;</div>
+          <h4>Human Tissue Authority</h4>
+          <p>UK regulator for human tissue and organs</p>
+        </div>
+        <div class="source-item">
+          <div class="source-item-icon">&#129656;</div>
+          <h4>NHS Blood &amp; Transplant</h4>
+          <p>Blood, organ and tissue donation services</p>
+        </div>
+        <div class="source-item">
+          <div class="source-item-icon">&#128300;</div>
+          <h4>The Scientist</h4>
+          <p>Life science research and news</p>
+        </div>
+        <div class="source-item">
+          <div class="source-item-icon">&#129514;</div>
+          <h4>Lab Manager</h4>
+          <p>Laboratory management and technology</p>
+        </div>
+        <div class="source-item">
+          <div class="source-item-icon">&#128240;</div>
+          <h4>Lab Bulletin</h4>
+          <p>UK laboratory industry news</p>
+        </div>
+        <div class="source-item">
+          <div class="source-item-icon">&#129516;</div>
+          <h4>Biobanking.com</h4>
+          <p>Tissue and organ banking news</p>
+        </div>
+        <div class="source-item">
+          <div class="source-item-icon">&#128218;</div>
+          <h4>eLife Sciences</h4>
+          <p>Open-access biomedical research</p>
+        </div>
+        <div class="source-item">
+          <div class="source-item-icon">&#127468;&#127463;</div>
+          <h4>UKCRC Tissue Directory</h4>
+          <p>UK biobank coordination centre</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="section section--blue">
+    <div class="container text-center">
+      <h2>Manage your tissue traceability with confidence</h2>
+      <p style="max-width: 520px; margin: 16px auto 32px;">Pro-curo helps tissue establishments stay compliant and in control. Get in touch to see how.</p>
+      <a href="contact.html" class="btn btn-white">Request a Demo</a>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo">
+            <img src="img/logo-icon.jpg" alt="Pro-curo logo">
+            <span>Pro-curo Software Limited</span>
+          </div>
+          <p>Tissue traceability and sample management software for HTA-licensed establishments and organisations regulated under the Human Tissue Act and EU Tissue Directive.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="whats-new.html">What's New</a></li>
+            <li><a href="industry-news.html">Industry News</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="support.html">Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Get in Touch</h4>
+          <p>10 Roffye Court, Crawley Road<br>Horsham, West Sussex, RH12 4DT<br>United Kingdom</p>
+          <p><a href="tel:+441403473839">+44 (0)1403 473839</a></p>
+          <p><a href="mailto:info@pro-curo.com">info@pro-curo.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Pro-curo Software Limited. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Scripts ===== -->
+  <script src="js/main.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    // ---- Configuration ----
+    // Using a public CORS proxy to fetch RSS/Atom feeds from the browser.
+    // In production, replace this with your own Azure Function endpoint
+    // for reliability and to avoid rate limits.
+    const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+
+    const FEEDS = [
+      {
+        id: 'hta',
+        name: 'Human Tissue Authority',
+        url: 'https://www.gov.uk/government/organisations/human-tissue-authority.atom',
+        category: 'hta',
+        maxItems: 10
+      },
+      {
+        id: 'nhsbt',
+        name: 'NHS Blood & Transplant',
+        // NHSBT doesn't have a public RSS — we scrape their news page via the proxy.
+        // For now, we use the GOV.UK feed for NHSBT:
+        url: 'https://www.gov.uk/government/organisations/nhs-blood-and-transplant.atom',
+        category: 'nhsbt',
+        maxItems: 10
+      },
+      {
+        id: 'the-scientist',
+        name: 'The Scientist',
+        url: 'https://www.the-scientist.com/rss',
+        category: 'the-scientist',
+        maxItems: 10
+      },
+      {
+        id: 'lab-manager',
+        name: 'Lab Manager',
+        url: 'https://www.labmanager.com/rss',
+        category: 'lab-manager',
+        maxItems: 10
+      },
+      {
+        id: 'biobanking',
+        name: 'Biobanking.com',
+        url: 'https://www.biobanking.com/feed/',
+        category: 'biobanking',
+        maxItems: 10
+      },
+      {
+        id: 'elife',
+        name: 'eLife Sciences',
+        url: 'https://elifesciences.org/rss/recent.xml',
+        category: 'elife',
+        maxItems: 10
+      }
+    ];
+
+    let allArticles = [];
+    let activeFilter = 'all';
+
+    // ---- DOM refs ----
+    const grid = document.getElementById('newsGrid');
+    const loading = document.getElementById('newsLoading');
+    const empty = document.getElementById('newsEmpty');
+    const errorBanner = document.getElementById('newsError');
+
+    // ---- Fetch & parse ----
+    async function fetchFeed(feed) {
+      try {
+        const res = await fetch(CORS_PROXY + encodeURIComponent(feed.url));
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const text = await res.text();
+        return parseFeed(text, feed);
+      } catch (err) {
+        console.warn('Failed to load feed: ' + feed.name, err);
+        return [];
+      }
+    }
+
+    function parseFeed(xml, feed) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(xml, 'application/xml');
+
+      // Check for parse errors
+      if (doc.querySelector('parsererror')) {
+        console.warn('XML parse error for ' + feed.name);
+        return [];
+      }
+
+      const articles = [];
+
+      // Try RSS <item> elements first
+      let items = doc.querySelectorAll('item');
+
+      if (items.length > 0) {
+        items.forEach(function (item, i) {
+          if (i >= feed.maxItems) return;
+          articles.push({
+            title: getTextContent(item, 'title'),
+            link: getTextContent(item, 'link'),
+            description: stripHTML(getTextContent(item, 'description')),
+            date: parseDate(getTextContent(item, 'pubDate')),
+            source: feed.name,
+            category: feed.category
+          });
+        });
+      } else {
+        // Try Atom <entry> elements
+        items = doc.querySelectorAll('entry');
+        items.forEach(function (item, i) {
+          if (i >= feed.maxItems) return;
+
+          // Atom links are in <link> elements with href attribute
+          var linkEl = item.querySelector('link[rel="alternate"]') || item.querySelector('link');
+          var link = linkEl ? linkEl.getAttribute('href') : '';
+
+          // Summary or content
+          var summary = getTextContent(item, 'summary') || getTextContent(item, 'content');
+
+          articles.push({
+            title: getTextContent(item, 'title'),
+            link: link,
+            description: stripHTML(summary),
+            date: parseDate(getTextContent(item, 'updated') || getTextContent(item, 'published')),
+            source: feed.name,
+            category: feed.category
+          });
+        });
+      }
+
+      return articles;
+    }
+
+    function getTextContent(parent, tag) {
+      var el = parent.querySelector(tag);
+      return el ? el.textContent.trim() : '';
+    }
+
+    function stripHTML(html) {
+      if (!html) return '';
+      var tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || '';
+    }
+
+    function parseDate(dateStr) {
+      if (!dateStr) return null;
+      var d = new Date(dateStr);
+      return isNaN(d.getTime()) ? null : d;
+    }
+
+    function formatDate(date) {
+      if (!date) return '';
+      var options = { day: 'numeric', month: 'long', year: 'numeric' };
+      return date.toLocaleDateString('en-GB', options);
+    }
+
+    function truncate(text, maxLen) {
+      if (!text || text.length <= maxLen) return text;
+      return text.substring(0, maxLen).replace(/\s+\S*$/, '') + '\u2026';
+    }
+
+    // ---- Render ----
+    function renderArticles(articles) {
+      grid.innerHTML = '';
+
+      if (articles.length === 0) {
+        grid.style.display = 'none';
+        empty.style.display = 'block';
+        return;
+      }
+
+      empty.style.display = 'none';
+      grid.style.display = 'grid';
+
+      articles.forEach(function (article) {
+        var card = document.createElement('div');
+        card.className = 'news-card';
+        card.setAttribute('data-category', article.category);
+
+        card.innerHTML =
+          '<span class="news-card-source">' + escapeHTML(article.source) + '</span>' +
+          '<h3><a href="' + escapeHTML(article.link) + '" target="_blank" rel="noopener noreferrer">' +
+          escapeHTML(article.title || 'Untitled') + '</a></h3>' +
+          '<p class="news-card-excerpt">' + escapeHTML(truncate(article.description, 180)) + '</p>' +
+          '<div class="news-card-meta">' +
+          (article.date ? formatDate(article.date) : '') +
+          '<a href="' + escapeHTML(article.link) + '" class="news-card-link" target="_blank" rel="noopener noreferrer">Read article</a>' +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+    }
+
+    function escapeHTML(str) {
+      if (!str) return '';
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    }
+
+    // ---- Filtering ----
+    function applyFilter(filter) {
+      activeFilter = filter;
+      var filtered = filter === 'all'
+        ? allArticles
+        : allArticles.filter(function (a) { return a.category === filter; });
+      renderArticles(filtered);
+    }
+
+    // ---- Filter button handlers ----
+    document.querySelectorAll('.filter-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.filter-btn').forEach(function (b) {
+          b.classList.remove('active');
+        });
+        btn.classList.add('active');
+        applyFilter(btn.getAttribute('data-filter'));
+      });
+    });
+
+    // ---- Init ----
+    async function init() {
+      loading.style.display = 'block';
+      grid.style.display = 'none';
+      empty.style.display = 'none';
+
+      var results = await Promise.allSettled(FEEDS.map(fetchFeed));
+
+      var failCount = 0;
+      results.forEach(function (result) {
+        if (result.status === 'fulfilled' && result.value.length > 0) {
+          allArticles = allArticles.concat(result.value);
+        } else {
+          failCount++;
+        }
+      });
+
+      // Sort by date, newest first
+      allArticles.sort(function (a, b) {
+        if (!a.date && !b.date) return 0;
+        if (!a.date) return 1;
+        if (!b.date) return -1;
+        return b.date - a.date;
+      });
+
+      loading.style.display = 'none';
+
+      if (failCount > 0 && allArticles.length > 0) {
+        errorBanner.style.display = 'block';
+      }
+
+      applyFilter('all');
+    }
+
+    init();
+  })();
+  </script>
+
+</body>
+</html>

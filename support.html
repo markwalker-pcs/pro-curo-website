@@ -206,6 +206,23 @@
       margin: 16px 0;
       font-size: 0.95rem;
     }
+    .kb-article-content .kb-version-heading {
+      display: inline-block;
+      background: #1F4E79;
+      color: #fff;
+      padding: 3px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin: 20px 0 10px;
+      letter-spacing: 0.02em;
+    }
+    .kb-article-content .kb-version-heading.v5 {
+      background: #27ae60;
+    }
+    .kb-article-content .kb-version-heading.legacy {
+      background: #7f8c8d;
+    }
 
     /* Version timeline */
     .version-timeline {
@@ -342,6 +359,7 @@
           <li><a href="features.html">Features</a></li>
           <li><a href="pricing.html">Pricing</a></li>
           <li><a href="whats-new.html">What's New</a></li>
+          <li><a href="industry-news.html">Industry News</a></li>
           <li><a href="support.html" class="active">Support</a></li>
           <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
         </ul>
@@ -469,20 +487,28 @@
           </div>
           <div class="kb-article-body">
             <div class="kb-article-content">
-              <p>Once logged in, the main screen is where you'll spend most of your time. All functions and features are accessed through the menu bar, ribbon toolbar, and right-click context menus.</p>
-              <p>The main screen is divided into key areas:</p>
+              <p>The main screen is where you'll spend most of your time in Pro-curo. The layout has evolved significantly across versions.</p>
+
+              <span class="kb-version-heading legacy">Versions 2 &amp; 3 — Desktop</span>
+              <p>In V2 and V3, the main screen is a Windows desktop application with a menu bar across the top, a Locations panel on the left showing your storage hierarchy as a tree, and a Samples panel on the right displaying samples in a list view. Right-click context menus provide quick access to common actions. V3 introduced the grid view for box locations and the MySamples personal view.</p>
+
+              <span class="kb-version-heading">Version 4 — Desktop</span>
+              <p>V4 introduced a modernised interface with a tabbed ribbon toolbar:</p>
               <ul>
                 <li><strong>Tab bar</strong> — Switch between Locations &amp; Samples, Administration, Mobile &amp; Scanning, and Reporting. Standard users typically won't see the Administration tab.</li>
                 <li><strong>Ribbon bar</strong> — Contains icon shortcuts for the most common actions (New, Edit, Split, Move, Book In/Out, etc.).</li>
-                <li><strong>Locations panel (left)</strong> — Shows your institute's storage hierarchy as a tree view. There are three fixed top-level locations: Pro-curo (root), My Samples, and Pro-curo / Disposed.</li>
-                <li><strong>Samples panel (right)</strong> — Shows a list or grid view of samples within the selected location. Right-click here for the quick-access samples menu.</li>
+                <li><strong>Locations panel (left)</strong> — Shows your institute's storage hierarchy as a tree view. Three fixed top-level locations: Pro-curo (root), My Samples, and Pro-curo / Disposed.</li>
+                <li><strong>Samples panel (right)</strong> — Shows a list or grid view of samples. Right-click here for the quick-access samples menu.</li>
                 <li><strong>Project filter</strong> — A dropdown to filter samples by project, showing only the relevant subset.</li>
+                <li><strong>Notification bar (new in V4)</strong> — Shows unread messages, date alerts, and sample counts at the bottom of the screen.</li>
               </ul>
-              <img src="img/dashboard.jpg" alt="Pro-curo main screen showing locations tree and sample list" class="kb-screenshot">
               <div class="kb-tip">
-                <strong>Tip:</strong> Check the "Include sub locations" box to see all samples within a freezer and its shelves, racks, draws, and boxes — regardless of depth. Check "Include retired samples" to show retired records (highlighted in orange).
+                <strong>Tip (V3 &amp; V4):</strong> Check the "Include sub locations" box to see all samples within a freezer and its shelves, racks, draws, and boxes — regardless of depth. Check "Include retired samples" to show retired records (highlighted in orange).
               </div>
-              <p><strong>In Pro-curo V5</strong>, the main screen has been redesigned as a modern web-based dashboard with interactive widgets, real-time KPIs, and a responsive layout that works on any device.</p>
+
+              <span class="kb-version-heading v5">Version 5 — Web-Based</span>
+              <p>V5 is a completely new web-based application accessed through your browser. The main screen is an interactive dashboard with live KPI widgets, recent activity feeds, and quick-action buttons. Navigation uses a modern sidebar menu rather than a ribbon toolbar, and the interface is fully responsive — it works on desktops, tablets, and mobile devices.</p>
+              <img src="img/dashboard.jpg" alt="Pro-curo V5 web-based dashboard" class="kb-screenshot">
             </div>
           </div>
         </div>
@@ -494,10 +520,10 @@
           </div>
           <div class="kb-article-body">
             <div class="kb-article-content">
-              <p>Before you begin using Pro-curo, several items should be configured by your administrator:</p>
+              <p>Before you begin using Pro-curo, several items should be configured by your administrator. The steps below apply across all versions — menu paths shown are for V2–V4 desktop; V5 uses the web-based Administration panel.</p>
               <ul>
-                <li><strong>Company details</strong> — Go to File &rarr; Setup &rarr; Company Details and enter your organisation's name and contact information. This appears on printed reports and labels.</li>
-                <li><strong>Users</strong> — Set up an account for everyone who will use the system (File &rarr; Setup &rarr; Users). Define what each user can do — from full administrator rights to restricted access for specific tasks such as adding or disposing of samples.</li>
+                <li><strong>Company details</strong> — In V2–V4: File &rarr; Setup &rarr; Company Details. In V5: Administration &rarr; Settings. Enter your organisation's name and contact information (appears on printed reports and labels).</li>
+                <li><strong>Users</strong> — Set up an account for everyone who will use the system. In V2–V4: File &rarr; Setup &rarr; Users. In V5: Administration &rarr; Users. Define what each user can do — from full administrator rights to restricted access for specific tasks.</li>
                 <li><strong>Sample types</strong> — Define the tissue and sample types your laboratory handles (e.g., Plasma, Cells, DNA, Tissue). These populate dropdown lists when registering new samples.</li>
                 <li><strong>Projects</strong> — Create projects to organise samples by department, study, or client. Projects control visibility — users only see samples in projects they're approved for.</li>
                 <li><strong>Disposal reasons</strong> — Set up the reasons a sample might be disposed of (e.g., expired, used for research, patient withdrawn). These appear in the sample's history for audit purposes.</li>
@@ -529,14 +555,19 @@
             <div class="kb-article-content">
               <p>Pro-curo lets you model your entire storage infrastructure as a hierarchy of locations. All locations are listed under the root "Pro-curo" location, and the hierarchy can include buildings, rooms, freezers, shelves, racks, draws, and boxes.</p>
               <p>You don't need the full set at every level — for example, you can have a building with just a freezer directly inside it if that matches your real-world layout.</p>
-              <p><strong>To add a new location:</strong></p>
+
+              <span class="kb-version-heading">Versions 2–4 (Desktop)</span>
+              <p>To add a new location:</p>
               <ul>
                 <li>Click on the parent location in the Locations panel (e.g., click your room to add a freezer within it).</li>
-                <li>Click the "New" icon in the Locations &amp; Samples ribbon, or right-click and select "New location...".</li>
+                <li>Click the "New" icon in the Locations &amp; Samples ribbon (V4) or menu bar (V2/V3), or right-click and select "New location...".</li>
                 <li>Choose the location type (Building, Room, Freezer, Shelf, Rack, Drawer, Box).</li>
                 <li>Enter a descriptive name — for example "Lab 1.1" for a room, or "-80 Freezer F001" for a freezer.</li>
               </ul>
-              <img src="img/locations.jpg" alt="Pro-curo location tree showing hierarchical structure" class="kb-screenshot">
+              <img src="img/locations.jpg" alt="Pro-curo V4 location tree showing hierarchical structure" class="kb-screenshot">
+
+              <span class="kb-version-heading v5">Version 5 (Web-Based)</span>
+              <p>In V5, locations are managed through the web interface's Location Management section. The same hierarchy model applies, but with a modern drag-and-drop interface and the ability to manage locations from any device.</p>
               <div class="kb-tip">
                 <strong>Enterprise edition:</strong> When creating a Box location, you can define its layout — single dimension (e.g., 10 positions), or two-dimensional grids with alphanumeric (A1–J10) or numeric (1–100) sub-locations. The system automatically creates all sub-positions for you.
               </div>
@@ -558,7 +589,7 @@
                 <li><strong>Rename</strong> — Change a location's name at any time. All sample history records within that location will be updated to show the new name.</li>
                 <li><strong>Delete</strong> — Remove a location, but only if it contains no samples. A location may appear empty if you are not approved for all projects — check with your administrator.</li>
               </ul>
-              <p>All of these actions are available from both the ribbon bar and the right-click context menu in the Locations panel.</p>
+              <p>In V2–V4, all of these actions are available from both the ribbon bar (V4) or menu bar (V2/V3) and the right-click context menu in the Locations panel. In V5, these actions are accessed through the web interface's location management tools.</p>
               <div class="kb-tip">
                 <strong>Tip:</strong> The icons used for buildings, rooms, boxes, etc. can be customised to better reflect your institute's storage types. Contact the Pro-curo technical team for guidance.
               </div>
@@ -573,8 +604,8 @@
           </div>
           <div class="kb-article-body">
             <div class="kb-article-content">
-              <p>You can print labels for any location in your hierarchy. These labels can include 2D Datamatrix barcodes representing the unique location name, which can be scanned with the Pro-curo Mobile application running on a portable barcode terminal.</p>
-              <p>To print a location label, select the location in the tree, then click "Print label" in the ribbon or right-click menu. Choose your printer and label template from the Select Label dialog box.</p>
+              <p>You can print labels for any location in your hierarchy. These labels can include 2D Datamatrix barcodes (V3+) representing the unique location name, which can be scanned with the Pro-curo Mobile application running on a portable barcode terminal.</p>
+              <p><strong>V2–V4 (Desktop):</strong> Select the location in the tree, then click "Print label" in the ribbon (V4) or menu bar (V2/V3), or use the right-click menu. Choose your printer and label template from the Select Label dialog box.</p>
               <p>Printed location labels speed up the process of moving samples remotely and improve traceability confidence by reducing the risk of a user selecting the wrong location manually.</p>
             </div>
           </div>
@@ -598,8 +629,11 @@
           </div>
           <div class="kb-article-body">
             <div class="kb-article-content">
-              <p>To add a new sample, navigate to the location where you want to store it, then click "New" in the Samples section of the ribbon (or right-click in the samples panel and select "New sample...").</p>
-              <p>The Sample Information screen contains the following preformatted fields:</p>
+              <span class="kb-version-heading">Versions 2–4 (Desktop)</span>
+              <p>Navigate to the location where you want to store the sample, then click "New" in the Samples section of the ribbon (V4) or menu bar (V2/V3), or right-click in the samples panel and select "New sample...".</p>
+              <span class="kb-version-heading v5">Version 5 (Web-Based)</span>
+              <p>In V5, click the "Add Sample" button from the sample management view or from within any location. The sample form opens in the browser.</p>
+              <p>Across all versions, the Sample Information screen contains the following preformatted fields:</p>
               <ul>
                 <li><strong>Project</strong> — Assign the sample to a project. This is mandatory and controls who can see and work with the sample.</li>
                 <li><strong>Sample type</strong> — Select the tissue or material type (e.g., Blood, Plasma, Cells, DNA). This is mandatory and can be pre-loaded with your organisation's types.</li>
@@ -610,7 +644,7 @@
                 <li><strong>Location &amp; Sub-location</strong> — The exact position within your storage hierarchy, right down to the box position.</li>
                 <li><strong>Notes</strong> — Free-text field for additional information.</li>
               </ul>
-              <img src="img/samples.jpg" alt="Pro-curo sample management screen" class="kb-screenshot">
+              <img src="img/samples.jpg" alt="Pro-curo V5 sample management screen" class="kb-screenshot">
               <p>You can also attach documents to individual samples or to entire batches using the "Sample document links" and "Batch document links" tabs.</p>
               <div class="kb-tip">
                 <strong>Tip:</strong> Use "Add and duplicate" when registering multiple similar samples — it creates the first sample then prompts for how many additional copies to create, saving significant data entry time.
@@ -635,7 +669,7 @@
                 <li><strong>Fields 19–20:</strong> Calendar/date fields, ensuring consistent date formatting.</li>
               </ul>
               <p>Field headings can be renamed to match your terminology (e.g., "User field 01" becomes "Gender" or "Consent Date"). Fields can also be marked as mandatory — the sample cannot be saved unless they are completed.</p>
-              <p>Configure these under File &rarr; Setup &rarr; User Fields.</p>
+              <p><strong>V2–V4 (Desktop):</strong> Configure these under File &rarr; Setup &rarr; User Fields. <strong>V5 (Web):</strong> Manage via Administration &rarr; Project Settings.</p>
             </div>
           </div>
         </div>
@@ -647,7 +681,9 @@
           </div>
           <div class="kb-article-body">
             <div class="kb-article-content">
-              <p>To edit a sample's information, highlight it in the samples panel and click "Edit" in the ribbon, or double-click the sample, or right-click and select "Edit sample...". You can modify any field — all changes are recorded in the sample's full audit history.</p>
+              <p><strong>V2–V4 (Desktop):</strong> Highlight the sample in the samples panel and click "Edit" in the ribbon (V4) or menu bar (V2/V3), or double-click the sample, or right-click and select "Edit sample...".</p>
+              <p><strong>V5 (Web):</strong> Click on a sample to open its detail view, then click "Edit" to modify fields inline.</p>
+              <p>In all versions, changes are recorded in the sample's full audit history.</p>
             </div>
           </div>
         </div>
@@ -680,9 +716,12 @@
           </div>
           <div class="kb-article-body">
             <div class="kb-article-content">
-              <p><strong>Moving samples:</strong> Select one or more samples (use Ctrl+click or Shift+click for multiple selection), then click "Move" in the ribbon. A location picker will appear — select the new destination and click OK. You can also move entire locations with all their contents.</p>
-              <p><strong>Booking out:</strong> When samples are temporarily removed from storage (e.g., for lab work), highlight them and click "Book out". The samples' background colour changes from white to brown, indicating they are out of storage. This maintains the chain of custody without losing track of the sample.</p>
+              <span class="kb-version-heading">Versions 2–4 (Desktop)</span>
+              <p><strong>Moving samples:</strong> Select one or more samples (use Ctrl+click or Shift+click for multiple selection), then click "Move" in the ribbon (V4) or menu bar (V2/V3). A location picker will appear — select the new destination and click OK. You can also move entire locations with all their contents.</p>
+              <p><strong>Booking out:</strong> When samples are temporarily removed from storage (e.g., for lab work), highlight them and click "Book out". The samples' background colour changes from white to brown, indicating they are out of storage.</p>
               <p><strong>Booking in:</strong> When samples are returned to storage, highlight them and click "Book in". The background returns to white.</p>
+              <span class="kb-version-heading v5">Version 5 (Web-Based)</span>
+              <p>In V5, sample moves and booking in/out are handled through the web interface with the same functionality. Bulk operations are supported via checkbox selection, and the booking status is shown with clear visual indicators.</p>
               <div class="kb-tip">
                 <strong>Tip:</strong> All booking and movement operations are recorded in the sample's history with a timestamp and the user who performed the action — critical for HTA audit compliance.
               </div>
@@ -713,7 +752,7 @@
           </div>
           <div class="kb-article-body">
             <div class="kb-article-content">
-              <p>Every action performed on a sample is recorded: who did it, what they changed, and when. To view a sample's complete history, right-click it and select "View history..." or use the ribbon icon.</p>
+              <p>Every action performed on a sample is recorded: who did it, what they changed, and when. In V2–V4, right-click a sample and select "View history..." or use the ribbon/menu icon. In V5, click on a sample to open its detail view, then select the "History" tab.</p>
               <p>The history records all events including: creation, edits, movements, book in/out, splits, retirement, and disposal — giving you a complete, unbroken chain of custody from intake to final disposition.</p>
               <p>This audit trail is essential for HTA compliance inspections and can be exported or printed as needed.</p>
             </div>
@@ -784,7 +823,8 @@
           </div>
           <div class="kb-article-body">
             <div class="kb-article-content">
-              <p>Pro-curo includes a built-in graphical label designer for creating custom label templates. The designer is accessed from the main Setup menu and allows you to:</p>
+              <span class="kb-version-heading">Versions 3–4 (Desktop)</span>
+              <p>Pro-curo V3 introduced the built-in graphical label designer for creating custom label templates. The designer is accessed from the main Setup menu and allows you to:</p>
               <ul>
                 <li>Create unlimited label templates with custom names</li>
                 <li>Set the label height, width, and format</li>
@@ -793,6 +833,8 @@
                 <li>Test-print before deploying a template</li>
               </ul>
               <p>To print labels, highlight one or more samples (using Ctrl or Shift for multiple selection), click the Print button, select your printer and template, and the labels are produced. You can also import and export label designs to share them across installations.</p>
+              <span class="kb-version-heading legacy">Version 2</span>
+              <p>V2 includes basic label printing with linear barcode support but does not have the graphical label designer — label templates use a simpler text-based format.</p>
             </div>
           </div>
         </div>
@@ -804,7 +846,8 @@
           </div>
           <div class="kb-article-body">
             <div class="kb-article-content">
-              <p>Pro-curo integrates with barcode scanners and RFID readers for faster, more accurate sample tracking. The Pro-curo Mobile application runs on portable barcode terminals, enabling staff to:</p>
+              <span class="kb-version-heading">Versions 3–4 (Desktop)</span>
+              <p>From V3 onwards, Pro-curo integrates with barcode scanners and RFID readers for faster, more accurate sample tracking. The Pro-curo Mobile application runs on portable barcode terminals, enabling staff to:</p>
               <ul>
                 <li>Scan location labels to navigate the storage hierarchy</li>
                 <li>Book samples in and out by scanning their barcodes</li>
@@ -834,10 +877,12 @@
           </div>
           <div class="kb-article-body">
             <div class="kb-article-content">
-              <p>Pro-curo includes built-in system reports that can be run from the Reporting tab. You can print sample lists, project summaries, location inventories, and audit trail reports.</p>
-              <p>The current sample list view can also be exported directly — click "Export grid" to save the visible data as a CSV file for use in Excel or other tools.</p>
+              <span class="kb-version-heading">Versions 2–4 (Desktop)</span>
+              <p>Pro-curo includes built-in system reports that can be run from the Reporting tab (V4) or Reporting menu (V2/V3). You can print sample lists, project summaries, location inventories, and audit trail reports.</p>
+              <p>The current sample list view can also be exported directly — click "Export grid" (V4) or use File &rarr; Export (V2/V3) to save the visible data as a CSV file for use in Excel or other tools.</p>
+              <span class="kb-version-heading v5">Version 5 (Web-Based)</span>
+              <p>V5 introduces the visual Query Builder — create custom data queries without writing any code. Drag and drop fields, apply filters and groupings, then export to CSV or generate polished PDF reports. You can save queries for re-use and schedule recurring reports.</p>
               <img src="img/querybuilder.jpg" alt="Pro-curo V5 query builder interface" class="kb-screenshot">
-              <p><strong>New in V5:</strong> The visual Query Builder lets you create custom data queries without writing any code. Drag and drop fields, apply filters and groupings, then export to CSV or generate polished PDF reports. You can save queries for re-use and schedule recurring reports.</p>
             </div>
           </div>
         </div>
@@ -869,13 +914,12 @@
           <div class="kb-article-body">
             <div class="kb-article-content">
               <p>Date alerts let you set automatic reminders based on date fields in your samples. This is useful for tracking consent expiry dates, review dates, or any time-sensitive event.</p>
-              <p>To set up a date alert, go to File &rarr; Admin &rarr; Date Alerts. You can configure:</p>
-              <ul>
-                <li>Whether to alert on a single sample, an entire batch, or an entire project</li>
-                <li>Which date field to monitor (any of the user-definable date fields)</li>
-                <li>Whether to alert on a specific date or within a date range</li>
-              </ul>
-              <p>Active alerts appear in the Notification Bar at the bottom of the screen (V4+), highlighted in green when due. From V4 onwards, the date alert process runs automatically with enhanced integration into the notification system.</p>
+              <span class="kb-version-heading legacy">Versions 2–3 (Desktop)</span>
+              <p>Go to File &rarr; Admin &rarr; Date Alerts. You can configure alerts on a single sample, batch, or project, and choose which date field to monitor. Alerts are checked manually from the Notifications area.</p>
+              <span class="kb-version-heading">Version 4 (Desktop)</span>
+              <p>V4 enhanced date alerts with automatic checking and a dedicated Notification Bar at the bottom of the main screen. Active alerts are highlighted in green when due. The date alert process runs automatically in the background.</p>
+              <span class="kb-version-heading v5">Version 5 (Web-Based)</span>
+              <p>V5 provides a modern notification system with browser alerts, dashboard widgets for upcoming expiries, and configurable alert rules through the Administration panel.</p>
             </div>
           </div>
         </div>
@@ -888,9 +932,11 @@
           <div class="kb-article-body">
             <div class="kb-article-content">
               <p>Pro-curo can import sample data from external CSV files, making it easy to migrate from other systems or bulk-load records.</p>
-              <p>From V4 onwards, the import feature includes custom import profiles that map your CSV columns to Pro-curo fields. These profiles are stored per project and support both comma and colon delimiters.</p>
-              <img src="img/import-wizard.jpg" alt="Pro-curo CSV import wizard" class="kb-screenshot">
-              <p><strong>New in V5:</strong> The step-by-step Import Wizard provides drag-and-drop CSV upload, automatic column mapping, pre-import validation with error highlighting, and a clear summary of what was imported. You can also view import history and roll back if needed.</p>
+              <span class="kb-version-heading">Version 4 (Desktop)</span>
+              <p>V4 introduced custom import profiles that map your CSV columns to Pro-curo fields. Profiles are stored per project and support both comma and colon delimiters.</p>
+              <span class="kb-version-heading v5">Version 5 (Web-Based)</span>
+              <p>V5's step-by-step Import Wizard provides drag-and-drop CSV upload, automatic column mapping, pre-import validation with error highlighting, and a clear summary of what was imported. You can also view import history and roll back if needed.</p>
+              <img src="img/import-wizard.jpg" alt="Pro-curo V5 CSV import wizard" class="kb-screenshot">
             </div>
           </div>
         </div>
@@ -913,8 +959,9 @@
           </div>
           <div class="kb-article-body">
             <div class="kb-article-content">
-              <p>Every person who uses Pro-curo must have their own login name and password. User accounts are managed under File &rarr; Setup &rarr; Users (or the Administration tab in V4+).</p>
-              <p>For each user, the administrator can control granular permissions including:</p>
+              <p>Every person who uses Pro-curo must have their own login name and password.</p>
+              <p><strong>V2/V3:</strong> User accounts are managed under File &rarr; Setup &rarr; Users. <strong>V4:</strong> Administration tab &rarr; Users. <strong>V5:</strong> Administration &rarr; User Management in the web interface.</p>
+              <p>Across all versions, the administrator can control granular permissions including:</p>
               <ul>
                 <li>Full administrator rights</li>
                 <li>Setup access (company, projects, sample types, etc.)</li>
@@ -953,29 +1000,34 @@
           </div>
           <div class="kb-article-body">
             <div class="kb-article-content">
-              <p>You can rearrange the columns shown in the sample list view to prioritise the fields most relevant to your daily work. For example, if your team regularly uses External Reference and Batch Number, place those in the first few columns.</p>
-              <p>The Data View Selection screen lets you choose which columns are visible and their order. You can select all, deselect all, and move columns up or down in the list.</p>
-              <p>In the Enterprise edition's grid view, you can also select which data appears in the cell ID label and link label fields, and adjust cell scaling to "fit to display" for optimal viewing.</p>
+              <span class="kb-version-heading">Versions 2–4 (Desktop)</span>
+              <p>You can rearrange the columns shown in the sample list view to prioritise the fields most relevant to your daily work. The Data View Selection screen lets you choose which columns are visible and their order — select all, deselect all, and move columns up or down.</p>
+              <p>In the V3/V4 Enterprise edition's grid view, you can also select which data appears in the cell ID label and link label fields, and adjust cell scaling to "fit to display" for optimal viewing.</p>
+              <span class="kb-version-heading v5">Version 5 (Web-Based)</span>
+              <p>V5's table views support drag-and-drop column reordering, resizable columns, and saved view presets directly in the browser.</p>
             </div>
           </div>
         </div>
 
-        <div class="kb-article" data-keywords="database maintenance archive backup check repair sql server installation technical">
+        <div class="kb-article" data-keywords="database maintenance archive backup check repair sql server installation technical moving migration postgresql docker">
           <div class="kb-article-header">
             <h3>Database management and maintenance</h3>
             <span class="toggle-icon">&#9660;</span>
           </div>
           <div class="kb-article-body">
             <div class="kb-article-content">
-              <p>Pro-curo's database requires periodic maintenance to ensure optimal performance:</p>
+              <span class="kb-version-heading legacy">Versions 2–3 (Desktop)</span>
+              <p>V2 and V3 use a local database. Periodic maintenance tasks include:</p>
               <ul>
                 <li><strong>Archive</strong> — Move disposed samples to an archive database to keep the active database lean and fast.</li>
                 <li><strong>Check database</strong> — Run integrity checks to ensure data consistency.</li>
                 <li><strong>Maintenance</strong> — Compact and optimise the database.</li>
                 <li><strong>Removing record locks</strong> — Clear any locked records (e.g., after a crash).</li>
               </ul>
-              <p>From V4, Pro-curo supports SQL Server databases with the option for custom database names, allowing multiple databases on the same SQL instance. The V4 installation is distributed as a single MSI file for easier deployment.</p>
-              <p><strong>V5</strong> uses PostgreSQL for enterprise-grade reliability and full-text search, with Docker-based deployment for consistent installations across cloud and on-premise environments.</p>
+              <span class="kb-version-heading">Version 4 (Desktop)</span>
+              <p>V4 moved to SQL Server databases with support for custom database names, allowing multiple databases on the same SQL instance. The V4 installation is distributed as a single MSI file for easier deployment. The same archive and maintenance tools are available through the Administration tab.</p>
+              <span class="kb-version-heading v5">Version 5 (Web-Based)</span>
+              <p>V5 uses PostgreSQL for enterprise-grade reliability and full-text search, with Docker-based deployment for consistent installations across cloud and on-premise environments. Database maintenance is handled through the web-based Administration panel.</p>
             </div>
           </div>
         </div>
@@ -987,7 +1039,8 @@
           </div>
           <div class="kb-article-body">
             <div class="kb-article-content">
-              <p>Pro-curo includes a built-in internal messaging system that allows users to communicate within the application. Unread messages are indicated in the Notification Bar at the bottom of the screen (V4+).</p>
+              <p>Pro-curo includes a built-in internal messaging system that allows users to communicate within the application.</p>
+              <p><strong>V2/V3:</strong> Messages are accessible from the main menu. <strong>V4:</strong> Unread message counts are shown in the Notification Bar at the bottom of the screen. <strong>V5:</strong> Messaging is integrated into the web-based notification system.</p>
               <p>This feature is useful for sending notes about specific samples or projects to colleagues without leaving the application.</p>
             </div>
           </div>
@@ -1233,6 +1286,7 @@
             <li><a href="features.html">Features</a></li>
             <li><a href="pricing.html">Pricing</a></li>
             <li><a href="whats-new.html">What's New</a></li>
+            <li><a href="industry-news.html">Industry News</a></li>
           </ul>
         </div>
         <div class="footer-links">
@@ -1312,9 +1366,9 @@
 
         // Show/hide sections based on whether they have visible articles
         sections.forEach(function(section) {
-          var visibleArticles = section.querySelectorAll('.kb-article[style=""],.kb-article:not([style])');
+          var sectionArticles = section.querySelectorAll('.kb-article');
           var hasVisible = false;
-          visibleArticles.forEach(function(a) {
+          sectionArticles.forEach(function(a) {
             if (a.style.display !== 'none') hasVisible = true;
           });
           section.style.display = hasVisible ? '' : 'none';
