@@ -844,3 +844,166 @@ p {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================
+   Clients & Resources Page Styles
+   ============================================ */
+
+/* --- Hero Short Variant --- */
+.hero--short {
+  padding: 60px 0 48px;
+}
+
+/* --- Client Sector Groups --- */
+.client-sector {
+  margin-bottom: 48px;
+}
+
+.client-sector:last-child {
+  margin-bottom: 0;
+}
+
+.client-sector__title {
+  font-size: 1.2rem;
+  color: #1F4E79;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e8f0fe;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.client-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.client-name {
+  background: #f7f9fc;
+  border: 1px solid #e8ecf1;
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 0.95rem;
+  color: #2c3e50;
+  transition: all 0.2s ease;
+}
+
+.client-name:hover {
+  background: #e8f0fe;
+  border-color: #c8d8e8;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 992px) {
+  .client-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .client-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Case Study Cards --- */
+.case-study-card h4 {
+  color: #1F4E79;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* --- White Paper Cards --- */
+.wp-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.wp-card .btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.btn--sm {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+}
+
+/* --- White Paper Content Pages --- */
+.wp-content {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.wp-meta {
+  font-size: 0.85rem;
+  color: #1F4E79;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.wp-content h1 {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+
+.wp-author {
+  font-size: 1rem;
+  color: #5a6a7a;
+  font-style: italic;
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e8ecf1;
+}
+
+.wp-content h2 {
+  font-size: 1.5rem;
+  margin-top: 40px;
+  margin-bottom: 16px;
+  color: #1F4E79;
+}
+
+.wp-content p {
+  font-size: 1.02rem;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.wp-content strong {
+  color: #1a2a3a;
+}
+
+.wp-references {
+  padding-left: 24px;
+  margin-top: 8px;
+}
+
+.wp-references li {
+  font-size: 0.92rem;
+  color: #5a6a7a;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.wp-references li a {
+  color: #1F4E79;
+}
+
+.wp-back {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid #e8ecf1;
+}
+
+@media (max-width: 768px) {
+  .wp-content h1 {
+    font-size: 1.7rem;
+  }
+  .wp-content h2 {
+    font-size: 1.3rem;
+  }
+}

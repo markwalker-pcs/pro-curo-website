@@ -286,6 +286,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="features.html">Features</a></li>
           <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="clients.html">Clients &amp; Resources</a></li>
           <li><a href="whats-new.html">What's New</a></li>
           <li><a href="industry-news.html" class="active">Industry News</a></li>
           <li><a href="support.html">Support</a></li>
@@ -420,6 +421,7 @@
         <div class="footer-links">
           <h4>Company</h4>
           <ul>
+            <li><a href="clients.html">Clients &amp; Resources</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="support.html">Support</a></li>
           </ul>
@@ -444,57 +446,9 @@
     'use strict';
 
     // ---- Configuration ----
-    // Using a public CORS proxy to fetch RSS/Atom feeds from the browser.
-    // In production, replace this with your own Azure Function endpoint
-    // for reliability and to avoid rate limits.
-    const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
-
-    const FEEDS = [
-      {
-        id: 'hta',
-        name: 'Human Tissue Authority',
-        url: 'https://www.gov.uk/government/organisations/human-tissue-authority.atom',
-        category: 'hta',
-        maxItems: 10
-      },
-      {
-        id: 'nhsbt',
-        name: 'NHS Blood & Transplant',
-        // NHSBT doesn't have a public RSS — we scrape their news page via the proxy.
-        // For now, we use the GOV.UK feed for NHSBT:
-        url: 'https://www.gov.uk/government/organisations/nhs-blood-and-transplant.atom',
-        category: 'nhsbt',
-        maxItems: 10
-      },
-      {
-        id: 'the-scientist',
-        name: 'The Scientist',
-        url: 'https://www.the-scientist.com/rss',
-        category: 'the-scientist',
-        maxItems: 10
-      },
-      {
-        id: 'lab-manager',
-        name: 'Lab Manager',
-        url: 'https://www.labmanager.com/rss',
-        category: 'lab-manager',
-        maxItems: 10
-      },
-      {
-        id: 'biobanking',
-        name: 'Biobanking.com',
-        url: 'https://www.biobanking.com/feed/',
-        category: 'biobanking',
-        maxItems: 10
-      },
-      {
-        id: 'elife',
-        name: 'eLife Sciences',
-        url: 'https://elifesciences.org/rss/recent.xml',
-        category: 'elife',
-        maxItems: 10
-      }
-    ];
+    // The Azure Function at /api/news handles all RSS fetching, parsing,
+    // and caching server-side. It refreshes every 2 hours automatically.
+    const API_ENDPOINT = '/api/news';
 
     let allArticles = [];
     let activeFilter = 'all';
@@ -505,100 +459,19 @@
     const empty = document.getElementById('newsEmpty');
     const errorBanner = document.getElementById('newsError');
 
-    // ---- Fetch & parse ----
-    async function fetchFeed(feed) {
-      try {
-        const res = await fetch(CORS_PROXY + encodeURIComponent(feed.url));
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const text = await res.text();
-        return parseFeed(text, feed);
-      } catch (err) {
-        console.warn('Failed to load feed: ' + feed.name, err);
-        return [];
-      }
+    // ---- Helpers ----
+    function formatDate(isoDate) {
+      if (!isoDate) return '';
+      var d = new Date(isoDate);
+      if (isNaN(d.getTime())) return '';
+      return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
     }
 
-    function parseFeed(xml, feed) {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(xml, 'application/xml');
-
-      // Check for parse errors
-      if (doc.querySelector('parsererror')) {
-        console.warn('XML parse error for ' + feed.name);
-        return [];
-      }
-
-      const articles = [];
-
-      // Try RSS <item> elements first
-      let items = doc.querySelectorAll('item');
-
-      if (items.length > 0) {
-        items.forEach(function (item, i) {
-          if (i >= feed.maxItems) return;
-          articles.push({
-            title: getTextContent(item, 'title'),
-            link: getTextContent(item, 'link'),
-            description: stripHTML(getTextContent(item, 'description')),
-            date: parseDate(getTextContent(item, 'pubDate')),
-            source: feed.name,
-            category: feed.category
-          });
-        });
-      } else {
-        // Try Atom <entry> elements
-        items = doc.querySelectorAll('entry');
-        items.forEach(function (item, i) {
-          if (i >= feed.maxItems) return;
-
-          // Atom links are in <link> elements with href attribute
-          var linkEl = item.querySelector('link[rel="alternate"]') || item.querySelector('link');
-          var link = linkEl ? linkEl.getAttribute('href') : '';
-
-          // Summary or content
-          var summary = getTextContent(item, 'summary') || getTextContent(item, 'content');
-
-          articles.push({
-            title: getTextContent(item, 'title'),
-            link: link,
-            description: stripHTML(summary),
-            date: parseDate(getTextContent(item, 'updated') || getTextContent(item, 'published')),
-            source: feed.name,
-            category: feed.category
-          });
-        });
-      }
-
-      return articles;
-    }
-
-    function getTextContent(parent, tag) {
-      var el = parent.querySelector(tag);
-      return el ? el.textContent.trim() : '';
-    }
-
-    function stripHTML(html) {
-      if (!html) return '';
-      var tmp = document.createElement('div');
-      tmp.innerHTML = html;
-      return tmp.textContent || tmp.innerText || '';
-    }
-
-    function parseDate(dateStr) {
-      if (!dateStr) return null;
-      var d = new Date(dateStr);
-      return isNaN(d.getTime()) ? null : d;
-    }
-
-    function formatDate(date) {
-      if (!date) return '';
-      var options = { day: 'numeric', month: 'long', year: 'numeric' };
-      return date.toLocaleDateString('en-GB', options);
-    }
-
-    function truncate(text, maxLen) {
-      if (!text || text.length <= maxLen) return text;
-      return text.substring(0, maxLen).replace(/\s+\S*$/, '') + '\u2026';
+    function escapeHTML(str) {
+      if (!str) return '';
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
     }
 
     // ---- Render ----
@@ -617,15 +490,15 @@
       articles.forEach(function (article) {
         var card = document.createElement('div');
         card.className = 'news-card';
-        card.setAttribute('data-category', article.category);
+        card.setAttribute('data-category', article.sourceId);
 
         card.innerHTML =
           '<span class="news-card-source">' + escapeHTML(article.source) + '</span>' +
           '<h3><a href="' + escapeHTML(article.link) + '" target="_blank" rel="noopener noreferrer">' +
           escapeHTML(article.title || 'Untitled') + '</a></h3>' +
-          '<p class="news-card-excerpt">' + escapeHTML(truncate(article.description, 180)) + '</p>' +
+          '<p class="news-card-excerpt">' + escapeHTML(article.description || '') + '</p>' +
           '<div class="news-card-meta">' +
-          (article.date ? formatDate(article.date) : '') +
+          formatDate(article.isoDate) +
           '<a href="' + escapeHTML(article.link) + '" class="news-card-link" target="_blank" rel="noopener noreferrer">Read article</a>' +
           '</div>';
 
@@ -633,19 +506,12 @@
       });
     }
 
-    function escapeHTML(str) {
-      if (!str) return '';
-      var div = document.createElement('div');
-      div.appendChild(document.createTextNode(str));
-      return div.innerHTML;
-    }
-
     // ---- Filtering ----
     function applyFilter(filter) {
       activeFilter = filter;
       var filtered = filter === 'all'
         ? allArticles
-        : allArticles.filter(function (a) { return a.category === filter; });
+        : allArticles.filter(function (a) { return a.sourceId === filter; });
       renderArticles(filtered);
     }
 
@@ -666,32 +532,32 @@
       grid.style.display = 'none';
       empty.style.display = 'none';
 
-      var results = await Promise.allSettled(FEEDS.map(fetchFeed));
+      try {
+        var res = await fetch(API_ENDPOINT);
+        if (!res.ok) throw new Error('API returned HTTP ' + res.status);
 
-      var failCount = 0;
-      results.forEach(function (result) {
-        if (result.status === 'fulfilled' && result.value.length > 0) {
-          allArticles = allArticles.concat(result.value);
-        } else {
-          failCount++;
+        var data = await res.json();
+
+        if (!data.ok) throw new Error(data.error || 'Unknown API error');
+
+        allArticles = data.articles || [];
+
+        loading.style.display = 'none';
+
+        // Show warning if some sources failed
+        if (data.errors && data.errors.length > 0 && allArticles.length > 0) {
+          errorBanner.style.display = 'block';
         }
-      });
 
-      // Sort by date, newest first
-      allArticles.sort(function (a, b) {
-        if (!a.date && !b.date) return 0;
-        if (!a.date) return 1;
-        if (!b.date) return -1;
-        return b.date - a.date;
-      });
+        applyFilter('all');
 
-      loading.style.display = 'none';
-
-      if (failCount > 0 && allArticles.length > 0) {
+      } catch (err) {
+        console.error('Failed to load news:', err);
+        loading.style.display = 'none';
+        errorBanner.textContent = 'Unable to load industry news at the moment. Please try again later.';
         errorBanner.style.display = 'block';
+        empty.style.display = 'block';
       }
-
-      applyFilter('all');
     }
 
     init();
