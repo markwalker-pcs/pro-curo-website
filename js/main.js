@@ -30,65 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // --- Contact form handling ---
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const formData = new FormData(contactForm);
-      const data = {};
-      formData.forEach(function (value, key) {
-        data[key] = value;
-      });
-
-      // Basic validation
-      if (!data.name || !data.email || !data.message) {
-        showFormMessage('Please fill in all required fields.', 'error');
-        return;
-      }
-
-      // Email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(data.email)) {
-        showFormMessage('Please enter a valid email address.', 'error');
-        return;
-      }
-
-      // Show success message (actual sending would use Azure Function or Formspree)
-      showFormMessage('Thank you for your message! We\'ll be in touch shortly.', 'success');
-      contactForm.reset();
-    });
-  }
-
-  function showFormMessage(text, type) {
-    let msgEl = document.getElementById('form-message');
-    if (!msgEl) {
-      msgEl = document.createElement('div');
-      msgEl.id = 'form-message';
-      contactForm.appendChild(msgEl);
-    }
-    msgEl.textContent = text;
-    msgEl.style.marginTop = '16px';
-    msgEl.style.padding = '14px 20px';
-    msgEl.style.borderRadius = '8px';
-    msgEl.style.fontWeight = '600';
-    msgEl.style.fontSize = '0.95rem';
-
-    if (type === 'success') {
-      msgEl.style.background = '#e8f5e9';
-      msgEl.style.color = '#2e7d32';
-      msgEl.style.border = '1px solid #c8e6c9';
-    } else {
-      msgEl.style.background = '#ffeef0';
-      msgEl.style.color = '#c62828';
-      msgEl.style.border = '1px solid #ffcdd2';
-    }
-
-    setTimeout(function () {
-      msgEl.remove();
-    }, 5000);
-  }
+  // --- Contact form now handled by MailerLite embed (see contact.html) ---
 
   // --- Smooth scroll for anchor links ---
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {

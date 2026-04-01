@@ -75,6 +75,11 @@
       color: #ffffff;
     }
 
+    #showMoreBtn:hover {
+      background: #1F4E79 !important;
+      color: #ffffff !important;
+    }
+
     /* News grid */
     .news-grid {
       display: grid;
@@ -341,6 +346,21 @@
 
       <div class="news-grid" id="newsGrid" style="display: none;"></div>
 
+      <div style="text-align: center; margin-top: 32px;" id="showMoreWrap" class="show-more-wrap">
+        <button id="showMoreBtn" class="btn btn-secondary" style="
+          background: transparent;
+          color: #1F4E79;
+          border: 2px solid #1F4E79;
+          padding: 12px 36px;
+          border-radius: 6px;
+          font-size: 1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.25s ease;
+          display: none;
+        ">Show more articles</button>
+      </div>
+
       <div class="news-empty" id="newsEmpty" style="display: none;">
         <p>No articles found. Please try again later or select a different source.</p>
       </div>
@@ -459,12 +479,15 @@
     let allArticles = [];
     let allSources = {};
     let activeFilter = 'all';
+    const PAGE_SIZE = 12;
+    let visibleCount = PAGE_SIZE;
 
     // ---- DOM refs ----
     const grid = document.getElementById('newsGrid');
     const loading = document.getElementById('newsLoading');
     const empty = document.getElementById('newsEmpty');
     const errorBanner = document.getElementById('newsError');
+    const showMoreBtn = document.getElementById('showMoreBtn');
 
     // ---- Helpers ----
     function formatDate(isoDate) {
@@ -482,19 +505,28 @@
     }
 
     // ---- Render ----
+    function getFilteredArticles() {
+      return activeFilter === 'all'
+        ? allArticles
+        : allArticles.filter(function (a) { return a.sourceId === activeFilter; });
+    }
+
     function renderArticles(articles) {
       grid.innerHTML = '';
 
       if (articles.length === 0) {
         grid.style.display = 'none';
         empty.style.display = 'block';
+        showMoreBtn.style.display = 'none';
         return;
       }
 
       empty.style.display = 'none';
       grid.style.display = 'grid';
 
-      articles.forEach(function (article) {
+      var visible = articles.slice(0, visibleCount);
+
+      visible.forEach(function (article) {
         var card = document.createElement('div');
         card.className = 'news-card';
         card.setAttribute('data-category', article.sourceId);
@@ -518,16 +550,29 @@
 
         grid.appendChild(card);
       });
+
+      // Show/hide the "Show more" button
+      if (visibleCount < articles.length) {
+        var remaining = articles.length - visibleCount;
+        showMoreBtn.textContent = 'Show more articles (' + remaining + ' remaining)';
+        showMoreBtn.style.display = 'inline-block';
+      } else {
+        showMoreBtn.style.display = 'none';
+      }
     }
 
     // ---- Filtering ----
     function applyFilter(filter) {
       activeFilter = filter;
-      var filtered = filter === 'all'
-        ? allArticles
-        : allArticles.filter(function (a) { return a.sourceId === filter; });
-      renderArticles(filtered);
+      visibleCount = PAGE_SIZE; // reset to first page on filter change
+      renderArticles(getFilteredArticles());
     }
+
+    // ---- Show more handler ----
+    showMoreBtn.addEventListener('click', function () {
+      visibleCount += PAGE_SIZE;
+      renderArticles(getFilteredArticles());
+    });
 
     // ---- Filter button handlers ----
     document.querySelectorAll('.filter-btn').forEach(function (btn) {
@@ -556,12 +601,6 @@
 
         allArticles = data.articles || [];
         allSources = data.sources || {};
-
-        // Debug: log article counts per source
-        var counts = {};
-        allArticles.forEach(function (a) { counts[a.sourceId] = (counts[a.sourceId] || 0) + 1; });
-        console.log('News loaded — articles per source:', counts);
-        console.log('Sources metadata:', allSources);
 
         loading.style.display = 'none';
 
