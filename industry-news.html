@@ -547,7 +547,7 @@
       empty.style.display = 'none';
 
       try {
-        var res = await fetch(API_ENDPOINT);
+        var res = await fetch(API_ENDPOINT + '?_t=' + Date.now());
         if (!res.ok) throw new Error('API returned HTTP ' + res.status);
 
         var data = await res.json();
@@ -556,6 +556,12 @@
 
         allArticles = data.articles || [];
         allSources = data.sources || {};
+
+        // Debug: log article counts per source
+        var counts = {};
+        allArticles.forEach(function (a) { counts[a.sourceId] = (counts[a.sourceId] || 0) + 1; });
+        console.log('News loaded — articles per source:', counts);
+        console.log('Sources metadata:', allSources);
 
         loading.style.display = 'none';
 
