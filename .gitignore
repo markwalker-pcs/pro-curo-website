@@ -10,5 +10,8 @@ Desktop.ini
 .vscode/
 .idea/
 
+# Dependencies (Azure installs these during deployment)
+node_modules/
+
 # Deployment guide (not needed on the live site)
 DEPLOYMENT.md

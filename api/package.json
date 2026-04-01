@@ -1,0 +1,9 @@
+{
+  "name": "procuro-news-api",
+  "version": "1.0.0",
+  "description": "Azure Functions API for Pro-curo industry news feed aggregation",
+  "dependencies": {
+    "@azure/storage-blob": "^12.17.0",
+    "fast-xml-parser": "^4.3.0"
+  }
+}

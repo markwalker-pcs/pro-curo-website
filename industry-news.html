@@ -112,6 +112,13 @@
       text-transform: uppercase;
       letter-spacing: 0.03em;
       width: fit-content;
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    a.news-card-source:hover {
+      background: #1F4E79;
+      color: #ffffff;
     }
 
     .news-card h3 {
@@ -317,6 +324,7 @@
         <button class="filter-btn" data-filter="lab-manager">Lab Manager</button>
         <button class="filter-btn" data-filter="biobanking">Biobanking</button>
         <button class="filter-btn" data-filter="elife">eLife</button>
+        <button class="filter-btn" data-filter="lab-news">Lab News</button>
       </div>
 
       <div class="news-error" id="newsError">
@@ -379,6 +387,11 @@
           <div class="source-item-icon">&#128218;</div>
           <h4>eLife Sciences</h4>
           <p>Open-access biomedical research</p>
+        </div>
+        <div class="source-item">
+          <div class="source-item-icon">&#128196;</div>
+          <h4>Lab News</h4>
+          <p>UK laboratory and science news</p>
         </div>
         <div class="source-item">
           <div class="source-item-icon">&#127468;&#127463;</div>
@@ -451,6 +464,7 @@
     const API_ENDPOINT = '/api/news';
 
     let allArticles = [];
+    let allSources = {};
     let activeFilter = 'all';
 
     // ---- DOM refs ----
@@ -492,8 +506,15 @@
         card.className = 'news-card';
         card.setAttribute('data-category', article.sourceId);
 
+        // Build source badge — link to source website if available
+        var sourceInfo = allSources[article.sourceId];
+        var sourceWebsite = sourceInfo && sourceInfo.website ? sourceInfo.website : null;
+        var sourceBadge = sourceWebsite
+          ? '<a href="' + escapeHTML(sourceWebsite) + '" class="news-card-source" target="_blank" rel="noopener noreferrer" title="Visit ' + escapeHTML(article.source) + '">' + escapeHTML(article.source) + '</a>'
+          : '<span class="news-card-source">' + escapeHTML(article.source) + '</span>';
+
         card.innerHTML =
-          '<span class="news-card-source">' + escapeHTML(article.source) + '</span>' +
+          sourceBadge +
           '<h3><a href="' + escapeHTML(article.link) + '" target="_blank" rel="noopener noreferrer">' +
           escapeHTML(article.title || 'Untitled') + '</a></h3>' +
           '<p class="news-card-excerpt">' + escapeHTML(article.description || '') + '</p>' +
@@ -541,6 +562,7 @@
         if (!data.ok) throw new Error(data.error || 'Unknown API error');
 
         allArticles = data.articles || [];
+        allSources = data.sources || {};
 
         loading.style.display = 'none';
 
