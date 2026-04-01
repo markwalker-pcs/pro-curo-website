@@ -42,18 +42,98 @@ const FEEDS = [
   {
     id: 'the-scientist',
     name: 'The Scientist',
-    url: 'https://www.the-scientist.com/rss',
+    url: 'https://www.the-scientist.com/atom/latest',
     website: 'https://www.the-scientist.com',
-    format: 'rss',
-    maxItems: 15
+    format: 'atom',
+    maxItems: 10
   },
   {
-    id: 'lab-manager',
-    name: 'Lab Manager',
-    url: 'https://www.labmanager.com/rss',
-    website: 'https://www.labmanager.com',
-    format: 'rss',
-    maxItems: 15
+    id: 'the-scientist',
+    name: 'The Scientist',
+    url: 'https://www.the-scientist.com/atom/health/cell-and-gene-therapy',
+    website: 'https://www.the-scientist.com',
+    format: 'atom',
+    maxItems: 10
+  },
+  {
+    id: 'the-scientist',
+    name: 'The Scientist',
+    url: 'https://www.the-scientist.com/atom/science/biochemistry',
+    website: 'https://www.the-scientist.com',
+    format: 'atom',
+    maxItems: 10
+  },
+  {
+    id: 'the-scientist',
+    name: 'The Scientist',
+    url: 'https://www.the-scientist.com/atom/science/genome-editing',
+    website: 'https://www.the-scientist.com',
+    format: 'atom',
+    maxItems: 10
+  },
+  {
+    id: 'the-scientist',
+    name: 'The Scientist',
+    url: 'https://www.the-scientist.com/atom/science/cell-and-molecular-biology',
+    website: 'https://www.the-scientist.com',
+    format: 'atom',
+    maxItems: 10
+  },
+  {
+    id: 'the-scientist',
+    name: 'The Scientist',
+    url: 'https://www.the-scientist.com/atom/science/genetics',
+    website: 'https://www.the-scientist.com',
+    format: 'atom',
+    maxItems: 10
+  },
+  {
+    id: 'the-scientist',
+    name: 'The Scientist',
+    url: 'https://www.the-scientist.com/atom/science/immunology',
+    website: 'https://www.the-scientist.com',
+    format: 'atom',
+    maxItems: 10
+  },
+  {
+    id: 'the-scientist',
+    name: 'The Scientist',
+    url: 'https://www.the-scientist.com/atom/science/cancer',
+    website: 'https://www.the-scientist.com',
+    format: 'atom',
+    maxItems: 10
+  },
+  {
+    id: 'the-scientist',
+    name: 'The Scientist',
+    url: 'https://www.the-scientist.com/atom/science/neuroscience',
+    website: 'https://www.the-scientist.com',
+    format: 'atom',
+    maxItems: 10
+  },
+  {
+    id: 'the-scientist',
+    name: 'The Scientist',
+    url: 'https://www.the-scientist.com/atom/technology/artificial-intelligence',
+    website: 'https://www.the-scientist.com',
+    format: 'atom',
+    maxItems: 10
+  },
+  {
+    id: 'the-scientist',
+    name: 'The Scientist',
+    url: 'https://www.the-scientist.com/atom/technology/synthetic-biology',
+    website: 'https://www.the-scientist.com',
+    format: 'atom',
+    maxItems: 10
+  },
+  {
+    id: 'the-scientist',
+    name: 'The Scientist',
+    url: 'https://www.the-scientist.com/atom/society/research-ethics',
+    website: 'https://www.the-scientist.com',
+    format: 'atom',
+    maxItems: 10
   },
   {
     id: 'biobanking',
@@ -328,6 +408,7 @@ async function fetchAllFeeds(context) {
   const errors = [];
   const sourceMeta = {};
   let allArticles = [];
+  const seenLinks = new Set(); // Deduplicate across feeds sharing the same source ID
 
   const results = await Promise.allSettled(
     FEEDS.map(async (feed) => {
@@ -338,15 +419,6 @@ async function fetchAllFeeds(context) {
         : parseRSS(xml, feed);
 
       context.log(`  → ${feed.name}: ${articles.length} articles`);
-
-      sourceMeta[feed.id] = {
-        id: feed.id,
-        name: feed.name,
-        website: feed.website || null,
-        count: articles.length,
-        ok: true
-      };
-
       return articles;
     })
   );
@@ -354,14 +426,27 @@ async function fetchAllFeeds(context) {
   results.forEach((result, idx) => {
     const feed = FEEDS[idx];
     if (result.status === 'fulfilled') {
-      allArticles = allArticles.concat(result.value);
-      if (!sourceMeta[feed.id]) {
-        sourceMeta[feed.id] = { id: feed.id, name: feed.name, website: feed.website || null, count: 0, ok: true };
+      // Deduplicate articles by link (important for sources with multiple feeds)
+      const newArticles = result.value.filter(a => {
+        if (!a.link || seenLinks.has(a.link)) return false;
+        seenLinks.add(a.link);
+        return true;
+      });
+      allArticles = allArticles.concat(newArticles);
+
+      // Accumulate counts for sources with multiple feeds
+      if (sourceMeta[feed.id]) {
+        sourceMeta[feed.id].count += newArticles.length;
+      } else {
+        sourceMeta[feed.id] = { id: feed.id, name: feed.name, website: feed.website || null, count: newArticles.length, ok: true };
       }
     } else {
-      context.log.error(`  ✗ ${feed.name}: ${result.reason.message}`);
-      errors.push({ source: feed.name, error: result.reason.message });
-      sourceMeta[feed.id] = { id: feed.id, name: feed.name, website: feed.website || null, count: 0, ok: false };
+      context.log.error(`  ✗ ${feed.name} (${feed.url}): ${result.reason.message}`);
+      errors.push({ source: feed.name, url: feed.url, error: result.reason.message });
+      // Only mark source as failed if no other feed for this source has succeeded
+      if (!sourceMeta[feed.id]) {
+        sourceMeta[feed.id] = { id: feed.id, name: feed.name, website: feed.website || null, count: 0, ok: false };
+      }
     }
   });
 

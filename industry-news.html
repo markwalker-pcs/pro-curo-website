@@ -223,17 +223,21 @@
     }
 
     .source-item {
+      display: block;
       background: #ffffff;
       border: 1px solid #e8ecf1;
       border-radius: 10px;
       padding: 20px;
       text-align: center;
       transition: all 0.25s ease;
+      text-decoration: none;
+      color: inherit;
     }
 
     .source-item:hover {
-      border-color: #c8d8e8;
-      box-shadow: 0 4px 16px rgba(31,78,121,0.06);
+      border-color: #1F4E79;
+      box-shadow: 0 4px 16px rgba(31,78,121,0.1);
+      transform: translateY(-2px);
     }
 
     .source-item-icon {
@@ -321,7 +325,6 @@
         <button class="filter-btn" data-filter="hta">HTA</button>
         <button class="filter-btn" data-filter="nhsbt">NHSBT</button>
         <button class="filter-btn" data-filter="the-scientist">The Scientist</button>
-        <button class="filter-btn" data-filter="lab-manager">Lab Manager</button>
         <button class="filter-btn" data-filter="biobanking">Biobanking</button>
         <button class="filter-btn" data-filter="elife">eLife</button>
         <button class="filter-btn" data-filter="lab-news">Lab News</button>
@@ -353,51 +356,41 @@
         <p>We aggregate news from these trusted organisations and publications to keep you informed.</p>
       </div>
       <div class="source-list">
-        <div class="source-item">
+        <a href="https://www.hta.gov.uk" target="_blank" rel="noopener noreferrer" class="source-item">
           <div class="source-item-icon">&#127963;&#65039;</div>
           <h4>Human Tissue Authority</h4>
           <p>UK regulator for human tissue and organs</p>
-        </div>
-        <div class="source-item">
+        </a>
+        <a href="https://www.nhsbt.nhs.uk" target="_blank" rel="noopener noreferrer" class="source-item">
           <div class="source-item-icon">&#129656;</div>
           <h4>NHS Blood &amp; Transplant</h4>
           <p>Blood, organ and tissue donation services</p>
-        </div>
-        <div class="source-item">
+        </a>
+        <a href="https://www.the-scientist.com" target="_blank" rel="noopener noreferrer" class="source-item">
           <div class="source-item-icon">&#128300;</div>
           <h4>The Scientist</h4>
           <p>Life science research and news</p>
-        </div>
-        <div class="source-item">
-          <div class="source-item-icon">&#129514;</div>
-          <h4>Lab Manager</h4>
-          <p>Laboratory management and technology</p>
-        </div>
-        <div class="source-item">
-          <div class="source-item-icon">&#128240;</div>
-          <h4>Lab Bulletin</h4>
-          <p>UK laboratory industry news</p>
-        </div>
-        <div class="source-item">
+        </a>
+        <a href="https://www.biobanking.com" target="_blank" rel="noopener noreferrer" class="source-item">
           <div class="source-item-icon">&#129516;</div>
           <h4>Biobanking.com</h4>
           <p>Tissue and organ banking news</p>
-        </div>
-        <div class="source-item">
+        </a>
+        <a href="https://elifesciences.org" target="_blank" rel="noopener noreferrer" class="source-item">
           <div class="source-item-icon">&#128218;</div>
           <h4>eLife Sciences</h4>
           <p>Open-access biomedical research</p>
-        </div>
-        <div class="source-item">
+        </a>
+        <a href="https://www.labnews.co.uk" target="_blank" rel="noopener noreferrer" class="source-item">
           <div class="source-item-icon">&#128196;</div>
           <h4>Lab News</h4>
           <p>UK laboratory and science news</p>
-        </div>
-        <div class="source-item">
+        </a>
+        <a href="https://biobankinguk.org" target="_blank" rel="noopener noreferrer" class="source-item">
           <div class="source-item-icon">&#127468;&#127463;</div>
           <h4>UKCRC Tissue Directory</h4>
           <p>UK biobank coordination centre</p>
-        </div>
+        </a>
       </div>
     </div>
   </section>
