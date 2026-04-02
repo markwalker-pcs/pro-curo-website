@@ -1,0 +1,54 @@
+# Pro-curo — Tissue Traceability & Sample Management Software
+
+> Pro-curo is specialist software for tissue establishments, tissue banks, and HTA-licensed organisations. It provides donor-to-recipient traceability, sample management, and audit trails required by the Human Tissue Act 2004 and the EU Tissue Directive (2004/23/EC).
+
+## What Pro-curo Does
+
+Pro-curo is a web-based tissue traceability and sample management system. It is used by organisations that handle human tissue and need to comply with the Human Tissue Authority (HTA) licensing requirements in the UK and the EU Tissue and Cells Directives across Europe.
+
+The software tracks biological samples from donor to recipient, maintaining a complete chain of custody. It replaces paper logbooks and spreadsheets with a purpose-built electronic system that provides full audit trails, role-based access control, and regulatory reporting.
+
+## Who Uses Pro-curo
+
+Pro-curo is used by NHS tissue banks, university research laboratories, biobanks, and other tissue establishments licensed by the Human Tissue Authority. Clients include leading NHS trusts and research institutions across the United Kingdom.
+
+## Key Capabilities
+
+- Donor-to-recipient traceability with full chain of custody
+- Sample tracking through receipt, processing, storage, and distribution
+- Interactive dashboards with live KPIs and project overview
+- Query builder for custom data searches and reports
+- CSV import wizard for migrating legacy data
+- Role-based access control with JWT authentication
+- Full audit trail on every record
+- Cloud-hosted (Azure) or on-premise deployment options
+- Web-based — accessible from any modern browser on desktop, tablet, or mobile
+
+## Regulatory Context
+
+Pro-curo is designed to help organisations meet the requirements of:
+- The Human Tissue Act 2004 (UK)
+- HTA licensing standards and codes of practice
+- EU Directive 2004/23/EC (the EU Tissue and Cells Directive)
+- Implementing Directives 2006/17/EC and 2006/86/EC
+
+## Company
+
+Pro-curo is developed by Pro-curo Software Ltd, a UK-based company specialising in tissue traceability solutions for the life sciences sector.
+
+## Website
+
+- Homepage: https://www.pro-curo.com
+- Features: https://www.pro-curo.com/features.html
+- Pricing: https://www.pro-curo.com/pricing.html
+- Clients & Resources: https://www.pro-curo.com/clients.html
+- Contact: https://www.pro-curo.com/contact.html
+- White Papers: https://www.pro-curo.com/clients.html (linked from Clients & Resources)
+
+## White Papers
+
+- HTA Compliance & Human Tissue Traceability: https://www.pro-curo.com/whitepapers/hta-compliance-traceability.html
+- Chain of Custody for Human Tissue: https://www.pro-curo.com/whitepapers/chain-of-custody.html
+- Moving from Paper to Electronic Systems in Tissue Banks: https://www.pro-curo.com/whitepapers/paper-to-electronic.html
+- The EU Tissue Directive — What It Means for Your Laboratory: https://www.pro-curo.com/whitepapers/eu-tissue-directive.html
+- The Importance of Sample Tracking in Life Science Laboratories: https://www.pro-curo.com/whitepapers/sample-tracking-importance.html

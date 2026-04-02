@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8CS9W53CST"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8CS9W53CST');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Pro-curo — tissue traceability and sample management software for HTA-licensed establishments, tissue banks, and organisations regulated under the Human Tissue Act and EU Tissue Directive.">
@@ -8,6 +16,45 @@
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Pro-curo",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web-based",
+    "description": "Tissue traceability and sample management software for HTA-licensed establishments, tissue banks, and organisations regulated under the Human Tissue Act and EU Tissue Directive.",
+    "url": "https://www.pro-curo.com",
+    "offers": {
+      "@type": "Offer",
+      "url": "https://www.pro-curo.com/pricing.html",
+      "priceCurrency": "GBP"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Pro-curo Software Ltd",
+      "url": "https://www.pro-curo.com",
+      "logo": "https://www.pro-curo.com/img/logo-icon.jpg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "url": "https://www.pro-curo.com/contact.html"
+      }
+    },
+    "featureList": [
+      "Donor-to-recipient traceability",
+      "Sample tracking and chain of custody",
+      "Interactive dashboards with live KPIs",
+      "Query builder for custom reports",
+      "Role-based access control",
+      "Full audit trail",
+      "Cloud or on-premise deployment",
+      "CSV import wizard"
+    ]
+  }
+  </script>
 </head>
 <body>
 
