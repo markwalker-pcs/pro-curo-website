@@ -417,6 +417,12 @@ p {
   font-weight: 700;
 }
 
+.feature-link {
+  margin-top: 16px;
+  font-size: 0.92rem;
+  color: #4a5568;
+}
+
 .feature-image {
   flex: 1.2;
 }
