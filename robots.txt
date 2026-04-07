@@ -1,7 +1,7 @@
 # Pro-curo - Tissue Traceability Software
-# https://pro-curo.com
+# https://www.pro-curo.com
 
 User-agent: *
 Allow: /
 
-Sitemap: https://pro-curo.com/sitemap.xml
+Sitemap: https://www.pro-curo.com/sitemap.xml

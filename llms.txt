@@ -38,17 +38,17 @@ Pro-curo is developed by Pro-curo Software Ltd, a UK-based company specialising 
 
 ## Website
 
-- Homepage: https://pro-curo.com
-- Features: https://pro-curo.com/features.html
-- Pricing: https://pro-curo.com/pricing.html
-- Clients & Resources: https://pro-curo.com/clients.html
-- Contact: https://pro-curo.com/contact.html
-- White Papers: https://pro-curo.com/clients.html (linked from Clients & Resources)
+- Homepage: https://www.pro-curo.com
+- Features: https://www.pro-curo.com/features.html
+- Pricing: https://www.pro-curo.com/pricing.html
+- Clients & Resources: https://www.pro-curo.com/clients.html
+- Contact: https://www.pro-curo.com/contact.html
+- White Papers: https://www.pro-curo.com/clients.html (linked from Clients & Resources)
 
 ## White Papers
 
-- HTA Compliance & Human Tissue Traceability: https://pro-curo.com/whitepapers/hta-compliance-traceability.html
-- Chain of Custody for Human Tissue: https://pro-curo.com/whitepapers/chain-of-custody.html
-- Moving from Paper to Electronic Systems in Tissue Banks: https://pro-curo.com/whitepapers/paper-to-electronic.html
-- The EU Tissue Directive — What It Means for Your Laboratory: https://pro-curo.com/whitepapers/eu-tissue-directive.html
-- The Importance of Sample Tracking in Life Science Laboratories: https://pro-curo.com/whitepapers/sample-tracking-importance.html
+- HTA Compliance & Human Tissue Traceability: https://www.pro-curo.com/whitepapers/hta-compliance-traceability.html
+- Chain of Custody for Human Tissue: https://www.pro-curo.com/whitepapers/chain-of-custody.html
+- Moving from Paper to Electronic Systems in Tissue Banks: https://www.pro-curo.com/whitepapers/paper-to-electronic.html
+- The EU Tissue Directive — What It Means for Your Laboratory: https://www.pro-curo.com/whitepapers/eu-tissue-directive.html
+- The Importance of Sample Tracking in Life Science Laboratories: https://www.pro-curo.com/whitepapers/sample-tracking-importance.html
