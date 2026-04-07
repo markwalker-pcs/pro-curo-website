@@ -1,16 +1,75 @@
 {
+  "routes": [
+    {
+      "route": "/software-product-range.php",
+      "redirect": "/features.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/product-information.php",
+      "redirect": "/features.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/pro-curo-ent.php",
+      "redirect": "/features.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/support.php",
+      "redirect": "/support.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/training-videos-version-3.php",
+      "redirect": "/support.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/news/*",
+      "redirect": "/industry-news.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/contact.php",
+      "redirect": "/contact.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/about.php",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/index.php",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/clients.php",
+      "redirect": "/clients.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/pro-curo-lite.php",
+      "redirect": "/pricing.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/pricing.php",
+      "redirect": "/pricing.html",
+      "statusCode": 301
+    }
+  ],
   "responseOverrides": {
     "404": {
-      "rewrite": "/404.html"
+      "rewrite": "/404.html",
+      "statusCode": 404
     }
   },
   "globalHeaders": {
     "X-Frame-Options": "DENY",
     "X-Content-Type-Options": "nosniff",
     "Referrer-Policy": "strict-origin-when-cross-origin"
-  },
-  "navigationFallback": {
-    "rewrite": "/404.html",
-    "exclude": ["/img/*", "/css/*", "/js/*", "/api/*"]
   }
 }
