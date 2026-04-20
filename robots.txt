@@ -4,4 +4,13 @@
 User-agent: *
 Allow: /
 
+# Block legacy Tumblr-era query-string URLs (~150 junk permutations
+# that are eating crawl budget — they all canonicalise to /).
+Disallow: /*tumblr_offset
+Disallow: /*tumblr_post
+Disallow: /*_escaped_fragment_
+
+# Old resource PDFs no longer published
+Disallow: /resources/
+
 Sitemap: https://www.pro-curo.com/sitemap.xml

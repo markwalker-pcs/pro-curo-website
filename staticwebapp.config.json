@@ -1,71 +1,68 @@
 {
   "routes": [
-    {
-      "route": "/software-product-range.php",
-      "redirect": "/features.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/product-information.php",
-      "redirect": "/features.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/pro-curo-ent.php",
-      "redirect": "/features.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/support.php",
-      "redirect": "/support.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/training-videos-version-3.php",
-      "redirect": "/support.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/news/*",
-      "redirect": "/industry-news.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/contact.php",
-      "redirect": "/contact.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/about.php",
-      "redirect": "/",
-      "statusCode": 301
-    },
-    {
-      "route": "/index.php",
-      "redirect": "/",
-      "statusCode": 301
-    },
-    {
-      "route": "/clients.php",
-      "redirect": "/clients.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/pro-curo-lite.php",
-      "redirect": "/pricing.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/pricing.php",
-      "redirect": "/pricing.html",
-      "statusCode": 301
-    }
+    { "route": "/software-product-range.php", "redirect": "/features.html", "statusCode": 301 },
+    { "route": "/product-information.php",    "redirect": "/features.html", "statusCode": 301 },
+    { "route": "/product-information",        "redirect": "/features.html", "statusCode": 301 },
+    { "route": "/pro-curo-ent.php",           "redirect": "/features.html", "statusCode": 301 },
+    { "route": "/pro-curo-version-2.php",     "redirect": "/features.html", "statusCode": 301 },
+    { "route": "/mobile-app.php",             "redirect": "/features.html", "statusCode": 301 },
+    { "route": "/mobile-devices.php",         "redirect": "/features.html", "statusCode": 301 },
+    { "route": "/flat-bed-scanners.php",      "redirect": "/features.html", "statusCode": 301 },
+    { "route": "/flat-bed-scanners-vnh.php",  "redirect": "/features.html", "statusCode": 301 },
+    { "route": "/barcode-printers.php",       "redirect": "/features.html", "statusCode": 301 },
+    { "route": "/storage-setup.php",          "redirect": "/features.html", "statusCode": 301 },
+    { "route": "/identification.php",         "redirect": "/features.html", "statusCode": 301 },
+    { "route": "/regulation.php",             "redirect": "/features.html", "statusCode": 301 },
+    { "route": "/working-with-samples.php",   "redirect": "/features.html", "statusCode": 301 },
+    { "route": "/working-with-files.php",     "redirect": "/features.html", "statusCode": 301 },
+
+    { "route": "/pricing.php",                "redirect": "/pricing.html", "statusCode": 301 },
+    { "route": "/pro-curo-lite.php",          "redirect": "/pricing.html", "statusCode": 301 },
+    { "route": "/trial.php",                  "redirect": "/pricing.html", "statusCode": 301 },
+
+    { "route": "/clients.php",                "redirect": "/clients.html", "statusCode": 301 },
+    { "route": "/testimonials.php",           "redirect": "/clients.html", "statusCode": 301 },
+    { "route": "/our-distributors.php",       "redirect": "/clients.html", "statusCode": 301 },
+
+    { "route": "/support.php",                "redirect": "/support.html", "statusCode": 301 },
+    { "route": "/support",                    "redirect": "/support.html", "statusCode": 301 },
+    { "route": "/support-contracts-vnh1.php", "redirect": "/support.html", "statusCode": 301 },
+    { "route": "/support-forum",              "redirect": "/support.html", "statusCode": 301 },
+    { "route": "/training-videos-version-2.php",     "redirect": "/support.html", "statusCode": 301 },
+    { "route": "/training-videos-version-3.php",     "redirect": "/support.html", "statusCode": 301 },
+    { "route": "/installation-videos-version-3.php", "redirect": "/support.html", "statusCode": 301 },
+    { "route": "/download.php",               "redirect": "/support.html", "statusCode": 301 },
+    { "route": "/downloads.php",              "redirect": "/support.html", "statusCode": 301 },
+    { "route": "/downloads",                  "redirect": "/support.html", "statusCode": 301 },
+    { "route": "/faqs.php",                   "redirect": "/support.html", "statusCode": 301 },
+    { "route": "/zfaqs-*",                    "redirect": "/support.html", "statusCode": 301 },
+
+    { "route": "/contact.php",                "redirect": "/contact.html", "statusCode": 301 },
+    { "route": "/contact-us-vnh.php",         "redirect": "/contact.html", "statusCode": 301 },
+
+    { "route": "/about.php",                  "redirect": "/",             "statusCode": 301 },
+    { "route": "/about-us.php",               "redirect": "/",             "statusCode": 301 },
+    { "route": "/the-team.php",               "redirect": "/",             "statusCode": 301 },
+    { "route": "/index.php",                  "redirect": "/",             "statusCode": 301 },
+    { "route": "/index.html",                 "redirect": "/",             "statusCode": 301 },
+
+    { "route": "/version3.php",               "redirect": "/whats-new.html", "statusCode": 301 },
+    { "route": "/version4.php",               "redirect": "/whats-new.html", "statusCode": 301 },
+    { "route": "/updates.php",                "redirect": "/whats-new.html", "statusCode": 301 },
+
+    { "route": "/news",                       "redirect": "/industry-news.html", "statusCode": 301 },
+    { "route": "/news/",                      "redirect": "/industry-news.html", "statusCode": 301 },
+    { "route": "/news.php",                   "redirect": "/industry-news.html", "statusCode": 301 },
+    { "route": "/news/*",                     "redirect": "/industry-news.html", "statusCode": 301 },
+
+    { "route": "/settings.php",               "statusCode": 410 },
+    { "route": "/administration.php",         "statusCode": 410 },
+    { "route": "/testing-page.php",           "statusCode": 410 },
+    { "route": "/resources/*",                "statusCode": 410 }
   ],
   "responseOverrides": {
-    "404": {
-      "rewrite": "/404.html",
-      "statusCode": 404
-    }
+    "404": { "rewrite": "/404.html", "statusCode": 404 },
+    "410": { "rewrite": "/404.html", "statusCode": 410 }
   },
   "globalHeaders": {
     "X-Frame-Options": "DENY",
