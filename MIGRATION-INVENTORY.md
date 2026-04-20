@@ -23,6 +23,7 @@ A new engineer should be able to read this in ten minutes and take the site over
 - **2026-04-20** — Registrar facts captured from Google Admin Console: registrar of record is Enom (back-end), domain managed via Google Workspace, auto-renewal on, next renewal 13 October 2026.
 - **2026-04-20** — Ran the production rollback drill. Forward commit `bf327c0` (`test: rollback drill — forward commit on llms.txt`) deployed in run [24685364366](https://github.com/markwalker-pcs/pro-curo-website/actions/runs/24685364366) — 47s, success. Revert commit `be2ee70` (`git revert --no-edit bf327c0`) deployed in run [24685412285](https://github.com/markwalker-pcs/pro-curo-website/actions/runs/24685412285) — 47s, success. `llms.txt` is back to its pre-drill state. The full cycle (push → deploy → revert → redeploy) works, takes ~2 minutes per leg, and produces a clean linear history under branch protection.
 - **2026-04-20** — Availability monitoring decision: UptimeRobot free tier, alert email `mark.walker@pro-curo.com`. Signup itself still pending Mark (email verification can't be done on his behalf).
+- **2026-04-20** — UptimeRobot monitor live. Public stats page: <https://stats.uptimerobot.com/Xc3c7XbQEC>. Monitor target is `https://www.pro-curo.com/`, alert email `mark.walker@pro-curo.com`.
 
 ### Material findings from the Azure read-only pass (2026-04-20)
 
@@ -37,21 +38,14 @@ A new engineer should be able to read this in ten minutes and take the site over
 
 ## Questions for Mark
 
-One item still needs Mark's direct action:
-
-1. **UptimeRobot signup.** Decision made (free tier, alert to `mark.walker@pro-curo.com`) but email-verification signup can only be done by Mark. Steps:
-   1. Sign up at <https://uptimerobot.com/signUp> with `mark.walker@pro-curo.com`
-   2. Verify the email (link in inbox)
-   3. Add **HTTPS monitor**: name `Pro-curo website`, URL `https://www.pro-curo.com/`, interval `5 minutes`
-   4. Add **alert contact**: email `mark.walker@pro-curo.com`, attach to the monitor
-   5. Tell Claude the monitor is up; Claude will append the monitor ID / dashboard URL to this inventory
+All discovery items closed as of 2026-04-20. Remaining external sign-off is the Cowork register row (see "When this is done" in `MIGRATION-BRIEF.md`).
 
 ### Proposed inline fixes — final state
 
 - **A.** ~~Extend `.gitignore` with `.env`, `.env.*`, `local.settings.json`, `bin/`, `obj/`, `.azurefunctions/`.~~ **Done 2026-04-20.**
 - **B.** ~~Rewrite the remote URL in `website/.git/config` to drop the embedded `markwalker-pcs@` username.~~ **Done 2026-04-20.**
 - **C.** ~~Enable branch protection on `main`.~~ **Done 2026-04-20** (linear history, no force-push, no deletion; admin override retained).
-- **D.** Add availability monitoring — **chosen: UptimeRobot free tier, alert email `mark.walker@pro-curo.com`**. Actual signup pending Mark (see Questions for Mark #1).
+- **D.** ~~Add availability monitoring~~ **Done 2026-04-20** — UptimeRobot free tier, alert to `mark.walker@pro-curo.com`, public stats at <https://stats.uptimerobot.com/Xc3c7XbQEC>.
 
 ### Domain-management caveat
 
@@ -256,12 +250,13 @@ Hardcoded in `api/news/index.js` `FEEDS` array. Swap when a feed goes dead. Curr
 
 ## 9. Monitoring
 
-**Today: none.** Confirmed 2026-04-20:
-- Application Insights: **not connected** to the Static Web App
-- Diagnostic settings on the SWA: **empty**, no log destinations
-- No availability test, no alerting, no uptime check
+| Layer | State |
+|---|---|
+| Uptime check | **UptimeRobot free tier** (chosen 2026-04-20 over Azure availability test to avoid a monthly cost line). HTTPS monitor targets `https://www.pro-curo.com/`. Alert contact: `mark.walker@pro-curo.com`. Public stats page: <https://stats.uptimerobot.com/Xc3c7XbQEC> |
+| Application Insights | **Not connected** to the Static Web App. Enabling would add a monthly cost line — defer until there's a reason |
+| Diagnostic settings on the SWA | **Empty** — no log destinations configured |
 
-Outstanding: cost-of-service decision for availability monitoring — Azure availability test (paid per test/month per region) vs UptimeRobot free tier (1 check, 5-minute interval, email alert). Target URL: `https://www.pro-curo.com/`. Alert destination: `mark@taraniscapital.com` per brief (cross-entity mailbox — flag if Mark wants a Pro-curo mailbox instead).
+If the UptimeRobot email alert ever pages, first action is hit the public stats page above to see current status and any correlated incidents, then check the Static Web App in the Azure portal for recent deployment or platform issues.
 
 ---
 
@@ -304,7 +299,7 @@ Outstanding: cost-of-service decision for availability monitoring — Azure avai
 
 - **Shared subscription with Pro-curo V5.** Hard guard rail: scope every `az` command to `rg-procuro-website`; never touch subscription-level role assignments, policies or defaults; never touch `procuro-production`.
 - **Public repo with historical content.** Any secret ever committed is exposed. Secret-history grep clean as of 2026-04-20 (see §2), but every future change must pass pre-commit grep too.
-- **No monitoring on a live public site.** Decision recorded: UptimeRobot free tier. Signup pending Mark (Questions for Mark #2).
+- ~~**No monitoring on a live public site.**~~ **Closed 2026-04-20** — UptimeRobot free tier is live (see §9).
 - **SEO fix revalidation outstanding.** Google-paced; track in `TASKS.md`, not here.
 - **Deploy-token rotation procedure not previously written down.** Captured in §3 above.
 - **Alert destination for future availability checks.** Brief specifies `mark@taraniscapital.com` — cross-entity mailbox. Flag for Mark to choose a Pro-curo-side address if preferred.
