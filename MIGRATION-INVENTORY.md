@@ -20,6 +20,7 @@ A new engineer should be able to read this in ten minutes and take the site over
 - **2026-04-20** — Installed Azure CLI (`winget install Microsoft.AzureCLI`, v2.85.0) and signed in as `mark.walker@pro-curo.com` (device-code flow). Ran read-only queries scoped to `rg-procuro-website` and the subscription DNS namespace. No writes.
 - **2026-04-20** — Switched `gh` CLI auth from stale `DisruptsMedia` (invalid keyring token) to `markwalker-pcs` via browser login.
 - **2026-04-20** — Enabled classic branch protection on `main` for `markwalker-pcs/pro-curo-website`: `required_linear_history=true`, `allow_force_pushes=false`, `allow_deletions=false`. `enforce_admins=false` so Mark retains an emergency admin-override path (sensible for a solo repo). No required reviews, no required status checks. Allowed-inline per brief.
+- **2026-04-20** — Registrar facts captured from Google Admin Console: registrar of record is Enom (back-end), domain managed via Google Workspace, auto-renewal on, next renewal 13 October 2026.
 
 ### Material findings from the Azure read-only pass (2026-04-20)
 
@@ -34,11 +35,10 @@ A new engineer should be able to read this in ten minutes and take the site over
 
 ## Questions for Mark
 
-Remaining after the Azure read-only pass and the GitHub pass — three items need Mark's direct action:
+Two items still need Mark's direct action:
 
-1. **eNom registrar — lock and auto-renewal status** for `pro-curo.com`, plus the current renewal date. Needs a login to the eNom portal.
-2. **Availability monitoring — sign up and configure.** The brief's fallback (UptimeRobot free tier) is the recommended choice because Application Insights is not connected and enabling Azure availability tests would add a monthly cost line. Setup needs Mark: sign up at <https://uptimerobot.com> (free tier), add HTTP(s) monitor for `https://www.pro-curo.com/` at 5-minute interval, add email alert contact. Brief specifies `mark@taraniscapital.com` — a cross-entity mailbox — flag if Mark prefers a Pro-curo address.
-3. **Rollback drill.** Trivial text change / deploy / revert / redeploy cycle against production. Holding until Mark OKs running it — even a footer-copyright change temporarily changes the live site and publishes two workflow runs.
+1. **Availability monitoring — sign up and configure.** The brief's fallback (UptimeRobot free tier) is the recommended choice because Application Insights is not connected and enabling Azure availability tests would add a monthly cost line. Setup needs Mark: sign up at <https://uptimerobot.com> (free tier), add HTTP(s) monitor for `https://www.pro-curo.com/` at 5-minute interval, add email alert contact. Brief specifies `mark@taraniscapital.com` — a cross-entity mailbox — flag if Mark prefers a Pro-curo address.
+2. **Rollback drill.** Trivial text change / deploy / revert / redeploy cycle against production. Holding until Mark OKs running it — even a footer-copyright change temporarily changes the live site and publishes two workflow runs.
 
 ### Proposed inline fixes — final state
 
@@ -46,6 +46,10 @@ Remaining after the Azure read-only pass and the GitHub pass — three items nee
 - **B.** ~~Rewrite the remote URL in `website/.git/config` to drop the embedded `markwalker-pcs@` username.~~ **Done 2026-04-20.**
 - **C.** ~~Enable branch protection on `main`.~~ **Done 2026-04-20** (linear history, no force-push, no deletion; admin override retained).
 - **D.** Add availability monitoring — **chosen: UptimeRobot free tier** (cheapest option that does the job; App Insights would cost monthly). Actual signup pending Mark (see Questions for Mark #2).
+
+### Domain-management caveat
+
+`pro-curo.com` was bought via Google Workspace with Enom as registrar-of-record. DNS changes go through Enom's control panel, **linked from Google Admin** (not from a direct Enom customer login). Google surfaces: "Changes to your advanced DNS settings, such as MX and CNAME records, may disrupt Google services that you've activated for your domain." For any future DNS edit, start from Google Admin Console → Domains → Advanced DNS, not a direct Enom login — that's the documented path, and mail / GSC verification / MailerLite DKIM are all sitting behind that same zone.
 
 ### Out-of-scope hygiene items noticed
 
@@ -179,10 +183,12 @@ Single user, no service principals, no group memberships, no other owners. **Do 
 
 | Field | Value |
 |---|---|
-| Registrar | eNom |
+| Registrar of record | eNom |
 | Domain | `pro-curo.com` |
-| Auto-renewal | [CONFIRM] at eNom |
-| Renewal date | [CONFIRM] at eNom |
+| Purchased / managed via | **Google Workspace / Google Admin Console** — the domain was bought through Google Workspace, with Enom as the back-end registrar. Primary management UI is Google Admin; Advanced DNS changes link out to Enom's DNS control panel |
+| Auto-renewal | **On** (confirmed 2026-04-20 via Google Admin) |
+| Next renewal date | **13 October 2026** |
+| Warning surfaced by Google Admin | "Changes to your advanced DNS settings, such as MX and CNAME records, may disrupt Google services that you've activated for your domain" — relevant when editing DNS (Google Workspace mail, SPF, GSC TXT) |
 
 ### DNS host
 
