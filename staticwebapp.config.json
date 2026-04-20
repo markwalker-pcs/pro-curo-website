@@ -55,14 +55,13 @@
     { "route": "/news.php",                   "redirect": "/industry-news.html", "statusCode": 301 },
     { "route": "/news/*",                     "redirect": "/industry-news.html", "statusCode": 301 },
 
-    { "route": "/settings.php",               "statusCode": 410 },
-    { "route": "/administration.php",         "statusCode": 410 },
-    { "route": "/testing-page.php",           "statusCode": 410 },
-    { "route": "/resources/*",                "statusCode": 410 }
+    { "route": "/settings.php",               "redirect": "/", "statusCode": 301 },
+    { "route": "/administration.php",         "redirect": "/", "statusCode": 301 },
+    { "route": "/testing-page.php",           "redirect": "/", "statusCode": 301 },
+    { "route": "/resources/*",                "redirect": "/support.html", "statusCode": 301 }
   ],
   "responseOverrides": {
-    "404": { "rewrite": "/404.html", "statusCode": 404 },
-    "410": { "rewrite": "/404.html", "statusCode": 410 }
+    "404": { "rewrite": "/404.html", "statusCode": 404 }
   },
   "globalHeaders": {
     "X-Frame-Options": "DENY",
