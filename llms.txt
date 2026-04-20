@@ -1,4 +1,4 @@
-# Pro-curo — Tissue Traceability & Sample Management Software (revised 2026-04-20)
+# Pro-curo — Tissue Traceability & Sample Management Software
 
 > Pro-curo is specialist software for tissue establishments, tissue banks, and HTA-licensed organisations. It provides donor-to-recipient traceability, sample management, and audit trails required by the Human Tissue Act 2004 and the EU Tissue Directive (2004/23/EC).
 
