@@ -51,7 +51,6 @@
     { "route": "/updates.php",                "redirect": "/whats-new.html", "statusCode": 301 },
 
     { "route": "/news",                       "redirect": "/industry-news.html", "statusCode": 301 },
-    { "route": "/news/",                      "redirect": "/industry-news.html", "statusCode": 301 },
     { "route": "/news.php",                   "redirect": "/industry-news.html", "statusCode": 301 },
     { "route": "/news/*",                     "redirect": "/industry-news.html", "statusCode": 301 },
 
