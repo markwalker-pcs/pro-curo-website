@@ -13,5 +13,13 @@ Desktop.ini
 # Dependencies (Azure installs these during deployment)
 node_modules/
 
+# Azure Functions local/build artefacts
+.env
+.env.*
+local.settings.json
+bin/
+obj/
+.azurefunctions/
+
 # Deployment guide (not needed on the live site)
 DEPLOYMENT.md
