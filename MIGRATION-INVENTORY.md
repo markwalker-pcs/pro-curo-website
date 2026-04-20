@@ -21,6 +21,8 @@ A new engineer should be able to read this in ten minutes and take the site over
 - **2026-04-20** — Switched `gh` CLI auth from stale `DisruptsMedia` (invalid keyring token) to `markwalker-pcs` via browser login.
 - **2026-04-20** — Enabled classic branch protection on `main` for `markwalker-pcs/pro-curo-website`: `required_linear_history=true`, `allow_force_pushes=false`, `allow_deletions=false`. `enforce_admins=false` so Mark retains an emergency admin-override path (sensible for a solo repo). No required reviews, no required status checks. Allowed-inline per brief.
 - **2026-04-20** — Registrar facts captured from Google Admin Console: registrar of record is Enom (back-end), domain managed via Google Workspace, auto-renewal on, next renewal 13 October 2026.
+- **2026-04-20** — Ran the production rollback drill. Forward commit `bf327c0` (`test: rollback drill — forward commit on llms.txt`) deployed in run [24685364366](https://github.com/markwalker-pcs/pro-curo-website/actions/runs/24685364366) — 47s, success. Revert commit `be2ee70` (`git revert --no-edit bf327c0`) deployed in run [24685412285](https://github.com/markwalker-pcs/pro-curo-website/actions/runs/24685412285) — 47s, success. `llms.txt` is back to its pre-drill state. The full cycle (push → deploy → revert → redeploy) works, takes ~2 minutes per leg, and produces a clean linear history under branch protection.
+- **2026-04-20** — Availability monitoring decision: UptimeRobot free tier, alert email `mark.walker@pro-curo.com`. Signup itself still pending Mark (email verification can't be done on his behalf).
 
 ### Material findings from the Azure read-only pass (2026-04-20)
 
@@ -35,17 +37,21 @@ A new engineer should be able to read this in ten minutes and take the site over
 
 ## Questions for Mark
 
-Two items still need Mark's direct action:
+One item still needs Mark's direct action:
 
-1. **Availability monitoring — sign up and configure.** The brief's fallback (UptimeRobot free tier) is the recommended choice because Application Insights is not connected and enabling Azure availability tests would add a monthly cost line. Setup needs Mark: sign up at <https://uptimerobot.com> (free tier), add HTTP(s) monitor for `https://www.pro-curo.com/` at 5-minute interval, add email alert contact. Brief specifies `mark@taraniscapital.com` — a cross-entity mailbox — flag if Mark prefers a Pro-curo address.
-2. **Rollback drill.** Trivial text change / deploy / revert / redeploy cycle against production. Holding until Mark OKs running it — even a footer-copyright change temporarily changes the live site and publishes two workflow runs.
+1. **UptimeRobot signup.** Decision made (free tier, alert to `mark.walker@pro-curo.com`) but email-verification signup can only be done by Mark. Steps:
+   1. Sign up at <https://uptimerobot.com/signUp> with `mark.walker@pro-curo.com`
+   2. Verify the email (link in inbox)
+   3. Add **HTTPS monitor**: name `Pro-curo website`, URL `https://www.pro-curo.com/`, interval `5 minutes`
+   4. Add **alert contact**: email `mark.walker@pro-curo.com`, attach to the monitor
+   5. Tell Claude the monitor is up; Claude will append the monitor ID / dashboard URL to this inventory
 
 ### Proposed inline fixes — final state
 
 - **A.** ~~Extend `.gitignore` with `.env`, `.env.*`, `local.settings.json`, `bin/`, `obj/`, `.azurefunctions/`.~~ **Done 2026-04-20.**
 - **B.** ~~Rewrite the remote URL in `website/.git/config` to drop the embedded `markwalker-pcs@` username.~~ **Done 2026-04-20.**
 - **C.** ~~Enable branch protection on `main`.~~ **Done 2026-04-20** (linear history, no force-push, no deletion; admin override retained).
-- **D.** Add availability monitoring — **chosen: UptimeRobot free tier** (cheapest option that does the job; App Insights would cost monthly). Actual signup pending Mark (see Questions for Mark #2).
+- **D.** Add availability monitoring — **chosen: UptimeRobot free tier, alert email `mark.walker@pro-curo.com`**. Actual signup pending Mark (see Questions for Mark #1).
 
 ### Domain-management caveat
 
@@ -171,9 +177,8 @@ Single user, no service principals, no group memberships, no other owners. **Do 
 
 ### Rollback
 
-1. **Trivial case:** `git revert <bad-commit>` on `main`, push, workflow redeploys (≈2 min)
-2. **If revert is unsafe:** Azure portal → Static Web App `procuro-website` → **Environments** → swap in the previous production deployment
-3. [CONFIRM] rollback drill — a trivial text change / deploy / revert / redeploy cycle is pending Mark's OK (see Questions for Mark #8)
+1. **Trivial case:** `git revert --no-edit <bad-commit>` on `main`, `git push origin main`, workflow redeploys. **Proven 2026-04-20**: forward run [24685364366](https://github.com/markwalker-pcs/pro-curo-website/actions/runs/24685364366) + revert run [24685412285](https://github.com/markwalker-pcs/pro-curo-website/actions/runs/24685412285), each 47s end-to-end. `git revert` produces a linear-history-safe forward commit (not a merge), so it clears branch protection's `required_linear_history` rule.
+2. **If revert is unsafe:** Azure portal → Static Web App `procuro-website` → **Environments** → swap in the previous production deployment.
 
 ---
 
