@@ -10,7 +10,4 @@ Disallow: /*tumblr_offset
 Disallow: /*tumblr_post
 Disallow: /*_escaped_fragment_
 
-# Old resource PDFs no longer published
-Disallow: /resources/
-
 Sitemap: https://www.pro-curo.com/sitemap.xml
