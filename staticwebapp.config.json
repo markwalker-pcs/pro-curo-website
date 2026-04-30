@@ -43,6 +43,7 @@
     { "route": "/about.php",                  "redirect": "/",             "statusCode": 301 },
     { "route": "/about-us.php",               "redirect": "/",             "statusCode": 301 },
     { "route": "/the-team.php",               "redirect": "/",             "statusCode": 301 },
+    { "route": "/The-Team.php",               "redirect": "/",             "statusCode": 301 },
     { "route": "/index.php",                  "redirect": "/",             "statusCode": 301 },
     { "route": "/index.html",                 "redirect": "/",             "statusCode": 301 },
 
