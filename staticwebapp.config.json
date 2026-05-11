@@ -30,6 +30,7 @@
     { "route": "/support-forum",              "redirect": "/support.html", "statusCode": 301 },
     { "route": "/training-videos-version-2.php",     "redirect": "/support.html", "statusCode": 301 },
     { "route": "/training-videos-version-3.php",     "redirect": "/support.html", "statusCode": 301 },
+    { "route": "/installation-videos-version-2.php", "redirect": "/support.html", "statusCode": 301 },
     { "route": "/installation-videos-version-3.php", "redirect": "/support.html", "statusCode": 301 },
     { "route": "/download.php",               "redirect": "/support.html", "statusCode": 301 },
     { "route": "/downloads.php",              "redirect": "/support.html", "statusCode": 301 },
