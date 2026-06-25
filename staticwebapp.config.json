@@ -59,7 +59,9 @@
     { "route": "/settings.php",               "redirect": "/", "statusCode": 301 },
     { "route": "/administration.php",         "redirect": "/", "statusCode": 301 },
     { "route": "/testing-page.php",           "redirect": "/", "statusCode": 301 },
-    { "route": "/resources/*",                "redirect": "/support.html", "statusCode": 301 }
+
+    { "route": "/resources/pro-curo-user-manual.pdf", "rewrite": "/resources/pro-curo-user-manual.pdf" },
+    { "route": "/resources/*",                        "redirect": "/support.html", "statusCode": 301 }
   ],
   "responseOverrides": {
     "404": { "rewrite": "/404.html", "statusCode": 404 }
