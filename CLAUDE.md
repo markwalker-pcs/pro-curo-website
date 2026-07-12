@@ -84,3 +84,7 @@ The `api/news` Function deploys in the same workflow — no separate step. The w
 ## Inventory and migration status
 
 `MIGRATION-INVENTORY.md` at the repo root is the authoritative record of the site's cloud, DNS, CI/CD, third-party and monitoring configuration. Read it before making any infrastructure change. Update it whenever any of those facts change.
+
+## Writing style (standing rule)
+
+Set by Mark, 12 July 2026. UK English. Do not use em dashes in any written output for this project (documents, reports, emails, web copy, artifacts, chat deliverables). Use full stops, colons, commas or parentheses instead; emphasis comes from sentence structure, not punctuation. Hyphens in compound words and en dashes in number ranges are fine.
