@@ -1,0 +1,6 @@
+# Keep the C006 guard scripts LF-only so they run under /bin/sh on Linux CI and
+# under Git Bash on Windows, regardless of the working tree's CRLF setting.
+# Scoped to these files on purpose: this is NOT a repo-wide CRLF normalisation
+# (that is a separate, large change - see CW005 §5 and HANDOVER-C006 watch-outs).
+tools/check-html-tails.sh text eol=lf
+.githooks/pre-commit text eol=lf

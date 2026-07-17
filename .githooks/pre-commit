@@ -1,0 +1,4 @@
+#!/bin/sh
+# pre-commit - block commits that truncate or malform site HTML (CW005 / HANDOVER-C006).
+# Enable once per clone with:  git config core.hooksPath .githooks
+exec "$(git rev-parse --show-toplevel)/tools/check-html-tails.sh"
