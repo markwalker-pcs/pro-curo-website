@@ -19,6 +19,11 @@ jobs:
         with:
           submodules: true
           lfs: false
+      - name: Verify HTML integrity (tail + div balance)
+        # Guard from HANDOVER-C006 / CW005: fails the build if any page is
+        # truncated (missing </html> or unbalanced <div>), so a broken tail
+        # blocks the deploy instead of shipping. Runs before deploy on purpose.
+        run: bash tools/check-html-tails.sh
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
