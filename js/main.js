@@ -201,6 +201,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   rhysLauncher.addEventListener('click', rhysOpen);
 
+  // Any element carrying data-rhys-open also opens the assistant, so an inline
+  // call-to-action button can reuse this one modal instead of duplicating it.
+  // Anchors keep a real href, so with JavaScript disabled the control still
+  // goes somewhere useful instead of being dead.
+  document.querySelectorAll('[data-rhys-open]').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      rhysOpen();
+    });
+  });
+
   // Close button and backdrop both carry data-rhys-close.
   rhysModal.addEventListener('click', function (e) {
     if (e.target && e.target.hasAttribute && e.target.hasAttribute('data-rhys-close')) {
