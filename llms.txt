@@ -40,6 +40,7 @@ Pro-curo is developed by Pro-curo Software Ltd, a UK-based company specialising 
 
 - Homepage: https://www.pro-curo.com
 - Features: https://www.pro-curo.com/features.html
+- V5 product demo video (6 min 28 s): https://youtu.be/esfvyr6Avu0
 - Pricing: https://www.pro-curo.com/pricing.html
 - Clients & Resources: https://www.pro-curo.com/clients.html
 - Contact: https://www.pro-curo.com/contact.html
