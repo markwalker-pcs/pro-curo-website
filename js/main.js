@@ -244,4 +244,42 @@ document.addEventListener('DOMContentLoaded', function () {
     rhysFooterBottom.appendChild(rhysNote);
   }
 
+  // --- Click-to-load YouTube player (CW040) ---
+  // The page ships a self-hosted poster inside a plain link to YouTube, so with
+  // JavaScript off the video is still one click away. Here that link becomes a
+  // play button, and nothing at all is requested from YouTube until it is
+  // pressed. The iframe then loads from the privacy-enhanced
+  // youtube-nocookie.com domain, as described in privacy.html.
+  var YT_ALLOW = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+
+  document.querySelectorAll('[data-yt-facade]').forEach(function (box) {
+    var videoId = box.getAttribute('data-yt-facade');
+    var link = box.querySelector('.yt-facade-play');
+    if (!videoId || !link) return;
+
+    // A real <button> gives Tab focus and Enter/Space activation for free.
+    var playBtn = document.createElement('button');
+    playBtn.type = 'button';
+    playBtn.className = link.className;
+    playBtn.setAttribute('aria-label', link.getAttribute('aria-label'));
+    while (link.firstChild) playBtn.appendChild(link.firstChild);
+    box.replaceChild(playBtn, link);
+
+    playBtn.addEventListener('click', function () {
+      var frame = document.createElement('iframe');
+      // Set allow before src, so autoplay and full screen are delegated for
+      // the first load.
+      frame.setAttribute('allow', YT_ALLOW);
+      frame.setAttribute('allowfullscreen', '');
+      frame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+      frame.setAttribute('title', box.getAttribute('data-yt-title') || 'YouTube video player');
+      frame.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(videoId) + '?autoplay=1&rel=0';
+      box.replaceChild(frame, playBtn);
+      frame.focus();
+      if (typeof gtag === 'function') {
+        gtag('event', 'demo_video_play', { page_path: window.location.pathname, video_id: videoId });
+      }
+    });
+  });
+
 });
