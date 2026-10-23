@@ -1,0 +1,580 @@
+{
+  "date": "2026-10-23",
+  "collectedAt": "2026-10-23T08:30:00Z",
+  "windowDays": 14,
+  "since": "2026-10-09T00:00:00.000Z",
+  "via": "fixture",
+  "totalInFeed": 121,
+  "count": 63,
+  "sourceErrors": [],
+  "sourceWarnings": [],
+  "items": [
+    {
+      "title": "How Monoclonal Antibodies Moved From &ldquo;Magic Bullets&rdquo; to Modern Medicine",
+      "link": "https://www.the-scientist.com/how-monoclonal-antibodies-moved-from-magic-bullets-to-modern-medicine-75174",
+      "description": "From treating cancer to infectious diseases, monoclonal antibodies have become powerful targeted therapies.",
+      "isoDate": "2026-10-23T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "How the DNA Barcoding Inventor Helped Crack the Code of Life",
+      "link": "https://www.the-scientist.com/how-the-dna-barcoding-inventor-helped-crack-the-code-of-life-75176",
+      "description": "Evolutionary biologist Paul Hebert revolutionized biodiversity research with DNA barcoding, inspiring a global effort to identify every species on Earth.",
+      "isoDate": "2026-10-23T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Then and Now: Emmeline Hill Gallops Through Horse Genetics and Beyond",
+      "link": "https://www.the-scientist.com/then-and-now-emmeline-hill-gallops-through-horse-genetics-and-beyond-75159",
+      "description": "Emmeline Hill was one of the first to study how genes influence horse traits. Now, she uses genetics to improve the welfare and management of horses and other animals.",
+      "isoDate": "2026-10-22T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Postdoc Portrait: Bo Zhao Investigates Neural Networks for Reliable AI",
+      "link": "https://www.the-scientist.com/postdoc-portrait-bo-zhao-investigates-neural-networks-for-reliable-ai-75168",
+      "description": "This postdoctoral researcher explores mathematical symmetry in neural networks to make modern artificial intelligence systems more interpretable, efficient, and reliable.",
+      "isoDate": "2026-10-22T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Academic Scientists&rsquo; Career Confidence Fell Amidst US Policy Changes",
+      "link": "https://www.the-scientist.com/academic-scientists-career-confidence-fell-amidst-us-policy-changes-75146",
+      "description": "A new NBER working paper surveying 916 biomedical PhD students and postdocs found academia-retention intentions fell 22 percentage points in six months.",
+      "isoDate": "2026-10-22T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Olfactory combinatorial coding supports risk–reward decision-making in Caenorhabditis elegans",
+      "link": "https://elifesciences.org/articles/104828",
+      "description": "Olfactory-driven behaviors are essential for animal survival, but mechanisms for decoding olfactory inputs remain poorly understood. We have used whole-network Ca2+ imaging to study olfactory coding in Caenorhabditis elegans. We show that the odorant 1-octanol is encoded…",
+      "isoDate": "2026-10-22T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Motor unit mechanisms of speed control in mouse locomotion",
+      "link": "https://elifesciences.org/articles/105829",
+      "description": "During locomotion, the coordinated activity of dozens of muscles shapes the kinematic features of each stride, including systematic changes in limb movement across walking speed. Motor units, each of which consists of a single motor neuron and the muscle fibers it innervates,…",
+      "isoDate": "2026-10-22T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "A hormonal message for a longer life",
+      "link": "https://elifesciences.org/articles/113125",
+      "description": "The steroid hormone dafachronic acid may carry the effects of reduced mTOR activity between tissues to coordinate metabolism and longevity across the body.",
+      "isoDate": "2026-10-22T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Ink Droplets, Jumping Spiders, and Neurons Win Nikon&rsquo;s Photo Contest",
+      "link": "https://www.the-scientist.com/ink-droplets-jumping-spiders-and-neurons-win-nikon-s-photo-contest-75162",
+      "description": "Get up close and personal with the winners of Nikon&rsquo;s Small World photomicrography competition, featuring images of ink droplets, jumping spiders, and neurons.",
+      "isoDate": "2026-10-21T14:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "A Non-Opioid Pain Receptor Has Renewed Potential for Pain Treatment",
+      "link": "https://www.the-scientist.com/a-non-opioid-pain-receptor-has-renewed-potential-for-pain-treatment-75164",
+      "description": "TRPV1, a receptor that responds to capsaicin and heat, has different conformations depending on the stimulus, expanding the potential for better drug targeting.",
+      "isoDate": "2026-10-21T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Enzyme Engineering Speeds Up With an Ultra-High-Throughput Screening Platform",
+      "link": "https://www.the-scientist.com/enzyme-engineering-speeds-up-with-an-ultra-high-throughput-screening-platform-75131",
+      "description": "Pando Bioscience pairs generative AI with wet lab screening and validation to cut the time and cost of engineering high-performance enzymes.",
+      "isoDate": "2026-10-21T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Novel but stable endosymbionts have contrasting effects on aphid dispersal and plant feeding damage in the cereal pest Diuraphis noxia",
+      "link": "https://elifesciences.org/articles/111255",
+      "description": "Endosymbiotic bacteria can affect many ecological attributes of their insect hosts, including (in herbivorous insects) how they interact with plants where they feed. This raises the issue of whether deliberate endosymbiont introductions could be used to decrease crop damage…",
+      "isoDate": "2026-10-21T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Complementary stable and dynamic prelimbic ensembles encode learned threat value underlying generalization and discrimination",
+      "link": "https://elifesciences.org/articles/111177",
+      "description": "Adaptive behavior requires assigning emotional value to sensory cues and generalizing to similar stimuli. The prelimbic cortex (PL) is critical for threat expression and discrimination, yet its neuronal ensembles undergo substantial turnover over time. How stable population…",
+      "isoDate": "2026-10-21T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "A mechanistic theory of planning in prefrontal cortex",
+      "link": "https://elifesciences.org/articles/109757",
+      "description": "Planning is critical for adaptive behaviour in a changing world, because it lets us anticipate the future and adjust our actions accordingly. While prefrontal cortex is crucial for this process, it remains unknown how planning is implemented in neural circuits. Prefrontal…",
+      "isoDate": "2026-10-21T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Correction: Stall force measurement of the kinesin-3 motor KIF1A using a programmable DNA origami nanospring",
+      "link": "https://elifesciences.org/articles/113474",
+      "description": "",
+      "isoDate": "2026-10-21T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Correction: Inhibitors of the small membrane (M) protein viroporin prevent Zika virus infection",
+      "link": "https://elifesciences.org/articles/113551",
+      "description": "",
+      "isoDate": "2026-10-21T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "p66Shc mediates SUMO2-induced endothelial dysfunction",
+      "link": "https://elifesciences.org/articles/106344",
+      "description": "Sumoylation is a post-translational modification that can regulate different physiological functions. Increased sumoylation, specifically conjugation of SUMO2/3 (small ubiquitin-like modifier 2/3), is detrimental to vascular health. However, the molecular mechanism mediating…",
+      "isoDate": "2026-10-21T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Strong mnemonic prediction errors increase cognitive control, attention, and arousal",
+      "link": "https://elifesciences.org/articles/109678",
+      "description": "Ongoing experience is continuously processed in the context of past events. Divergence between current experience and memory-based predictions (i.e., a mnemonic prediction error; MPE) is theorized to be a signal that encoding, as opposed to retrieval, should be prioritized. We…",
+      "isoDate": "2026-10-21T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Former MIT Biologist David Sabatini Wins $6 Million Defamation Lawsuit",
+      "link": "https://www.the-scientist.com/former-mit-biologist-david-sabatini-wins-6-million-defamation-lawsuit-75163",
+      "description": "A jury agreed that David Sabatini was defamed by his accuser and former colleague, MIT biologist Kristin Knause.",
+      "isoDate": "2026-10-20T16:55:50.203Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Recombinant Enzymes for IVD Assays",
+      "link": "https://www.the-scientist.com/recombinant-enzymes-for-ivd-assays-75140",
+      "description": "Sino Biological&rsquo;s Alston Zhang explains recombinant enzyme advantages, assay purity, and how a novel diacetinase is reshaping IVD development.",
+      "isoDate": "2026-10-20T12:40:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Corporate report: Human Tissue Authority annual report and accounts: 2025 to 2026",
+      "link": "https://www.gov.uk/government/publications/human-tissue-authority-annual-report-and-accounts-2025-to-2026",
+      "description": "Annual report and accounts from the Human Tissue Authority (HTA) covering the period 1 April 2025 to 31 March 2026.",
+      "isoDate": "2026-10-20T10:29:36.000Z",
+      "source": "Human Tissue Authority",
+      "sourceId": "hta",
+      "category": "regulator"
+    },
+    {
+      "title": "Historic Vaccine Perks",
+      "link": "https://www.the-scientist.com/historic-vaccine-perks-75160",
+      "description": "Test your knowledge with this fun trivia challenge!",
+      "isoDate": "2026-10-20T04:27:30.873Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Can a Blood Draw Really Tell Us What Is Happening in the Brain?",
+      "link": "https://www.the-scientist.com/can-a-blood-draw-really-tell-us-what-is-happening-in-the-brain-75157",
+      "description": "Blood can reveal neurological injury, cerebrospinal fluid can provide biological context, and multiomic approaches can connect the two.",
+      "isoDate": "2026-10-20T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "A Star-Studded Biotech Conference Was Actually a Ransomware Front",
+      "link": "https://www.the-scientist.com/a-star-studded-biotech-conference-was-actually-a-ransomware-front-75158",
+      "description": "Fake speaker listings and sponsorships lent credibility to phishing emails targeting life science professionals, a cybersecurity company said.",
+      "isoDate": "2026-10-20T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Multiplexed CRISPRi reveals a transcriptional switch between KLF activators and repressors in the maturing neocortex",
+      "link": "https://elifesciences.org/articles/106510",
+      "description": "A critical phase of mammalian brain development takes place after birth. Neurons of the mouse neocortex undergo dramatic changes in their morphology, physiology, and synaptic connections during the first postnatal month, while properties of immature neurons, such as the capacity…",
+      "isoDate": "2026-10-20T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "An integrated human forebrain organoid reveals microglia-mediated CD8+ T cell recruitment and neuroimmune dysfunction in Alzheimer’s disease pathology",
+      "link": "https://elifesciences.org/articles/111730",
+      "description": "Genetic evidence implicates immune dysfunction in Alzheimer’s disease (AD), yet the neuroimmune mechanisms operating in human tissue remain poorly defined. Here, we establish a modular human forebrain organoid platform that systematically integrates human induced pluripotent…",
+      "isoDate": "2026-10-20T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Bats&rsquo; Viral Immunity May Have Driven Their Long Lifespans",
+      "link": "https://www.the-scientist.com/bats-viral-immunity-may-have-driven-their-long-lifespans-75153",
+      "description": "Understanding how long-lived animals resist cancer and aging effects could provide solutions for humans to manage these conditions.",
+      "isoDate": "2026-10-19T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "How Cadavers Are Breathing New Life into Drug Discovery",
+      "link": "https://www.the-scientist.com/how-cadavers-are-breathing-new-life-into-drug-discovery-75150",
+      "description": "A proteomics atlas built from donated human postmortem tissues could help unbury the molecular landscape of healthy bodies.",
+      "isoDate": "2026-10-19T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "A Microfluidic Bacterial Display Platform Reimagines Protein Engineering",
+      "link": "https://www.the-scientist.com/a-microfluidic-bacterial-display-platform-reimagines-protein-engineering-75142",
+      "description": "Caravel Bio&rsquo;s team uses cell-free synthesis and encapsulated bacteria to improve the production of commercial-scale biotechnology.",
+      "isoDate": "2026-10-19T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Syntaxin11 deficiency inhibits CRAC channel priming to suppress cytotoxicity and gene expression in T lymphocytes independent of membrane trafficking",
+      "link": "https://elifesciences.org/articles/111335",
+      "description": "Mutations in Syntaxin11 (STX11), a Q-SNARE, result in a fatal immune disorder known as familial hemophagocytic lymphohistiocytosis 4 (FHLH4) in human patients. A key diagnostic feature of FHLH4 is defective T and natural killer cell cytotoxicity. Here, we show that STX11…",
+      "isoDate": "2026-10-19T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Bruce suppresses autophagy-regulated caspase activity and wing tissue growth in Drosophila",
+      "link": "https://elifesciences.org/articles/109876",
+      "description": "Caspases are cysteine-aspartic proteases that mediate both lethal and non-lethal cellular outcomes, including the promotion of tissue growth. However, the mechanisms underlying the differential regulation of these activities remain unclear. We have previously shown that among…",
+      "isoDate": "2026-10-19T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Correction: Cold-inducible RNA-binding protein (CIRBP) adjusts clock-gene expression and REM-sleep recovery following sleep deprivation",
+      "link": "https://elifesciences.org/articles/113484",
+      "description": "",
+      "isoDate": "2026-10-19T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Lab Innovations: an exhibitor&#8217;s perspective",
+      "link": "https://labnews.co.uk/lab-innovations-an-exhibitors-perspective/",
+      "description": "In the first of three features looking ahead to Lab Innovations, Michelle Locke and Ricky Williams, of regular attendees Teknomek, share their views on the value of the show… “For Teknomek, Lab Innovations provides a unique opportunity for us to come together with organisations…",
+      "isoDate": "2026-10-18T22:58:26.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "Molecular tweaks make fluorescent probes five times brighter",
+      "link": "https://labnews.co.uk/molecular-tweaks-make-fluorescent-probes-five-times-brighter/",
+      "description": "Chemists at the University of Bath have identified how small changes to the structure of azulene-based fluorescent probes can alter their colour and brightness, providing a blueprint for developing improved tools for biological imaging and chemical sensing. Published in Organic…",
+      "isoDate": "2026-10-18T12:36:43.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "3D printing offers a new route to rubber glove manufacturing",
+      "link": "https://labnews.co.uk/3d-printing-offers-a-new-route-to-rubber-glove-manufacturing/",
+      "description": "Researchers at Cranfield University have developed a 3D printing method for manufacturing rubber gloves that could enable more flexible production, reduce material waste and support more geographically distributed manufacturing. The 3D-PEP process, developed with industry…",
+      "isoDate": "2026-10-18T12:30:23.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "Brain cells head to space in bid to advance neurodegenerative disease research",
+      "link": "https://labnews.co.uk/brain-cells-head-to-space-in-bid-to-advance-neurodegenerative-disease-research/",
+      "description": "Researchers at the Saudi King Abdullah University of Science and Technology (KAUST) have sent two biomedical experiments to the International Space Station (ISS), where brain cells and organoids will be studied in microgravity ahead of planned investigations into…",
+      "isoDate": "2026-10-18T12:15:17.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "How Peatland Bogs Sequester Massive Amounts of Carbon",
+      "link": "https://www.the-scientist.com/how-peatland-bogs-sequester-massive-amounts-of-carbon-75149",
+      "description": "By analyzing peat moss cell surface chemistry, researchers identified how these bogs store more carbon than all other living organisms combined.",
+      "isoDate": "2026-10-18T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Latest Lab Talk News in Brief: Awards, seed funding, acquisitions and more…",
+      "link": "https://labnews.co.uk/latest-lab-talk-news-in-brief-awards-seed-funding-acquisitions-and-more/",
+      "description": "Group chairman and CEO of precision instruments manufacturer HORIBA, Atsushi Horiba has been named an honorary fellow of University College London (UCL). The award is in recognition of contributions made through the partnership between his firm and the university toward “the…",
+      "isoDate": "2026-10-17T19:33:31.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "A New Digital Pathology Tool Masks Healthy Tissue to Isolate Tumor DNA",
+      "link": "https://www.the-scientist.com/a-new-digital-pathology-tool-masks-healthy-tissue-to-isolate-tumor-dna-75138",
+      "description": "QuantumCyte&rsquo;s AI-guided platform prints polymers over healthy cells in biopsies, enriching tumor DNA purity to identify targeted cancer therapies for patients.",
+      "isoDate": "2026-10-17T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Designing a Workflow for Functional Protein Expression",
+      "link": "https://www.the-scientist.com/designing-a-workflow-for-functional-protein-expression-75152",
+      "description": "A case study offers insights into improving protein yield with less optimization effort and fewer processing steps",
+      "isoDate": "2026-10-16T19:27:15.093Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Human Egg Cell-Inspired Biomaterial Shields Insulin-Producing Cells in Mice",
+      "link": "https://www.the-scientist.com/human-egg-cell-inspired-biomaterial-shields-insulin-producing-cells-in-mice-75145",
+      "description": "A protective coating prolonged the survival and function of transplanted islet cells in diabetic mice, offering a novel cell therapy approach.",
+      "isoDate": "2026-10-16T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "A Molecular Typewriter Maps Cell Lineages in Mice",
+      "link": "https://www.the-scientist.com/a-molecular-typewriter-maps-cell-lineages-in-mice-75133",
+      "description": "By stamping barcodes into the genome, researchers traced cell lineages from a single starting cell to more than 1.2 million cells in a developing mouse embryo.",
+      "isoDate": "2026-10-16T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Why Did Optogenetics Win the Nobel Prize in Physiology or Medicine?",
+      "link": "https://www.the-scientist.com/why-did-optogenetics-win-the-nobel-prize-in-physiology-or-medicine-75148",
+      "description": "This year&rsquo;s Nobel Prize in Physiology or Medicine went to a pioneering neuroscience technology that may one day soon have major applications in healthcare.",
+      "isoDate": "2026-10-16T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Cell Culture Contamination: Sources, Detection, and Control",
+      "link": "https://www.the-scientist.com/cell-culture-contamination-sources-detection-and-control-75147",
+      "description": "Monitoring programs and repositories of tested cells help labs manage contamination that visual checks miss.",
+      "isoDate": "2026-10-15T15:58:10.015Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Alleged AI-Generated Papers Misuse Open Neuroimaging Data",
+      "link": "https://www.the-scientist.com/alleged-ai-generated-papers-misuse-open-neuroimaging-data-75144",
+      "description": "Neuroscientists discovered evidence of published papers potentially using AI to fake analyses of public brain scan datasets, sparking research integrity concerns.",
+      "isoDate": "2026-10-15T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Mirror Neuron Research Moves from Hype to Mechanisms",
+      "link": "https://www.the-scientist.com/mirror-neuron-research-moves-from-hype-to-mechanisms-75141",
+      "description": "Thirty years after their discovery in monkeys, mirror neurons are reshaping how scientists view human social connection and brain rehabilitation.",
+      "isoDate": "2026-10-14T15:12:47.276Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Digital PCR in AAV Gene Therapy Quality Control",
+      "link": "https://www.the-scientist.com/digital-pcr-in-aav-gene-therapy-quality-control-75139",
+      "description": "Bio-Rad brings Coave Therapeutics&#39; Adrien Savy to explain ddPCR&rsquo;s role in AAV gene therapy analytical continuity, platform blind",
+      "isoDate": "2026-10-14T14:04:38.836Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Rosalind Franklin Knew About DNA&rsquo;s Helical Structure First",
+      "link": "https://www.the-scientist.com/rosalind-franklin-knew-about-dna-s-helical-structure-first-75137",
+      "description": "A new analysis suggests that Rosalind Franklin, who took the first images of DNA&rsquo;s double-helix structure, knew far more about her data than her colleagues later claimed.",
+      "isoDate": "2026-10-14T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Inside the Chemistry Nobel",
+      "link": "https://www.the-scientist.com/inside-the-chemistry-nobel-75136",
+      "description": "Test your knowledge with this fun trivia challenge!",
+      "isoDate": "2026-10-13T19:03:53.091Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Free Lab Innovations supplement to aid Show visitors",
+      "link": "https://labnews.co.uk/free-lab-innovations-supplement-to-aid-show-visitors/",
+      "description": "To mark Lab Innovations, we are producing a special show supplement available with the forthcoming new edition of Laboratory News that will also be distributed free at the event. Designed to be light enough to fit in a pocked or bag, the separate publication will feature…",
+      "isoDate": "2026-10-13T19:03:13.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "Then and Now: Rommie Amaro Analyzes Protein Wiggles",
+      "link": "https://www.the-scientist.com/then-and-now-rommie-amaro-analyzes-protein-wiggles-75128",
+      "description": "Amaro uses advanced computational methods and three-dimensional simulations to explore the intricate dance of proteins.",
+      "isoDate": "2026-10-13T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Chromatin Biology Is Reshaping Epigenetic Medicine",
+      "link": "https://www.the-scientist.com/chromatin-biology-is-reshaping-epigenetic-medicine-75127",
+      "description": "As researchers unravel the machinery that controls gene expression, they are finding more mechanistically informed ways to intervene in disease.",
+      "isoDate": "2026-10-13T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Postdoc Portrait: Andrew Milner Studies Kidney Development",
+      "link": "https://www.the-scientist.com/postdoc-portrait-andrew-milner-studies-kidney-development-75117",
+      "description": "This postdoctoral researcher investigates the genetic and environmental factors that govern nephron endowment and kidney development.",
+      "isoDate": "2026-10-13T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Nobel-Winning Discovery Allows Creation of Chiral Drugs on Demand",
+      "link": "https://www.the-scientist.com/nobel-winning-discovery-allows-creation-of-chiral-drugs-on-demand-75126",
+      "description": "Many drugs have mirror chemical structures, one helpful and the other harmful. 2026 Nobel Prize-winning research revealed how to create one molecule or its mirror image.",
+      "isoDate": "2026-10-12T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "New Push to Make Editing Human Embryos Legal Comes Under Scrutiny",
+      "link": "https://www.the-scientist.com/new-push-to-make-editing-human-embryos-legal-comes-under-scrutiny-75125",
+      "description": "A biotech startup leads a new effort to edit human embryos therapeutically, hoping technical advances will persuade regulators to re-evaluate embryo editing bans.",
+      "isoDate": "2026-10-12T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Shape-Shifting Tau Filaments Could Lead to New Dementia Therapies",
+      "link": "https://www.the-scientist.com/shape-shifting-tau-filaments-could-lead-to-new-dementia-therapies-75124",
+      "description": "Tau fibrils, which damage the brain in Alzheimer&rsquo;s disease, can change shape after they form, offering a path to slow or stop neurodegenerative diseases.",
+      "isoDate": "2026-10-11T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Kindergarten Vaccination Falls as Exemptions Hit Record High",
+      "link": "https://www.the-scientist.com/kindergarten-vaccination-falls-as-exemptions-hit-record-high-75091",
+      "description": "New CDC data show most US states no longer meet the vaccination threshold needed for herd immunity to stop measles from spreading in kindergarten classrooms.",
+      "isoDate": "2026-10-10T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Nikon Disqualifies Winning Video Over AI Use After Weeks of Controversy",
+      "link": "https://www.the-scientist.com/nikon-disqualifies-winning-video-over-ai-use-following-weeks-of-controversy-75123",
+      "description": "Weeks after defending its Small World in Motion contest winning entry, Nikon disqualified the video citing policy violation and announced a new first-place winner.",
+      "isoDate": "2026-10-09T16:46:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Tiny genome discovered provides hints for limits of life",
+      "link": "https://labnews.co.uk/tiny-genome-discovered-hints-at-limits-of-life/",
+      "description": "Scientists have identified a previously unknown microorganism with the smallest genome yet found in an archaeon, a type of single-celled organism distinct from bacteria. Named Candidatus Sukunaarchaeum mirabile, it appears to retain the genetic machinery needed to reproduce and…",
+      "isoDate": "2026-10-09T16:13:59.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "£3.75m programme targets rising UK mosquito and midge disease risks",
+      "link": "https://labnews.co.uk/3-75m-programme-targets-rising-uk-mosquito-and-midge-disease-risks/",
+      "description": "A £3.75 million research programme led by the University of Glasgow will investigate how environmental change could alter the risk of mosquito and midge-borne diseases across the UK. The four-year PAMEC programme, funded by UKRI as part of a £20 million interdisciplinary…",
+      "isoDate": "2026-10-09T15:41:41.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "Nobel Prizes 2026 science winners named",
+      "link": "https://labnews.co.uk/nobel-prizes-2026-science-winners-named/",
+      "description": "This year’s three Nobel Prizes for natural science have been shared by six laureates from the USA, Germany, Japan and France. The Nobel Prize for Physiology or Medicine went to psychiatrist and bioengineer Karl Deisseroth (USA, Howard Hughes Medical Institute and Stanford…",
+      "isoDate": "2026-10-09T15:31:22.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "Invisible Ink Could Make Tattoos Less Permanent",
+      "link": "https://www.the-scientist.com/invisible-ink-could-make-tattoos-less-permanent-75122",
+      "description": "PhotoTat, a light-activated invisible tattoo ink, changes color and fades on demand. It could replace permanent radiation therapy and biopsy marks for cancer treatment.",
+      "isoDate": "2026-10-09T15:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "One Researcher&rsquo;s Quest to Cure Neurodegenerative Diseases Gets Personal",
+      "link": "https://www.the-scientist.com/one-researcher-s-quest-to-cure-neurodegenerative-diseases-gets-personal-75120",
+      "description": "By facilitating research on amyotrophic lateral sclerosis and frontotemporal dementia, Yentli Soto Albrecht hopes to change outcomes for patients like herself.",
+      "isoDate": "2026-10-09T04:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    }
+  ]
+}

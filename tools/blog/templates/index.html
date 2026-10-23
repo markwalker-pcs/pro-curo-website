@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{GA4}}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{GA4}}');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{META_DESCRIPTION}}">
+  <title>{{PAGE_TITLE}}</title>
+  <link rel="icon" href="{{ROOT}}img/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{{ROOT}}img/apple-touch-icon.png">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <link rel="alternate" type="application/rss+xml" title="{{SERIES_NAME}}" href="{{FEED_URL}}">
+{{PREV_NEXT_LINKS}}
+  <link rel="stylesheet" href="{{ROOT}}css/style.css">
+  <link rel="stylesheet" href="{{ROOT}}blog/blog.css">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pro-curo">
+  <meta property="og:title" content="{{PAGE_TITLE}}">
+  <meta property="og:description" content="{{META_DESCRIPTION}}">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Structured Data: Blog -->
+  <script type="application/ld+json">
+{{JSONLD}}
+  </script>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="{{ROOT}}index.html" class="logo">
+        <img src="{{ROOT}}img/logo-icon.jpg" alt="Pro-curo logo">
+        <span>Pro-curo</span>
+      </a>
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="{{ROOT}}index.html">Home</a></li>
+          <li><a href="{{ROOT}}features.html">Features</a></li>
+          <li><a href="{{ROOT}}pricing.html">Pricing</a></li>
+          <li><a href="{{ROOT}}clients.html">Clients &amp; Resources</a></li>
+          <li><a href="{{ROOT}}whats-new.html">What's New</a></li>
+          <li><a href="{{ROOT}}industry-news.html">Industry News</a></li>
+          <li><a href="{{ROOT}}blog/" class="active">{{SECTION_NAME}}</a></li>
+          <li><a href="{{ROOT}}support.html">Support</a></li>
+          <li><a href="{{ROOT}}contact.html" class="nav-cta">Get in Touch</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="news-hero blog-hero">
+    <div class="container">
+      <span class="badge">{{SECTION_NAME}}</span>
+      <h1>{{SERIES_NAME}}</h1>
+      <p class="lead">{{SERIES_TAGLINE_SENTENCE}}</p>
+      <p class="blog-feed-link"><a href="{{ROOT}}blog/feed.xml">RSS feed</a></p>
+    </div>
+  </section>
+
+  <!-- ===== Articles ===== -->
+  <section class="section">
+    <div class="container">
+{{EMPTY_NOTE}}
+      <div class="blog-grid">
+{{CARDS}}
+      </div>
+{{PAGINATION}}
+    </div>
+  </section>
+
+  <!-- ===== Sign-up ===== -->
+  <section class="section section--grey">
+    <div class="container">
+      <div class="blog-signup">
+        <div>
+          <h2>Get {{SERIES_NAME}} by email</h2>
+          <p>One email every two weeks with the issue, the sources and nothing else. Unsubscribe with one click. We only add people who have asked to hear from us.</p>
+        </div>
+        <a href="{{SIGNUP_URL}}" class="btn btn-primary"{{SIGNUP_ATTRS}}>{{SIGNUP_LABEL}}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="section section--blue">
+    <div class="container text-center">
+      <h2>See how Pro-curo keeps every sample traceable</h2>
+      <p style="max-width: 560px; margin: 16px auto 32px;">A six-minute tour of Version 5, or a conversation with Rhys, our AI assistant, whenever suits you.</p>
+      <div class="btn-group" style="justify-content: center;">
+        <a href="{{ROOT}}whats-new.html#demo-video" class="btn btn-white">{{DEMO_LABEL}}</a>
+        <a href="{{ROOT}}contact.html" class="btn btn-outline btn-outline--light" data-rhys-open>{{RHYS_LABEL}}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo">
+            <img src="{{ROOT}}img/logo-icon.jpg" alt="Pro-curo logo">
+            <span>Pro-curo Software Limited</span>
+          </div>
+          <p>Tissue traceability and sample management software for HTA-licensed establishments and organisations regulated under the Human Tissue Act and EU Tissue Directive.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="{{ROOT}}features.html">Features</a></li>
+            <li><a href="{{ROOT}}biological-sample-tracking-software.html">Biological Sample Tracking</a></li>
+            <li><a href="{{ROOT}}pricing.html">Pricing</a></li>
+            <li><a href="{{ROOT}}whats-new.html">What's New</a></li>
+            <li><a href="{{ROOT}}industry-news.html">Industry News</a></li>
+            <li><a href="{{ROOT}}blog/">{{SECTION_NAME}}</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="{{ROOT}}clients.html">Clients &amp; Resources</a></li>
+            <li><a href="{{ROOT}}contact.html">Contact</a></li>
+            <li><a href="{{ROOT}}support.html">Support</a></li>
+            <li><a href="{{ROOT}}privacy.html">Privacy</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Get in Touch</h4>
+          <p>10 Roffye Court, Crawley Road<br>Horsham, West Sussex, RH12 4DT<br>United Kingdom</p>
+          <p><a href="tel:+441403473839">+44 (0)1403 473839</a></p>
+          <p><a href="mailto:info@pro-curo.com">info@pro-curo.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; {{YEAR}} Pro-curo Software Limited. All rights reserved. | Registered in England &amp; Wales No. 07510777 | VAT No. GB124 2717 38</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ROOT}}js/main.js"></script>
+</body>
+</html>

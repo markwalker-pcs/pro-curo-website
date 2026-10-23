@@ -1,0 +1,8 @@
+{
+  "_comment": "Canned claim check for BLOG_MOCK_MODEL=1 runs. Every claim supported so the mock pipeline completes without a revision pass.",
+  "claims": [
+    { "claim": "The HTA published its annual report and accounts for 2025 to 2026 on 20 October 2026.", "supported": true, "sourceUrl": "https://www.gov.uk/government/publications/human-tissue-authority-annual-report-and-accounts-2025-to-2026", "evidence": "The GOV.UK publication page is dated 20 October 2026 and carries that title." },
+    { "claim": "The Scientist published an explainer on sources, detection and control of cell culture contamination.", "supported": true, "sourceUrl": "https://www.the-scientist.com/cell-culture-contamination-sources-detection-and-control-75147", "evidence": "Title and summary of the article." },
+    { "claim": "A new digital pathology tool masks healthy tissue to isolate tumour DNA.", "supported": true, "sourceUrl": "https://www.the-scientist.com/a-new-digital-pathology-tool-masks-healthy-tissue-to-isolate-tumor-dna-75138", "evidence": "Title of the article." }
+  ]
+}

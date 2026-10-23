@@ -1,0 +1,12 @@
+{
+  "_comment": "Canned model ranking for BLOG_MOCK_MODEL=1 runs. Indices refer to the shortlist produced from snapshot-2026-10-23.json.",
+  "ranked": [
+    { "index": 0, "score": 9, "reason": "The regulator's own annual account of licensing and inspection activity for the year, directly relevant to Designated Individuals.", "isRegulatoryChange": false, "hasOperationalLesson": true },
+    { "index": 5, "score": 7, "reason": "A practical review of how cell culture contamination arises and is detected, which maps onto storage and handling practice.", "isRegulatoryChange": false, "hasOperationalLesson": true },
+    { "index": 3, "score": 5, "reason": "Digital pathology on tissue sections touches sample handling, though the operational lesson is limited.", "isRegulatoryChange": false, "hasOperationalLesson": false },
+    { "index": 1, "score": 4, "reason": "Organoid research is of interest to cell line custodians but carries no operational lesson.", "isRegulatoryChange": false, "hasOperationalLesson": false },
+    { "index": 2, "score": 3, "reason": "Lineage tracing in mice is interesting science with no bearing on running a collection.", "isRegulatoryChange": false, "hasOperationalLesson": false },
+    { "index": 4, "score": 1, "reason": "Fly tissue growth biology, off topic for this audience.", "isRegulatoryChange": false, "hasOperationalLesson": false }
+  ],
+  "misconception": null
+}

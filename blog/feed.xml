@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Sample Matters</title>
+    <link>https://www.pro-curo.com/blog/</link>
+    <description>Sample Matters, the Pro-curo fortnightly briefing, from Pro-curo Software Limited.</description>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 23 Oct 2026 08:59:15 GMT</lastBuildDate>
+    <atom:link href="https://www.pro-curo.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>https://www.pro-curo.com/img/logo-icon.jpg</url>
+      <title>Sample Matters</title>
+      <link>https://www.pro-curo.com/blog/</link>
+    </image>
+
+  </channel>
+</rss>

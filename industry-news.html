@@ -84,6 +84,32 @@
       color: #ffffff;
     }
 
+    /* Link to the fortnightly blog (CW042) */
+    .briefing-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      background: #e8f0fe;
+      border: 1px solid #c8d8e8;
+      border-radius: 12px;
+      padding: 18px 24px;
+      margin: 0 auto 40px;
+      max-width: 860px;
+      color: #4a5568;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .briefing-link strong {
+      color: #1F4E79;
+    }
+
+    .briefing-link .btn {
+      white-space: nowrap;
+    }
+
     #showMoreBtn:hover {
       background: #1F4E79 !important;
       color: #ffffff !important;
@@ -314,6 +340,7 @@
           <li><a href="clients.html">Clients &amp; Resources</a></li>
           <li><a href="whats-new.html">What's New</a></li>
           <li><a href="industry-news.html" class="active">Industry News</a></li>
+          <li><a href="blog/">Blog</a></li>
           <li><a href="support.html">Support</a></li>
           <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
         </ul>
@@ -336,12 +363,26 @@
 
       <div class="news-filters">
         <button class="filter-btn active" data-filter="all">All Sources</button>
+        <button class="filter-btn" data-filter="category:regulator">Regulators</button>
         <button class="filter-btn" data-filter="hta">HTA</button>
+        <button class="filter-btn" data-filter="mhra">MHRA</button>
+        <button class="filter-btn" data-filter="hra">HRA</button>
+        <button class="filter-btn" data-filter="ukhsa">UKHSA</button>
+        <button class="filter-btn" data-filter="dhsc">DHSC</button>
         <button class="filter-btn" data-filter="nhsbt">NHSBT</button>
-        <button class="filter-btn" data-filter="the-scientist">The Scientist</button>
-        <button class="filter-btn" data-filter="biobanking">Biobanking</button>
-        <button class="filter-btn" data-filter="elife">eLife</button>
+        <button class="filter-btn" data-filter="biobanking">Biobanking.com</button>
+        <button class="filter-btn" data-filter="bbmri-eric">BBMRI-ERIC</button>
         <button class="filter-btn" data-filter="lab-news">Lab News</button>
+        <button class="filter-btn" data-filter="the-scientist">The Scientist</button>
+        <button class="filter-btn" data-filter="elife">eLife</button>
+      </div>
+
+      <div class="briefing-link">
+        <div>
+          <strong>Read our fortnightly briefing.</strong>
+          Every two weeks we pick the stories that matter to people who look after samples and explain what they mean in practice.
+        </div>
+        <a href="blog/" class="btn btn-outline btn--sm">Go to the blog</a>
       </div>
 
       <div class="news-error" id="newsError">
@@ -390,30 +431,55 @@
           <h4>Human Tissue Authority</h4>
           <p>UK regulator for human tissue and organs</p>
         </a>
+        <a href="https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency" target="_blank" rel="noopener noreferrer" class="source-item">
+          <div class="source-item-icon">&#128138;</div>
+          <h4>MHRA</h4>
+          <p>Medicines and medical devices regulator</p>
+        </a>
+        <a href="https://www.hra.nhs.uk" target="_blank" rel="noopener noreferrer" class="source-item">
+          <div class="source-item-icon">&#128203;</div>
+          <h4>Health Research Authority</h4>
+          <p>Research ethics and approvals</p>
+        </a>
+        <a href="https://www.gov.uk/government/organisations/uk-health-security-agency" target="_blank" rel="noopener noreferrer" class="source-item">
+          <div class="source-item-icon">&#129440;</div>
+          <h4>UK Health Security Agency</h4>
+          <p>Public health protection and laboratories</p>
+        </a>
+        <a href="https://www.gov.uk/government/organisations/department-of-health-and-social-care" target="_blank" rel="noopener noreferrer" class="source-item">
+          <div class="source-item-icon">&#127963;&#65039;</div>
+          <h4>Department of Health and Social Care</h4>
+          <p>Health policy and legislation</p>
+        </a>
         <a href="https://www.nhsbt.nhs.uk" target="_blank" rel="noopener noreferrer" class="source-item">
           <div class="source-item-icon">&#129656;</div>
           <h4>NHS Blood &amp; Transplant</h4>
           <p>Blood, organ and tissue donation services</p>
-        </a>
-        <a href="https://www.the-scientist.com" target="_blank" rel="noopener noreferrer" class="source-item">
-          <div class="source-item-icon">&#128300;</div>
-          <h4>The Scientist</h4>
-          <p>Life science research and news</p>
         </a>
         <a href="https://www.biobanking.com" target="_blank" rel="noopener noreferrer" class="source-item">
           <div class="source-item-icon">&#129516;</div>
           <h4>Biobanking.com</h4>
           <p>Tissue and organ banking news</p>
         </a>
-        <a href="https://elifesciences.org" target="_blank" rel="noopener noreferrer" class="source-item">
-          <div class="source-item-icon">&#128218;</div>
-          <h4>eLife Sciences</h4>
-          <p>Open-access biomedical research</p>
+        <a href="https://www.bbmri-eric.eu" target="_blank" rel="noopener noreferrer" class="source-item">
+          <div class="source-item-icon">&#127466;&#127482;</div>
+          <h4>BBMRI-ERIC</h4>
+          <p>European biobanking research infrastructure</p>
         </a>
         <a href="https://www.labnews.co.uk" target="_blank" rel="noopener noreferrer" class="source-item">
           <div class="source-item-icon">&#128196;</div>
           <h4>Lab News</h4>
           <p>UK laboratory and science news</p>
+        </a>
+        <a href="https://www.the-scientist.com" target="_blank" rel="noopener noreferrer" class="source-item">
+          <div class="source-item-icon">&#128300;</div>
+          <h4>The Scientist</h4>
+          <p>Cell and gene therapy, genome editing, research ethics</p>
+        </a>
+        <a href="https://elifesciences.org" target="_blank" rel="noopener noreferrer" class="source-item">
+          <div class="source-item-icon">&#128218;</div>
+          <h4>eLife Sciences</h4>
+          <p>Open-access biomedical research</p>
         </a>
         <a href="https://biobankinguk.org" target="_blank" rel="noopener noreferrer" class="source-item">
           <div class="source-item-icon">&#127468;&#127463;</div>
@@ -452,6 +518,7 @@
             <li><a href="pricing.html">Pricing</a></li>
             <li><a href="whats-new.html">What's New</a></li>
             <li><a href="industry-news.html">Industry News</a></li>
+          <li><a href="blog/">Blog</a></li>
           </ul>
         </div>
         <div class="footer-links">
@@ -516,9 +583,13 @@
 
     // ---- Render ----
     function getFilteredArticles() {
-      return activeFilter === 'all'
-        ? allArticles
-        : allArticles.filter(function (a) { return a.sourceId === activeFilter; });
+      if (activeFilter === 'all') return allArticles;
+      // "category:regulator" style filters group sources by the category the API returns
+      if (activeFilter.indexOf('category:') === 0) {
+        var cat = activeFilter.substring(9);
+        return allArticles.filter(function (a) { return a.category === cat; });
+      }
+      return allArticles.filter(function (a) { return a.sourceId === activeFilter; });
     }
 
     function renderArticles(articles) {
@@ -611,6 +682,15 @@
 
         allArticles = data.articles || [];
         allSources = data.sources || {};
+
+        // Hide filter buttons for sources the API knows nothing about or that
+        // returned no items, so an empty source is not offered as a choice.
+        document.querySelectorAll('.filter-btn').forEach(function (btn) {
+          var f = btn.getAttribute('data-filter');
+          if (f === 'all' || f.indexOf('category:') === 0) return;
+          var info = allSources[f];
+          if (!info || !info.count) btn.style.display = 'none';
+        });
 
         loading.style.display = 'none';
 

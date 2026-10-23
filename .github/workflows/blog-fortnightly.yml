@@ -1,0 +1,164 @@
+name: Blog fortnightly editor
+
+# CW042. Runs every Monday at 06:00 UTC (06:00 UK in winter, 07:00 UK in summer:
+# GitHub cron is fixed to UTC and does not follow daylight saving). The editor
+# itself exits unless the ISO week number matches the parity in
+# tools/blog/config/site.json ("even"), which gives a fortnightly cadence.
+# Manual runs can force a run in an odd week and pick a format.
+#
+# The workflow never merges. It opens a pull request for Mark to review;
+# Azure Static Web Apps builds a preview of the pull request automatically.
+#
+# Secrets and variables (repository settings, never in source):
+#   secrets.ANTHROPIC_API_KEY            model access (required)
+#   secrets.BLOG_GITHUB_TOKEN            fine-grained PAT (contents + pull requests, this repo)
+#                                        used to push the branch and open the PR, so that
+#                                        the deploy workflow builds the preview. Without
+#                                        it the default token is used, the PR is created
+#                                        only if "Allow GitHub Actions to create pull
+#                                        requests" is on, and no preview is built.
+#   secrets.ACS_EMAIL_CONNECTION_STRING  Azure Communication Services email (optional)
+#   secrets.BLOG_BANNED_NAMES            comma separated names that must never appear
+#   secrets.BLOG_NOTIFY_TO               distribution list for the social pack
+#   vars.BLOG_MAIL_FROM                  sender address on the ACS-verified domain
+#   vars.BLOG_ALERT_TO                   Mark's address for skip and failure notices
+#                                        (optional; falls back to BLOG_NOTIFY_TO)
+# BLOG_BANNED_NAMES and BLOG_NOTIFY_TO are read from secrets first and from
+# variables of the same name as a fallback, so either home works.
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Run even in an odd ISO week'
+        type: boolean
+        default: false
+      format:
+        description: 'Force a format (blank = apply the selection rule)'
+        type: choice
+        default: ''
+        options: ['', 'A', 'B', 'C', 'D', 'E']
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: blog-editor
+  cancel-in-progress: false
+
+jobs:
+  draft:
+    name: Collect, draft, check, propose
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      TOOL_DIR: tools/blog
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.BLOG_GITHUB_TOKEN || github.token }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: tools/blog/package-lock.json
+
+      - name: Install the editor
+        working-directory: ${{ env.TOOL_DIR }}
+        run: npm ci --no-audit --no-fund
+
+      - name: Unit tests (lint, selection rule, build)
+        working-directory: ${{ env.TOOL_DIR }}
+        run: npm test
+
+      - name: Week parity
+        working-directory: ${{ env.TOOL_DIR }}
+        run: node parity.js | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Run the editor
+        id: editor
+        working-directory: ${{ env.TOOL_DIR }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BLOG_BANNED_NAMES: ${{ secrets.BLOG_BANNED_NAMES || vars.BLOG_BANNED_NAMES }}
+        run: |
+          set -euo pipefail
+          ARGS=""
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then ARGS="$ARGS --force"; fi
+          if [ -n "${{ github.event.inputs.format }}" ]; then ARGS="$ARGS --format ${{ github.event.inputs.format }}"; fi
+          node run.js $ARGS --out "$RUNNER_TEMP/result.json" --pr-body "$RUNNER_TEMP/pr-body.md"
+          STATUS=$(node -p "require('$RUNNER_TEMP/result.json').status")
+          echo "status=$STATUS" >> "$GITHUB_OUTPUT"
+          node -p "const r=require('$RUNNER_TEMP/result.json'); r.reason || ''" > "$RUNNER_TEMP/reason.txt"
+          echo "reason=$(cat "$RUNNER_TEMP/reason.txt")" >> "$GITHUB_OUTPUT"
+          if [ "$STATUS" = "proposed" ]; then
+            node -p "require('$RUNNER_TEMP/result.json').branch" | sed 's/^/branch=/' >> "$GITHUB_OUTPUT"
+            node -p "require('$RUNNER_TEMP/result.json').prTitle" | sed 's/^/title=/' >> "$GITHUB_OUTPUT"
+            node -p "require('$RUNNER_TEMP/result.json').files.join(' ')" | sed 's/^/files=/' >> "$GITHUB_OUTPUT"
+            node -p "require('$RUNNER_TEMP/result.json').slug" | sed 's/^/slug=/' >> "$GITHUB_OUTPUT"
+          fi
+          echo "Editor status: $STATUS" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Nothing to publish this fortnight
+        if: steps.editor.outputs.status == 'skip'
+        working-directory: ${{ env.TOOL_DIR }}
+        env:
+          ACS_EMAIL_CONNECTION_STRING: ${{ secrets.ACS_EMAIL_CONNECTION_STRING }}
+          BLOG_MAIL_FROM: ${{ vars.BLOG_MAIL_FROM }}
+          BLOG_NOTIFY_TO: ${{ secrets.BLOG_NOTIFY_TO || vars.BLOG_NOTIFY_TO }}
+          BLOG_ALERT_TO: ${{ vars.BLOG_ALERT_TO }}
+        run: |
+          echo "Skipped: ${{ steps.editor.outputs.reason }}" >> "$GITHUB_STEP_SUMMARY"
+          # An odd-week exit is routine and sends no mail; a quiet fortnight tells Mark.
+          case "${{ steps.editor.outputs.reason }}" in
+            "odd week") echo "Odd ISO week, no notice sent." ;;
+            *) node notify.js skip --reason "${{ steps.editor.outputs.reason }}" ;;
+          esac
+
+      - name: Open the pull request
+        if: steps.editor.outputs.status == 'proposed'
+        env:
+          GH_TOKEN: ${{ secrets.BLOG_GITHUB_TOKEN || github.token }}
+          BRANCH: ${{ steps.editor.outputs.branch }}
+          TITLE: ${{ steps.editor.outputs.title }}
+          FILES: ${{ steps.editor.outputs.files }}
+        run: |
+          set -euo pipefail
+          git config user.name "Pro-curo blog editor"
+          git config user.email "tech@pro-curo.com"
+          git checkout -b "$BRANCH"
+          git add $FILES
+          # C006 guard on the generated pages, after staging so new files are tracked.
+          bash tools/check-html-tails.sh
+          # Pre-commit secret grep, as CLAUDE.md requires on this public repo.
+          if git diff --cached | grep -E -i 'AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{30,}|AccountKey=|DefaultEndpointsProtocol|BEGIN (RSA|OPENSSH) PRIVATE|sk-ant-' ; then
+            echo "Secret-looking string in the staged diff; refusing to commit." >&2
+            exit 1
+          fi
+          git commit -m "$TITLE" -m "Drafted by the fortnightly editor (tools/blog). Reviewed and approved by a human before merge."
+          git push --set-upstream origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" --title "$TITLE" --body-file "$RUNNER_TEMP/pr-body.md" --label blog
+          # Review request is best effort: it fails if the token's owner is the PR author.
+          gh pr edit "$BRANCH" --add-reviewer markwalker-pcs || echo "Could not request review (token owner may be the author); Mark is notified by the PR itself."
+          echo "Opened pull request for branch $BRANCH" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Report a failure
+        if: failure()
+        working-directory: ${{ env.TOOL_DIR }}
+        env:
+          ACS_EMAIL_CONNECTION_STRING: ${{ secrets.ACS_EMAIL_CONNECTION_STRING }}
+          BLOG_MAIL_FROM: ${{ vars.BLOG_MAIL_FROM }}
+          BLOG_NOTIFY_TO: ${{ secrets.BLOG_NOTIFY_TO || vars.BLOG_NOTIFY_TO }}
+          BLOG_ALERT_TO: ${{ vars.BLOG_ALERT_TO }}
+        run: |
+          ERR=""
+          if [ -f "$RUNNER_TEMP/result.json" ]; then ERR=$(node -p "require('$RUNNER_TEMP/result.json').error || ''" || true); fi
+          node notify.js failure --step "${{ job.status }} in job draft" --error "${ERR:-see the run log}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true

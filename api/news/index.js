@@ -1,17 +1,25 @@
 /**
  * Azure Function: GET /api/news
  *
- * Fetches RSS/Atom feeds from trusted life-science and tissue-sector sources,
- * parses them into a unified JSON format, and caches the result in Azure Blob
- * Storage so it survives function cold starts.
+ * Fetches RSS/Atom feeds from trusted life-science, regulator and tissue-sector
+ * sources, parses them into a unified JSON format, and caches the result in
+ * Azure Blob Storage so it survives function cold starts.
  *
  * Query parameters:
- *   ?source=hta          — filter by source ID (optional)
- *   ?refresh=true        — force a cache refresh (optional, for admin use)
+ *   ?source=hta          - filter by source ID (optional)
+ *   ?category=regulator  - filter by category (optional): regulator, biobanking, lab, science
+ *   ?refresh=true        - force a cache refresh (optional, for admin use)
  *
  * Environment variables:
- *   NEWS_CACHE_CONNECTION — Azure Storage connection string (required for
+ *   NEWS_CACHE_CONNECTION - Azure Storage connection string (required for
  *                           persistent cache; falls back to in-memory if unset)
+ *
+ * CW042 (Oct 2026): every feed carries a `category`, each article carries the
+ * same field, The Scientist is limited to its sample-management sub-feeds,
+ * regulator feeds (MHRA, HRA, UKHSA, DHSC) and BBMRI-ERIC were added, and
+ * high-volume general feeds take an optional `keywords` relevance filter.
+ * Sources that answered OK with zero items are reported in `warnings` so a
+ * silently empty feed is visible instead of looking healthy.
  */
 
 const https = require('https');
@@ -22,14 +30,68 @@ const { BlobServiceClient } = require('@azure/storage-blob');
 // ---------------------------------------------------------------------------
 // Feed configuration
 // ---------------------------------------------------------------------------
+// category: regulator | biobanking | lab | science
+// keywords: optional. When present an item is kept only if its title or
+//           description matches at least one keyword (case-insensitive). Used
+//           for broad feeds where most items are off-topic for sample custodians.
+const SAMPLE_KEYWORDS = [
+  'tissue', 'biobank', 'sample', 'specimen', 'cryo', 'freezer', 'storage',
+  'consent', 'traceab', 'chain of custody', 'cell line', 'organoid', 'stem cell',
+  'cell therapy', 'gene therapy', 'laborator', 'pathology', 'blood', 'plasma',
+  'transplant', 'donor', 'donation', 'human tissue', 'hta', 'research ethics',
+  'data protection', 'gdpr', 'reproducib', 'cold chain', 'genomic', 'genome',
+  'biological', 'infection', 'contamination', 'microbio', 'virus', 'bacteria',
+  'clinical trial', 'research', 'audit', 'inspection', 'licen', 'regulat'
+];
+
 const FEEDS = [
+  // --- Regulators and public bodies (GOV.UK Atom) ---
   {
     id: 'hta',
     name: 'Human Tissue Authority',
     url: 'https://www.gov.uk/government/organisations/human-tissue-authority.atom',
     website: 'https://www.hta.gov.uk',
     format: 'atom',
+    category: 'regulator',
     maxItems: 15
+  },
+  {
+    id: 'mhra',
+    name: 'MHRA',
+    url: 'https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency.atom',
+    website: 'https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency',
+    format: 'atom',
+    category: 'regulator',
+    maxItems: 15
+  },
+  {
+    id: 'hra',
+    name: 'Health Research Authority',
+    url: 'https://www.gov.uk/government/organisations/health-research-authority.atom',
+    website: 'https://www.hra.nhs.uk',
+    format: 'atom',
+    category: 'regulator',
+    maxItems: 15
+  },
+  {
+    id: 'ukhsa',
+    name: 'UK Health Security Agency',
+    url: 'https://www.gov.uk/government/organisations/uk-health-security-agency.atom',
+    website: 'https://www.gov.uk/government/organisations/uk-health-security-agency',
+    format: 'atom',
+    category: 'regulator',
+    maxItems: 15,
+    keywords: SAMPLE_KEYWORDS
+  },
+  {
+    id: 'dhsc',
+    name: 'Department of Health and Social Care',
+    url: 'https://www.gov.uk/government/organisations/department-of-health-and-social-care.atom',
+    website: 'https://www.gov.uk/government/organisations/department-of-health-and-social-care',
+    format: 'atom',
+    category: 'regulator',
+    maxItems: 15,
+    keywords: SAMPLE_KEYWORDS
   },
   {
     id: 'nhsbt',
@@ -37,31 +99,50 @@ const FEEDS = [
     url: 'https://www.gov.uk/government/organisations/nhs-blood-and-transplant.atom',
     website: 'https://www.nhsbt.nhs.uk',
     format: 'atom',
+    category: 'regulator',
+    maxItems: 15
+  },
+
+  // --- Biobanking ---
+  {
+    id: 'biobanking',
+    name: 'Biobanking.com',
+    url: 'https://www.biobanking.com/feed/',
+    website: 'https://www.biobanking.com',
+    format: 'rss',
+    category: 'biobanking',
     maxItems: 15
   },
   {
-    id: 'the-scientist',
-    name: 'The Scientist',
-    url: 'https://www.the-scientist.com/atom/latest',
-    website: 'https://www.the-scientist.com',
-    format: 'atom',
-    maxItems: 10
+    id: 'bbmri-eric',
+    name: 'BBMRI-ERIC',
+    url: 'https://www.bbmri-eric.eu/feed/',
+    website: 'https://www.bbmri-eric.eu',
+    format: 'rss',
+    category: 'biobanking',
+    maxItems: 15
   },
+
+  // --- Laboratory ---
+  {
+    id: 'lab-news',
+    name: 'Lab News',
+    url: 'https://labnews.co.uk/feed/',
+    website: 'https://www.labnews.co.uk',
+    format: 'rss',
+    category: 'lab',
+    maxItems: 15
+  },
+
+  // --- Science press (limited to the sub-feeds relevant to sample management) ---
   {
     id: 'the-scientist',
     name: 'The Scientist',
     url: 'https://www.the-scientist.com/atom/health/cell-and-gene-therapy',
     website: 'https://www.the-scientist.com',
     format: 'atom',
-    maxItems: 10
-  },
-  {
-    id: 'the-scientist',
-    name: 'The Scientist',
-    url: 'https://www.the-scientist.com/atom/science/biochemistry',
-    website: 'https://www.the-scientist.com',
-    format: 'atom',
-    maxItems: 10
+    category: 'science',
+    maxItems: 8
   },
   {
     id: 'the-scientist',
@@ -69,7 +150,8 @@ const FEEDS = [
     url: 'https://www.the-scientist.com/atom/science/genome-editing',
     website: 'https://www.the-scientist.com',
     format: 'atom',
-    maxItems: 10
+    category: 'science',
+    maxItems: 8
   },
   {
     id: 'the-scientist',
@@ -77,55 +159,8 @@ const FEEDS = [
     url: 'https://www.the-scientist.com/atom/science/cell-and-molecular-biology',
     website: 'https://www.the-scientist.com',
     format: 'atom',
-    maxItems: 10
-  },
-  {
-    id: 'the-scientist',
-    name: 'The Scientist',
-    url: 'https://www.the-scientist.com/atom/science/genetics',
-    website: 'https://www.the-scientist.com',
-    format: 'atom',
-    maxItems: 10
-  },
-  {
-    id: 'the-scientist',
-    name: 'The Scientist',
-    url: 'https://www.the-scientist.com/atom/science/immunology',
-    website: 'https://www.the-scientist.com',
-    format: 'atom',
-    maxItems: 10
-  },
-  {
-    id: 'the-scientist',
-    name: 'The Scientist',
-    url: 'https://www.the-scientist.com/atom/science/cancer',
-    website: 'https://www.the-scientist.com',
-    format: 'atom',
-    maxItems: 10
-  },
-  {
-    id: 'the-scientist',
-    name: 'The Scientist',
-    url: 'https://www.the-scientist.com/atom/science/neuroscience',
-    website: 'https://www.the-scientist.com',
-    format: 'atom',
-    maxItems: 10
-  },
-  {
-    id: 'the-scientist',
-    name: 'The Scientist',
-    url: 'https://www.the-scientist.com/atom/technology/artificial-intelligence',
-    website: 'https://www.the-scientist.com',
-    format: 'atom',
-    maxItems: 10
-  },
-  {
-    id: 'the-scientist',
-    name: 'The Scientist',
-    url: 'https://www.the-scientist.com/atom/technology/synthetic-biology',
-    website: 'https://www.the-scientist.com',
-    format: 'atom',
-    maxItems: 10
+    category: 'science',
+    maxItems: 8
   },
   {
     id: 'the-scientist',
@@ -133,15 +168,8 @@ const FEEDS = [
     url: 'https://www.the-scientist.com/atom/society/research-ethics',
     website: 'https://www.the-scientist.com',
     format: 'atom',
-    maxItems: 10
-  },
-  {
-    id: 'biobanking',
-    name: 'Biobanking.com',
-    url: 'https://www.biobanking.com/feed/',
-    website: 'https://www.biobanking.com',
-    format: 'rss',
-    maxItems: 15
+    category: 'science',
+    maxItems: 8
   },
   {
     id: 'elife',
@@ -149,15 +177,9 @@ const FEEDS = [
     url: 'https://elifesciences.org/rss/recent.xml',
     website: 'https://elifesciences.org',
     format: 'rss',
-    maxItems: 15
-  },
-  {
-    id: 'lab-news',
-    name: 'Lab News',
-    url: 'https://www.labnews.co.uk/section/1.rss',
-    website: 'https://www.labnews.co.uk',
-    format: 'rss',
-    maxItems: 15
+    category: 'science',
+    maxItems: 15,
+    keywords: SAMPLE_KEYWORDS
   }
 ];
 
@@ -173,7 +195,8 @@ let memoryCache = {
   articles: [],
   sources: {},
   fetchedAt: null,
-  errors: []
+  errors: [],
+  warnings: []
 };
 
 // ---------------------------------------------------------------------------
@@ -194,7 +217,7 @@ function getBlobClient() {
 async function readBlobCache(context) {
   const client = getBlobClient();
   if (!client) {
-    context.log('No Blob Storage configured — using in-memory cache.');
+    context.log('No Blob Storage configured, using in-memory cache.');
     return memoryCache;
   }
 
@@ -209,11 +232,11 @@ async function readBlobCache(context) {
     return data;
   } catch (err) {
     if (err.statusCode === 404) {
-      context.log('Blob cache does not exist yet — will create on first fetch.');
+      context.log('Blob cache does not exist yet, will create on first fetch.');
     } else {
       context.log.warn('Failed to read Blob cache:', err.message);
     }
-    return { articles: [], sources: {}, fetchedAt: null, errors: [] };
+    return { articles: [], sources: {}, fetchedAt: null, errors: [], warnings: [] };
   }
 }
 
@@ -305,6 +328,13 @@ function stripHTML(html) {
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
     .replace(/&#039;/g, "'")
+    .replace(/&#8217;|&rsquo;/g, '’')
+    .replace(/&#8216;|&lsquo;/g, '‘')
+    .replace(/&#8220;|&ldquo;/g, '“')
+    .replace(/&#8221;|&rdquo;/g, '”')
+    .replace(/&#8211;|&ndash;/g, '–')
+    .replace(/&#8212;|&mdash;/g, ', ')
+    .replace(/&#8230;|&hellip;/g, '…')
     .replace(/&nbsp;/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
@@ -312,7 +342,26 @@ function stripHTML(html) {
 
 function truncate(text, max) {
   if (!text || text.length <= max) return text || '';
-  return text.substring(0, max).replace(/\s+\S*$/, '') + '\u2026';
+  return text.substring(0, max).replace(/\s+\S*$/, '') + '…';
+}
+
+function matchesKeywords(feed, title, description) {
+  if (!feed.keywords || feed.keywords.length === 0) return true;
+  const hay = `${title} ${description}`.toLowerCase();
+  return feed.keywords.some(k => hay.includes(k));
+}
+
+function makeArticle(feed, title, link, description, dateStr) {
+  return {
+    title,
+    link,
+    description: truncate(description, 280),
+    date: dateStr || null,
+    isoDate: safeISODate(dateStr),
+    source: feed.name,
+    sourceId: feed.id,
+    category: feed.category
+  };
 }
 
 function parseRSS(xml, feed) {
@@ -324,20 +373,15 @@ function parseRSS(xml, feed) {
 
     const items = Array.isArray(channel.item) ? channel.item : (channel.item ? [channel.item] : []);
 
-    for (let i = 0; i < Math.min(items.length, feed.maxItems); i++) {
+    for (let i = 0; i < items.length && articles.length < feed.maxItems; i++) {
       const item = items[i];
-      articles.push({
-        title: stripHTML(item.title || ''),
-        link: item.link || '',
-        description: truncate(stripHTML(item.description || item['content:encoded'] || ''), 280),
-        date: item.pubDate || null,
-        isoDate: safeISODate(item.pubDate),
-        source: feed.name,
-        sourceId: feed.id
-      });
+      const title = stripHTML(item.title || '');
+      const description = stripHTML(item.description || item['content:encoded'] || '');
+      if (!matchesKeywords(feed, title, description)) continue;
+      articles.push(makeArticle(feed, title, item.link || '', description, item.pubDate || item['dc:date'] || null));
     }
   } catch (err) {
-    // swallow parse errors — we'll just return empty
+    // swallow parse errors, we just return empty
   }
   return articles;
 }
@@ -351,14 +395,14 @@ function parseAtom(xml, feed) {
 
     const entries = Array.isArray(atomFeed.entry) ? atomFeed.entry : (atomFeed.entry ? [atomFeed.entry] : []);
 
-    for (let i = 0; i < Math.min(entries.length, feed.maxItems); i++) {
+    for (let i = 0; i < entries.length && articles.length < feed.maxItems; i++) {
       const entry = entries[i];
 
       // Atom links can be objects or arrays
       let link = '';
       if (entry.link) {
         if (Array.isArray(entry.link)) {
-          const alt = entry.link.find(l => l['@_rel'] === 'alternate') || entry.link[0];
+          const alt = entry.link.find(l => l['@_rel'] === 'alternate') || entry.link.find(l => !l['@_rel']) || entry.link[0];
           link = alt['@_href'] || '';
         } else if (typeof entry.link === 'object') {
           link = entry.link['@_href'] || '';
@@ -373,17 +417,12 @@ function parseAtom(xml, feed) {
           ? (typeof entry.content === 'object' ? entry.content['#text'] : entry.content)
           : '');
 
-      const dateStr = entry.updated || entry.published || null;
+      const dateStr = entry.published || entry.updated || null;
+      const title = stripHTML(typeof entry.title === 'object' ? entry.title['#text'] : entry.title || '');
+      const description = stripHTML(summary);
+      if (!matchesKeywords(feed, title, description)) continue;
 
-      articles.push({
-        title: stripHTML(typeof entry.title === 'object' ? entry.title['#text'] : entry.title || ''),
-        link: link,
-        description: truncate(stripHTML(summary), 280),
-        date: dateStr,
-        isoDate: safeISODate(dateStr),
-        source: feed.name,
-        sourceId: feed.id
-      });
+      articles.push(makeArticle(feed, title, link, description, dateStr));
     }
   } catch (err) {
     // swallow
@@ -406,6 +445,7 @@ function safeISODate(dateStr) {
 // ---------------------------------------------------------------------------
 async function fetchAllFeeds(context) {
   const errors = [];
+  const warnings = [];
   const sourceMeta = {};
   let allArticles = [];
   const seenLinks = new Set(); // Deduplicate across feeds sharing the same source ID
@@ -418,13 +458,28 @@ async function fetchAllFeeds(context) {
         ? parseAtom(xml, feed)
         : parseRSS(xml, feed);
 
-      context.log(`  → ${feed.name}: ${articles.length} articles`);
+      context.log(`  ${feed.name}: ${articles.length} articles`);
       return articles;
     })
   );
 
   results.forEach((result, idx) => {
     const feed = FEEDS[idx];
+    if (!sourceMeta[feed.id]) {
+      sourceMeta[feed.id] = {
+        id: feed.id,
+        name: feed.name,
+        website: feed.website || null,
+        category: feed.category,
+        count: 0,
+        ok: false,
+        feeds: 0,
+        feedsOk: 0
+      };
+    }
+    const meta = sourceMeta[feed.id];
+    meta.feeds += 1;
+
     if (result.status === 'fulfilled') {
       // Deduplicate articles by link (important for sources with multiple feeds)
       const newArticles = result.value.filter(a => {
@@ -433,20 +488,15 @@ async function fetchAllFeeds(context) {
         return true;
       });
       allArticles = allArticles.concat(newArticles);
-
-      // Accumulate counts for sources with multiple feeds
-      if (sourceMeta[feed.id]) {
-        sourceMeta[feed.id].count += newArticles.length;
-      } else {
-        sourceMeta[feed.id] = { id: feed.id, name: feed.name, website: feed.website || null, count: newArticles.length, ok: true };
+      meta.count += newArticles.length;
+      meta.ok = true;
+      meta.feedsOk += 1;
+      if (result.value.length === 0) {
+        warnings.push({ source: feed.name, url: feed.url, warning: 'Feed answered OK but yielded no items (after any keyword filter).' });
       }
     } else {
-      context.log.error(`  ✗ ${feed.name} (${feed.url}): ${result.reason.message}`);
+      context.log.error(`  FAILED ${feed.name} (${feed.url}): ${result.reason.message}`);
       errors.push({ source: feed.name, url: feed.url, error: result.reason.message });
-      // Only mark source as failed if no other feed for this source has succeeded
-      if (!sourceMeta[feed.id]) {
-        sourceMeta[feed.id] = { id: feed.id, name: feed.name, website: feed.website || null, count: 0, ok: false };
-      }
     }
   });
 
@@ -458,7 +508,7 @@ async function fetchAllFeeds(context) {
     return b.isoDate.localeCompare(a.isoDate);
   });
 
-  return { articles: allArticles, sources: sourceMeta, errors };
+  return { articles: allArticles, sources: sourceMeta, errors, warnings };
 }
 
 // ---------------------------------------------------------------------------
@@ -466,24 +516,28 @@ async function fetchAllFeeds(context) {
 // ---------------------------------------------------------------------------
 module.exports = async function (context, req) {
   const source = (req.query.source || '').toLowerCase().trim();
+  const category = (req.query.category || '').toLowerCase().trim();
   const forceRefresh = req.query.refresh === 'true';
 
   // Load cache from Blob Storage (or memory fallback)
   let cache = await readBlobCache(context);
 
-  // Check if cache is still valid
+  // Check if cache is still valid. A cache written before CW042 has no
+  // category on its articles, so treat it as stale and refetch once.
   const cacheAge = cache.fetchedAt ? Date.now() - new Date(cache.fetchedAt).getTime() : Infinity;
-  const cacheValid = cacheAge < CACHE_TTL_MS && cache.articles && cache.articles.length > 0;
+  const cacheHasCategories = cache.articles && cache.articles.length > 0 && cache.articles.every(a => a.category);
+  const cacheValid = cacheAge < CACHE_TTL_MS && cacheHasCategories;
 
   if (!cacheValid || forceRefresh) {
-    context.log(`Cache ${cacheValid ? 'valid but refresh forced' : 'stale or empty'} — fetching fresh feeds...`);
+    context.log(`Cache ${cacheValid ? 'valid but refresh forced' : 'stale, empty or pre-category'}, fetching fresh feeds...`);
     try {
       const data = await fetchAllFeeds(context);
       cache = {
         articles: data.articles,
         sources: data.sources,
         fetchedAt: new Date().toISOString(),
-        errors: data.errors
+        errors: data.errors,
+        warnings: data.warnings
       };
 
       // Persist to Blob Storage
@@ -518,10 +572,13 @@ module.exports = async function (context, req) {
     context.log(`Serving cached data (${Math.round(cacheAge / 60000)} minutes old, ${cache.articles.length} articles).`);
   }
 
-  // Filter by source if requested
+  // Filter by source or category if requested
   let articles = cache.articles;
   if (source && source !== 'all') {
     articles = articles.filter(a => a.sourceId === source);
+  }
+  if (category && category !== 'all') {
+    articles = articles.filter(a => a.category === category);
   }
 
   context.res = {
@@ -535,9 +592,22 @@ module.exports = async function (context, req) {
       count: articles.length,
       articles: articles,
       sources: cache.sources,
+      categories: {
+        regulator: 'Regulators',
+        biobanking: 'Biobanking',
+        lab: 'Laboratory',
+        science: 'Science'
+      },
       cachedAt: cache.fetchedAt || null,
       cacheAgeMinutes: cache.fetchedAt ? Math.round((Date.now() - new Date(cache.fetchedAt).getTime()) / 60000) : null,
-      errors: cache.errors && cache.errors.length > 0 ? cache.errors : undefined
+      errors: cache.errors && cache.errors.length > 0 ? cache.errors : undefined,
+      warnings: cache.warnings && cache.warnings.length > 0 ? cache.warnings : undefined
     })
   };
 };
+
+// Exported for local testing (tools/blog can also fetch feeds directly).
+module.exports.FEEDS = FEEDS;
+module.exports.parseRSS = parseRSS;
+module.exports.parseAtom = parseAtom;
+module.exports.fetchURL = fetchURL;
