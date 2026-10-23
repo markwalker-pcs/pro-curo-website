@@ -1,0 +1,17 @@
+{
+  "_comment": "Quiet-fortnight fixture: nothing relevant in the window.",
+  "date": "2026-12-28",
+  "collectedAt": "2026-12-28T06:00:00Z",
+  "windowDays": 14,
+  "since": "2026-12-14T06:00:00Z",
+  "via": "fixture",
+  "totalInFeed": 3,
+  "count": 3,
+  "sourceErrors": [],
+  "sourceWarnings": [],
+  "items": [
+    { "title": "Then and Now: a profile of a horse geneticist", "link": "https://example.org/thin-1", "description": "A career profile.", "isoDate": "2026-12-20T04:00:00Z", "source": "The Scientist", "sourceId": "the-scientist", "category": "science" },
+    { "title": "Photo contest winners announced", "link": "https://example.org/thin-2", "description": "Ink droplets and jumping spiders.", "isoDate": "2026-12-19T04:00:00Z", "source": "The Scientist", "sourceId": "the-scientist", "category": "science" },
+    { "title": "A hormonal message for a longer life", "link": "https://example.org/thin-3", "description": "Ageing in worms.", "isoDate": "2026-12-18T04:00:00Z", "source": "eLife Sciences", "sourceId": "elife", "category": "science" }
+  ]
+}

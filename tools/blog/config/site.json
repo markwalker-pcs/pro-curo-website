@@ -1,0 +1,74 @@
+{
+  "_comment": "Single place for the names and fixed text the blog uses. Renaming the section or the series is a one-line edit here (CW042, plan section 13 decisions 1 to 5).",
+  "siteUrl": "https://www.pro-curo.com",
+  "sectionName": "Blog",
+  "sectionPath": "/blog/",
+  "seriesName": "Sample Matters",
+  "seriesTagline": "the Pro-curo fortnightly briefing",
+  "byline": "Pro-curo team",
+  "reviewer": "Mark Walker",
+  "reviewerRole": "Director, Pro-curo Software Limited",
+  "disclosure": "Researched and drafted with AI assistance from public sources, then reviewed and edited by the Pro-curo team.",
+  "notAdviceLine": "This article explains public sources for information only. It is not legal or regulatory advice. Check the primary documents linked below and your own regulator's guidance.",
+  "publisher": {
+    "name": "Pro-curo Software Limited",
+    "url": "https://www.pro-curo.com",
+    "logo": "https://www.pro-curo.com/img/logo-icon.jpg",
+    "logoWidth": 512,
+    "logoHeight": 512
+  },
+  "ga4": "G-8CS9W53CST",
+  "model": "claude-opus-5-5",
+  "newsApi": "https://www.pro-curo.com/api/news",
+  "windowDays": 14,
+  "pageSize": 12,
+  "repeatWindowIssues": 6,
+  "weekParity": "even",
+  "scoring": {
+    "threshold": 6,
+    "minItems": 3,
+    "shortlist": 20,
+    "clearMargin": 2,
+    "quietFortnightSnapshots": 6,
+    "quietFortnightMinItems": 6
+  },
+  "formats": {
+    "A": { "label": "Briefing", "name": "Fortnightly briefing", "minWords": 700, "maxWords": 1000 },
+    "B": { "label": "Explainer", "name": "Regulatory explainer", "minWords": 900, "maxWords": 1300 },
+    "C": { "label": "Deep dive", "name": "Practice deep dive", "minWords": 1200, "maxWords": 1600 },
+    "D": { "label": "Round-up", "name": "Trend round-up", "minWords": 1000, "maxWords": 1400 },
+    "E": { "label": "Q and A", "name": "Q and A or myth-buster", "minWords": 600, "maxWords": 900 }
+  },
+  "limits": {
+    "titleMax": 60,
+    "metaDescriptionMax": 155,
+    "linkedinMinWords": 120,
+    "linkedinMaxWords": 200,
+    "facebookMinWords": 40,
+    "facebookMaxWords": 80,
+    "hashtagsMin": 3,
+    "hashtagsMax": 5,
+    "emailSubjectMax": 60
+  },
+  "utm": {
+    "campaignPrefix": "sample-matters-"
+  },
+  "postingTimes": {
+    "articleLive": "Wednesday 09:00 UK",
+    "linkedin": "Wednesday 10:00 UK",
+    "facebook": "Wednesday 12:30 UK",
+    "email": "Thursday 09:00 UK",
+    "linkedinWeekTwo": "Tuesday of week two, 10:00 UK"
+  },
+  "cta": {
+    "demoVideoPath": "/whats-new.html#demo-video",
+    "demoVideoLabel": "Watch the six-minute V5 demo",
+    "rhysLabel": "Talk to Rhys",
+    "contactPath": "/contact.html"
+  },
+  "mailerlite": {
+    "_comment": "Hosted MailerLite form URL for the sign-up block on the blog index. Empty until Abeer supplies it; the block then links to the contact page.",
+    "formUrl": ""
+  },
+  "userAgent": "Pro-curo-NewsBot/1.0 (+https://www.pro-curo.com)"
+}

@@ -122,6 +122,7 @@ Three GitHub accounts live on Mark's machine (`Walkerma75` for Taranis, `markwal
 | SSL | Azure Static Web Apps free SSL, auto-renewing (both hostnames report status `Ready`) |
 | App settings on SWA | Only `NEWS_CACHE_CONNECTION` is set |
 | Storage Account (news cache) | `procuronewscache`, `Standard_LRS`, located in `uksouth`, inside this RG. Referenced by `NEWS_CACHE_CONNECTION` |
+| Communication Services (CW042, added 2026-10-23) | ACS resource `procuro-website-comms` (location global, data location UK) and Email Communication Service `procuro-website-email` with an Azure-managed sender domain, linked to the ACS resource. Used only for the blog editor's notification emails. Pay per message, no fixed cost |
 | Application Insights | **None** — not connected to the Static Web App |
 | Diagnostic settings on SWA | **None** — no log destinations configured |
 | Azure DNS zone | **None in this subscription** — DNS is at eNom (see §6) |
@@ -149,6 +150,11 @@ Single user, no service principals, no group memberships, no other owners. **Do 
 | Google reCAPTCHA site key `6Lf1...slaD` | Hardcoded in `contact.html` | **Public by design** — site keys are not secrets; the corresponding secret key is held by MailerLite (not Pro-curo) |
 | MailerLite account/form IDs | Hardcoded in `contact.html` (`action` URL for account `2222074`, form `183534805221115798`) | Public URLs — not secrets |
 | GA4 measurement ID `G-8CS9W53CST` | Hardcoded in every HTML `<head>` | Public by design |
+| `ANTHROPIC_API_KEY` (CW042) | GitHub repo secret | Claude API key for the fortnightly blog editor (`tools/blog`). Rotate in the Anthropic Console, then update the secret. Never commit |
+| `BLOG_GITHUB_TOKEN` (CW042) | GitHub repo secret | Fine-grained PAT scoped to this repo (contents, pull requests read/write) so the editor's branch push triggers the preview build and it can open the PR. Optional; without it the default token is used and no preview builds |
+| `ACS_EMAIL_CONNECTION_STRING` (CW042) | GitHub repo secret (set 2026-10-23) | Primary connection string of ACS resource `procuro-website-comms` in `rg-procuro-website`. Used only by `tools/blog/notify.js`. Rotate with `az communication regenerate-key` then update the secret. Never commit |
+| `BLOG_BANNED_NAMES`, `BLOG_NOTIFY_TO` (CW042) | GitHub repo secrets (set by Mark 2026-10-23) | Banned names must never be written into the repo (company identity rule) and recipient addresses are not committed. The workflows fall back to variables of the same name |
+| `BLOG_MAIL_FROM`, `BLOG_ALERT_TO` (CW042) | GitHub repo variables | Sender on the ACS-verified domain; Mark's alert address (optional, falls back to `BLOG_NOTIFY_TO`) |
 
 **`.gitignore` coverage (as of 2026-04-20):** OS files, editor files, `node_modules/`, `.env`, `.env.*`, `local.settings.json`, `bin/`, `obj/`, `.azurefunctions/`, `DEPLOYMENT.md`.
 
@@ -168,6 +174,15 @@ Single user, no service principals, no group memberships, no other owners. **Do 
 | Token | Repo secret `AZURE_STATIC_WEB_APPS_API_TOKEN_ZEALOUS_SAND_02C845110` |
 | PR previews | Yes — the same workflow handles PR preview environments on `opened/synchronize/reopened` and cleans them up on `closed` |
 | Manual deploy path | **None intended.** The GitHub Actions workflow is the only deployment path — no `swa deploy` from dev machines |
+
+### Blog editor workflows (CW042, added 2026-10-23)
+
+| Field | Value |
+|---|---|
+| `.github/workflows/blog-fortnightly.yml` | Cron `0 6 * * 1` (Mondays 06:00 UTC) plus `workflow_dispatch` (`force`, `format`). Runs `tools/blog/run.js`, which exits in odd ISO weeks. Opens a pull request on branch `blog/<date>-<slug>`; never merges. Permissions: contents and pull requests write. Concurrency group `blog-editor` |
+| `.github/workflows/blog-published.yml` | `pull_request` closed on `main`; acts only when merged and the head branch starts with `blog/`. Emails the social pack (ACS) and commits the state change to `content/blog-state.json` on `main` |
+| Preview | The existing SWA workflow builds a preview for the editor's PR, provided the branch is pushed with `BLOG_GITHUB_TOKEN` (events from the default `GITHUB_TOKEN` do not trigger workflows) |
+| Guard | `tools/check-html-tails.sh` runs on the staged files before the editor commits; the SWA workflow runs it again before deploy |
 
 ### Rollback
 
@@ -227,18 +242,28 @@ Azure Static Web Apps free cert, auto-renewing. Confirmed 2026-04-20: `az static
 | Google Search Console | Verified owner `mark.walker@pro-curo.com`. Verification method = **DNS TXT** on `pro-curo.com` (`google-site-verification=peifu9cUhJBtcQIM1jRPl9g5lTp9y1HYk4bdplTZqNc`) | SEO fix revalidation depends on this mailbox staying live and the TXT record staying in eNom DNS |
 | MailerLite contact form | `contact.html` posts to `https://assets.mailerlite.com/jsonp/2222074/forms/183534805221115798/subscribe` | Replaces the old JS-only form handler |
 | Google reCAPTCHA v2 | Site key `6Lf1KHQUAAAAAFNKEX1hdSWCS3mRMv4FlFaNslaD` on the contact form | Public key; secret held by MailerLite |
-| RSS/Atom sources (api/news) | 17 feed entries in `api/news/index.js` — 1 HTA, 1 NHSBT, 12 The Scientist, 1 Biobanking.com, 1 eLife, 1 Lab News | All public feed endpoints, no auth |
+| RSS/Atom sources (api/news) | 14 feed entries in `api/news/index.js` (CW042, 2026-10-23): HTA, MHRA, HRA, UKHSA, DHSC, NHSBT (GOV.UK Atom), Biobanking.com, BBMRI-ERIC, Lab News, 4 The Scientist topic feeds, eLife | All public feed endpoints, no auth. Each feed carries a `category` (regulator, biobanking, lab, science); UKHSA, DHSC and eLife are keyword-filtered |
+| Anthropic Claude API (CW042) | `tools/blog` via `@anthropic-ai/sdk`, model named in `tools/blog/config/site.json` | Four calls per fortnightly run (ranking, draft, claim check, optional revision). Key in GitHub secret `ANTHROPIC_API_KEY` |
+| Azure Communication Services email (CW042) | `tools/blog/notify.js` | Created 2026-10-23 in `rg-procuro-website`: ACS resource `procuro-website-comms` (data location UK) with Email Communication Service `procuro-website-email` and an Azure-managed sender domain (`DoNotReply@66727ef5-82d1-4703-a597-e0fa398d7ee9.azurecomm.net`, no DNS needed). Connection string in GitHub secret `ACS_EMAIL_CONNECTION_STRING`, sender in variable `BLOG_MAIL_FROM`. A custom sender domain (for example `mail.pro-curo.com`, DNS at eNom) can replace it later; the workflow only needs `BLOG_MAIL_FROM` changed |
+| MailerLite (blog sign-up) | `blog/index.html` sign-up block | Links to the contact page until Abeer supplies a hosted form URL (`tools/blog/config/site.json`, `mailerlite.formUrl`). No MailerLite script loads on the blog |
 
 ### Industry news feed URLs
 
-Hardcoded in `api/news/index.js` `FEEDS` array. Swap when a feed goes dead. Current list:
+Hardcoded in `api/news/index.js` `FEEDS` array. Swap when a feed goes dead. Current list (CW042):
 
 - `https://www.gov.uk/government/organisations/human-tissue-authority.atom`
+- `https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency.atom`
+- `https://www.gov.uk/government/organisations/health-research-authority.atom`
+- `https://www.gov.uk/government/organisations/uk-health-security-agency.atom` (keyword filtered)
+- `https://www.gov.uk/government/organisations/department-of-health-and-social-care.atom` (keyword filtered)
 - `https://www.gov.uk/government/organisations/nhs-blood-and-transplant.atom`
-- `https://www.the-scientist.com/atom/latest` plus 11 topic feeds under `the-scientist.com/atom/`
 - `https://www.biobanking.com/feed/`
-- `https://elifesciences.org/rss/recent.xml`
-- `https://www.labnews.co.uk/section/1.rss`
+- `https://www.bbmri-eric.eu/feed/`
+- `https://labnews.co.uk/feed/` (the old `www.labnews.co.uk/section/1.rss` now redirects here)
+- `https://www.the-scientist.com/atom/health/cell-and-gene-therapy`, `.../atom/science/genome-editing`, `.../atom/science/cell-and-molecular-biology`, `.../atom/society/research-ethics`
+- `https://elifesciences.org/rss/recent.xml` (keyword filtered)
+
+Checked and rejected 2026-10-23: ISBER (`isber.org` returns 403 to feed readers, no RSS), EU health / SoHO news (`health.ec.europa.eu` publishes no RSS), HRA's own site (`hra.nhs.uk` has no feed; the GOV.UK organisation Atom covers it).
 
 ---
 

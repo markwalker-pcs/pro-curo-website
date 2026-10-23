@@ -1,0 +1,124 @@
+# Relevance scoring for the fortnightly editor (CW042, plan section 6.2).
+#
+# score = sourceWeight (by sourceId, else by category) + sum of keyword weights
+#         matched in title + description (each keyword counted once; title
+#         matches count double). Items below scoring.threshold in site.json are
+#         dropped before the model ranking pass.
+#
+# Keep this file as the one place relevance is tuned. Keywords are matched
+# case-insensitively as substrings, so "biobank" also matches "biobanking".
+
+sourceWeights:
+  hta: 5
+  mhra: 4
+  hra: 4
+  nhsbt: 3
+  dhsc: 2
+  ukhsa: 2
+  biobanking: 4
+  bbmri-eric: 4
+  lab-news: 2
+  the-scientist: 1
+  elife: 1
+
+categoryWeights:
+  regulator: 3
+  biobanking: 3
+  lab: 2
+  science: 1
+
+# Regulator sources whose items can force format B when the model confirms the
+# item changes or clarifies an obligation.
+regulatorSources:
+  - hta
+  - mhra
+  - hra
+  - dhsc
+  - nhsbt
+
+keywords:
+  # Core subject
+  biobank: 4
+  tissue bank: 4
+  human tissue: 4
+  human tissue act: 5
+  human tissue authority: 5
+  hta: 3
+  designated individual: 5
+  licensing standard: 4
+  code of practice: 4
+  tissue: 2
+  sample: 2
+  specimen: 2
+  cell line: 3
+  organoid: 2
+  stem cell: 2
+  cell therapy: 2
+  gene therapy: 2
+  # Operations
+  traceab: 4
+  chain of custody: 5
+  consent: 3
+  storage: 2
+  cryopreserv: 4
+  cryo: 2
+  freezer: 4
+  liquid nitrogen: 4
+  cold chain: 3
+  temperature: 2
+  inventory: 3
+  lims: 4
+  sample management: 5
+  sample tracking: 5
+  barcode: 3
+  label: 2
+  audit: 3
+  audit trail: 4
+  inspection: 4
+  non-compliance: 3
+  shortfall: 3
+  adverse event: 3
+  contamination: 3
+  mislabel: 4
+  misidentif: 4
+  disposal: 2
+  retention: 2
+  # Governance and law
+  gdpr: 3
+  data protection: 3
+  information governance: 3
+  research ethics: 3
+  ethics committee: 2
+  governance: 2
+  regulation: 2
+  regulator: 2
+  soho: 5
+  substances of human origin: 5
+  tissue directive: 4
+  2004/23: 4
+  accreditation: 3
+  iso 20387: 5
+  iso 15189: 4
+  iso 17025: 3
+  ukas: 3
+  mhra: 2
+  good practice: 2
+  gxp: 2
+  glp: 2
+  gmp: 2
+  # Sector bodies and infrastructure
+  isber: 4
+  bbmri: 3
+  ukcrc: 3
+  tissue directory: 3
+  nhs: 1
+  transplant: 2
+  donation: 2
+  donor: 2
+  blood: 1
+  pathology: 2
+  laborator: 1
+  lab manager: 3
+  reproducib: 2
+  data sharing: 2
+  annual report: 2

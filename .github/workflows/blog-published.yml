@@ -1,0 +1,74 @@
+name: Blog article published
+
+# CW042. When a pull request from a blog/ branch is merged (Mark's approval),
+# email the social pack with the social card attached and the live URL to the
+# distribution list in vars.BLOG_NOTIFY_TO, and mark the issue as published in
+# content/blog-state.json. The deploy itself is the normal Azure Static Web
+# Apps workflow on the merge commit.
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  notify:
+    name: Email the social pack and record the publish
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'blog/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: tools/blog/package-lock.json
+
+      - name: Install the editor
+        working-directory: tools/blog
+        run: npm ci --no-audit --no-fund
+
+      - name: Work out the article slug
+        id: slug
+        env:
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          # Branch is blog/<yyyy-mm-dd>-<slug>
+          SLUG=$(echo "$HEAD_REF" | sed -E 's#^blog/[0-9]{4}-[0-9]{2}-[0-9]{2}-##')
+          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
+          echo "Published slug: $SLUG" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Send the social pack
+        working-directory: tools/blog
+        env:
+          ACS_EMAIL_CONNECTION_STRING: ${{ secrets.ACS_EMAIL_CONNECTION_STRING }}
+          BLOG_MAIL_FROM: ${{ vars.BLOG_MAIL_FROM }}
+          BLOG_NOTIFY_TO: ${{ secrets.BLOG_NOTIFY_TO || vars.BLOG_NOTIFY_TO }}
+          BLOG_ALERT_TO: ${{ vars.BLOG_ALERT_TO }}
+        run: node notify.js published --slug "${{ steps.slug.outputs.slug }}" --pr "${{ github.event.pull_request.number }}"
+
+      - name: Record the publish in blog-state.json
+        working-directory: tools/blog
+        run: node publish.js --slug "${{ steps.slug.outputs.slug }}" --pr "${{ github.event.pull_request.number }}"
+
+      - name: Commit the state change to main
+        run: |
+          set -euo pipefail
+          git config user.name "Pro-curo blog editor"
+          git config user.email "tech@pro-curo.com"
+          if git diff --quiet -- content/blog-state.json content/articles; then
+            echo "State already up to date."
+            exit 0
+          fi
+          git add content/blog-state.json content/articles
+          git commit -m "Blog: mark issue published (PR #${{ github.event.pull_request.number }})"
+          git push origin HEAD:main
