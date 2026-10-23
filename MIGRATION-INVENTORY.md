@@ -122,6 +122,7 @@ Three GitHub accounts live on Mark's machine (`Walkerma75` for Taranis, `markwal
 | SSL | Azure Static Web Apps free SSL, auto-renewing (both hostnames report status `Ready`) |
 | App settings on SWA | Only `NEWS_CACHE_CONNECTION` is set |
 | Storage Account (news cache) | `procuronewscache`, `Standard_LRS`, located in `uksouth`, inside this RG. Referenced by `NEWS_CACHE_CONNECTION` |
+| Communication Services (CW042, added 2026-10-23) | ACS resource `procuro-website-comms` (location global, data location UK) and Email Communication Service `procuro-website-email` with an Azure-managed sender domain, linked to the ACS resource. Used only for the blog editor's notification emails. Pay per message, no fixed cost |
 | Application Insights | **None** — not connected to the Static Web App |
 | Diagnostic settings on SWA | **None** — no log destinations configured |
 | Azure DNS zone | **None in this subscription** — DNS is at eNom (see §6) |
@@ -151,7 +152,7 @@ Single user, no service principals, no group memberships, no other owners. **Do 
 | GA4 measurement ID `G-8CS9W53CST` | Hardcoded in every HTML `<head>` | Public by design |
 | `ANTHROPIC_API_KEY` (CW042) | GitHub repo secret | Claude API key for the fortnightly blog editor (`tools/blog`). Rotate in the Anthropic Console, then update the secret. Never commit |
 | `BLOG_GITHUB_TOKEN` (CW042) | GitHub repo secret | Fine-grained PAT scoped to this repo (contents, pull requests read/write) so the editor's branch push triggers the preview build and it can open the PR. Optional; without it the default token is used and no preview builds |
-| `ACS_EMAIL_CONNECTION_STRING` (CW042) | GitHub repo secret | Connection string of the Azure Communication Services email resource in `rg-procuro-website` (to be created; see section 3). Used only by `tools/blog/notify.js`. Never commit |
+| `ACS_EMAIL_CONNECTION_STRING` (CW042) | GitHub repo secret (set 2026-10-23) | Primary connection string of ACS resource `procuro-website-comms` in `rg-procuro-website`. Used only by `tools/blog/notify.js`. Rotate with `az communication regenerate-key` then update the secret. Never commit |
 | `BLOG_BANNED_NAMES`, `BLOG_NOTIFY_TO` (CW042) | GitHub repo secrets (set by Mark 2026-10-23) | Banned names must never be written into the repo (company identity rule) and recipient addresses are not committed. The workflows fall back to variables of the same name |
 | `BLOG_MAIL_FROM`, `BLOG_ALERT_TO` (CW042) | GitHub repo variables | Sender on the ACS-verified domain; Mark's alert address (optional, falls back to `BLOG_NOTIFY_TO`) |
 
@@ -243,7 +244,7 @@ Azure Static Web Apps free cert, auto-renewing. Confirmed 2026-04-20: `az static
 | Google reCAPTCHA v2 | Site key `6Lf1KHQUAAAAAFNKEX1hdSWCS3mRMv4FlFaNslaD` on the contact form | Public key; secret held by MailerLite |
 | RSS/Atom sources (api/news) | 14 feed entries in `api/news/index.js` (CW042, 2026-10-23): HTA, MHRA, HRA, UKHSA, DHSC, NHSBT (GOV.UK Atom), Biobanking.com, BBMRI-ERIC, Lab News, 4 The Scientist topic feeds, eLife | All public feed endpoints, no auth. Each feed carries a `category` (regulator, biobanking, lab, science); UKHSA, DHSC and eLife are keyword-filtered |
 | Anthropic Claude API (CW042) | `tools/blog` via `@anthropic-ai/sdk`, model named in `tools/blog/config/site.json` | Four calls per fortnightly run (ranking, draft, claim check, optional revision). Key in GitHub secret `ANTHROPIC_API_KEY` |
-| Azure Communication Services email (CW042) | `tools/blog/notify.js` | Resource to be created in `rg-procuro-website` with a verified sender domain; connection string in GitHub secret `ACS_EMAIL_CONNECTION_STRING`. Until then the notify step logs and exits 0 |
+| Azure Communication Services email (CW042) | `tools/blog/notify.js` | Created 2026-10-23 in `rg-procuro-website`: ACS resource `procuro-website-comms` (data location UK) with Email Communication Service `procuro-website-email` and an Azure-managed sender domain (`DoNotReply@66727ef5-82d1-4703-a597-e0fa398d7ee9.azurecomm.net`, no DNS needed). Connection string in GitHub secret `ACS_EMAIL_CONNECTION_STRING`, sender in variable `BLOG_MAIL_FROM`. A custom sender domain (for example `mail.pro-curo.com`, DNS at eNom) can replace it later; the workflow only needs `BLOG_MAIL_FROM` changed |
 | MailerLite (blog sign-up) | `blog/index.html` sign-up block | Links to the contact page until Abeer supplies a hosted form URL (`tools/blog/config/site.json`, `mailerlite.formUrl`). No MailerLite script loads on the blog |
 
 ### Industry news feed URLs
