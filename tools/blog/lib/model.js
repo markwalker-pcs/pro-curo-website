@@ -123,12 +123,18 @@ function audienceBlock() {
   return m ? m[0] : guide;
 }
 
+function relevanceBlock() {
+  const guide = editorialGuide();
+  const m = guide.match(/## The relevance test[\s\S]*?(?=\n## Voice)/);
+  return m ? m[0] : '';
+}
+
 // ---- Ranking -------------------------------------------------------------
 async function rankItems(cfg, shortlist) {
   if (mockMode()) return loadMock('ranking');
   const list = shortlist.map((it, i) =>
     `${i}. [${it.source}${it.category ? ', ' + it.category : ''}] ${it.title}\n   ${it.description || ''}\n   ${it.link}\n   rules score ${it.rulesScore}`).join('\n\n');
-  const system = `You rank industry news for the editor of Sample Matters, the fortnightly briefing published by Pro-curo Software Limited for people who look after human tissue and biological sample collections in the UK.\n\n${audienceBlock()}\n\nScore each item 0 to 10 for how much it matters to that audience. A regulator publication that changes or clarifies an obligation scores high. General science with no bearing on running a sample collection scores low. Mark isRegulatoryChange true only when the item itself changes, introduces or clarifies a rule, standard, licence condition, code of practice or statutory date for regulated establishments; an annual report, a news story about a regulator, or a consultation summary is not a change unless it states one. Mark hasOperationalLesson true when the story carries a practical lesson about storage, consent, labelling, traceability, data, audit or inspection. Write every reason in UK English without em dashes.`;
+  const system = `You rank industry news for the editor of Sample Matters, the fortnightly briefing published by Pro-curo Software Limited for people who look after human tissue and biological sample collections in the UK.\n\n${audienceBlock()}\n\n${relevanceBlock()}\n\nScore each item 0 to 10 for how much it matters to that audience, applying the relevance test: the score reflects what a reader could check, change or watch for, based on the substance of the item, never on the fact of publication or on document mechanics. A regulator publication that changes or clarifies an obligation scores high. A recurring regulator publication (annual report, inspection summary, code revision) scores high as news, because the comparison with the previous edition matters to practice. General science with no bearing on running a sample collection scores low.\n\nMark isRegulatoryChange true only when the item itself changes, introduces or clarifies a rule, standard, licence condition, code of practice or statutory date for regulated establishments; an annual report, a news story about a regulator, or a consultation summary is not a change unless it states one.\n\nMark hasOperationalLesson true only when the item describes a specific event, finding, inspection outcome, incident or piece of guidance about storage, consent, labelling, traceability, data, audit or inspection, such that the lesson is the source's own. An annual report, corporate report, press release about a publication, conference notice or general science paper does not carry an operational lesson in this sense, whatever its subject, because its lesson cannot be known from the headline and summary. Write every reason in UK English without em dashes.`;
   const user = `Rank these ${shortlist.length} items. Return every index exactly once.\n\n${list}`;
   return parseCall(cfg, { system, user, schema: RankingSchema, effort: 'medium', maxTokens: 8000 });
 }
@@ -141,12 +147,12 @@ function formatBrief(cfg, format) {
 
 function sourcesBlock(researched) {
   return researched.map((r, i) =>
-    `--- SOURCE ${i + 1} ---\nTitle: ${r.title}\nPublisher: ${r.source}\nURL: ${r.link}\nPublished: ${r.isoDate}\nFetched text: ${r.fetched ? 'yes' : 'no (feed summary only)'}${r.attachments && r.attachments.length ? '\nAttachments read: ' + r.attachments.map(a => `${a.title} (${a.pages} of ${a.totalPages} pages)`).join('; ') : ''}\n\n${r.text}\n`).join('\n');
+    `--- SOURCE ${i + 1}${r.isPreviousEdition ? ' (PREVIOUS EDITION, supplied for comparison with the new one)' : ''} ---\nTitle: ${r.title}\nPublisher: ${r.source}\nURL: ${r.link}\nPublished: ${r.isoDate}\nFetched text: ${r.fetched ? 'yes' : 'no (feed summary only)'}${r.attachments && r.attachments.length ? '\nAttachments read: ' + r.attachments.map(a => `${a.title} (${a.pages} of ${a.totalPages} pages)`).join('; ') : ''}\n\n${r.text}\n`).join('\n');
 }
 
 async function draftArticle(cfg, { format, issue, lead, also, researched, snapshotDate, previousTitles }) {
   if (mockMode()) return loadMock('draft');
-  const system = `You are the writer for Sample Matters, ${cfg.seriesTagline}, published on pro-curo.com by Pro-curo Software Limited. Follow this editorial guide exactly.\n\n${editorialGuide()}\n\nIssue ${issue}, collected ${snapshotDate}. ${formatBrief(cfg, format)}\n\nYou must only state facts that appear in the source texts below. Link each claim to its source URL inside the body HTML using <a href="URL">. Quote at most one sentence per source, in quotation marks and attributed. Do not invent dates, figures, names or quotations. Where the fetched text is a feed summary only, say the detail comes from the summary and keep claims to what it states. Write the whole output in UK English with no em dashes. The disclosure line, reviewer line and not-advice line are added by the template, so do not write them.`;
+  const system = `You are the writer for Sample Matters, ${cfg.seriesTagline}, published on pro-curo.com by Pro-curo Software Limited. Follow this editorial guide exactly.\n\n${editorialGuide()}\n\nIssue ${issue}, collected ${snapshotDate}. ${formatBrief(cfg, format)}\n\nYou must only state facts that appear in the source texts below. Link each claim to its source URL inside the body HTML using <a href="URL">. Quote at most one sentence per source, in quotation marks and attributed. Do not invent dates, figures, names or quotations. Where the fetched text is a feed summary only, say the detail comes from the summary and keep claims to what it states. Apply the relevance test from the guide to every story and every "why this matters" bullet: each must say what a reader would check, change or watch for, drawn from the substance of the source, never from how or where the document was published. Where a source is marked as a previous edition, write the comparison the guide asks for. Write the whole output in UK English with no em dashes. The disclosure line, reviewer line and not-advice line are added by the template, so do not write them.`;
   const alsoList = also.length
     ? `\n\nOther items from the fortnight for the "also this fortnight" list (summarise in one sentence each from the summary given, do not invent detail):\n${also.map(a => `- ${a.title} (${a.source}) ${a.link}\n  ${a.description || ''}`).join('\n')}`
     : '';
