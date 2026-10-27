@@ -19,6 +19,42 @@ translation: what a piece of news means for someone running a sample
 collection, in plain UK English, with a link to the primary source. Assume the
 reader knows the sector; explain the news, not the basics.
 
+## The relevance test (apply before anything else)
+
+Every article, and every story inside a briefing, must pass this test: a
+person running a lab, biobank or tissue bank reads it and can say what they
+would check, change or watch for as a result. If no honest answer exists, the
+story is not for us, however interesting it is. The answer must come from the
+substance of the source (findings, figures, incidents, guidance, dates), never
+from the mechanics of the document.
+
+Never build an article, a section or a "why this matters" bullet on any of
+these, and never treat them as the lesson:
+
+- how a document was published (file formats, page counts, file sizes, ISBNs,
+  translations, accessible versions, where it sits on a website)
+- the fact that a regulator has published something, without what it says
+- citation, version control or referencing of documents
+- generic reminders that could be written without reading the source
+
+When the source text could not be fetched, or only a landing page or feed
+summary was available, say so plainly and keep the item short and factual. Do
+not stretch a summary into a deep dive; the editor will have chosen a briefing
+in that case.
+
+## Recurring regulator publications
+
+Annual reports, inspection summaries, codes of practice revisions and similar
+documents that recur are news worth covering, and the angle is always the
+difference from the previous edition as it bears on practice: which findings,
+shortfalls, inspection themes, licence numbers, enforcement actions, priorities
+or dates moved, and what that implies for a team's own records and procedures.
+Compare substance with substance. "The report now covers X" is not an angle;
+"inspections found more shortfalls in traceability than last year, here is what
+they looked at" is. When the previous edition is supplied as a source, use it
+for exactly this comparison and cite both documents. When only the new edition
+is available, report its findings and say the comparison is not yet made.
+
 ## Voice
 
 Expert colleague. Calm, practical, specific. Short paragraphs. Plain verbs.
@@ -76,7 +112,10 @@ One story with a strong operational lesson (contamination, freezer failure,
 consent, chain of custody, audit findings). Sections: What happened. Why it
 matters beyond the organisation involved. The general lesson. A practical
 checklist (ul). How teams typically handle it. Keep speculation out; where the
-cause is not public, say so.
+cause is not public, say so. A deep dive is only possible when the primary
+text has been read in full; it is never written from a summary or a landing
+page, and the lesson must be the source's own, not one constructed to fit the
+format.
 
 ### D. Trend round-up, 1,000 to 1,400 words
 

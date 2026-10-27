@@ -23,7 +23,8 @@ const {
 } = require('./lib/util');
 const { collect, recentSnapshots } = require('./lib/collect');
 const { loadTaxonomy, scoreSnapshot } = require('./lib/score');
-const { chooseFormat, selectStories } = require('./lib/choose');
+const { chooseFormat, selectStories, applyResearchFallback } = require('./lib/choose');
+const { findPreviousEdition } = require('./lib/editions');
 const { loadState, saveState, coveredLinks, recordIssue, loadArticles, saveArticle } = require('./lib/state');
 const { research } = require('./lib/research');
 const model = require('./lib/model');
@@ -147,16 +148,34 @@ async function main() {
 
   // 3 CHOOSE
   const choice = chooseFormat(ranked, state, cfg, tax, { formatOverride });
-  const format = choice.format;
-  const stories = selectStories(format, ranked, cfg);
+  let format = choice.format;
+  let stories = selectStories(format, ranked, cfg);
   if (format === 'B' && choice.lead && stories.lead[0] !== choice.lead) {
     stories.also = [stories.lead[0], ...stories.also].filter(s => s && s !== choice.lead).slice(0, 5);
     stories.lead = [choice.lead];
   }
   log(`Issue ${choice.issue}, format ${format}: ${choice.reason}`);
 
-  // 4 RESEARCH
-  const researched = await research(stories.lead, cfg.userAgent, { offline: !!args.offline });
+  // 4 RESEARCH (lead stories, plus the previous edition of a recurring
+  // regulator publication so the draft can compare substance with substance)
+  let researched = await research(stories.lead, cfg.userAgent, { offline: !!args.offline });
+  for (const lead of stories.lead.slice(0, 2)) {
+    const prev = await findPreviousEdition(lead, cfg.userAgent, { offline: !!args.offline });
+    if (prev) researched.push(...(await research([prev], cfg.userAgent, { offline: !!args.offline })));
+  }
+
+  // Format fallback: no deep dive or explainer without the primary text.
+  const fallback = applyResearchFallback(format, researched, cfg);
+  if (fallback.changed) {
+    log(`Format ${format} dropped to ${fallback.format}: ${fallback.reason}`);
+    choice.reason += `; dropped to ${fallback.format} after research because ${fallback.reason}`;
+    format = fallback.format;
+    const wider = selectStories(format, ranked, cfg);
+    const have = new Set(researched.map(r => r.link));
+    const extra = wider.lead.filter(s => !have.has(s.link));
+    if (extra.length) researched = researched.concat(await research(extra, cfg.userAgent, { offline: !!args.offline }));
+    stories = { lead: wider.lead, also: wider.also };
+  }
 
   // 5 DRAFT
   let draft = await model.draftArticle(cfg, {

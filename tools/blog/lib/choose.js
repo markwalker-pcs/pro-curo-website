@@ -61,4 +61,22 @@ function selectStories(format, ranked, cfg) {
   return { lead: top.slice(0, 7), also: [] };
 }
 
-module.exports = { chooseFormat, selectStories };
+// After research: a deep dive (C) or explainer (B) is only honest when the
+// primary text was actually read. If the lead source could not be fetched, or
+// came back as little more than a landing page, fall back to a briefing (A)
+// rather than let the writer stretch a summary. Returns {format, changed, reason}.
+function applyResearchFallback(format, researched, cfg) {
+  if (format !== 'B' && format !== 'C') return { format, changed: false, reason: '' };
+  const minChars = (cfg.scoring && cfg.scoring.minPrimaryTextChars) || 4000;
+  const lead = (researched || []).find(r => !r.isPreviousEdition) || researched[0];
+  if (!lead) return { format: 'A', changed: true, reason: 'no lead source text at all' };
+  if (!lead.fetched) {
+    return { format: 'A', changed: true, reason: `the lead source could not be fetched (${lead.note || 'summary only'}), so a ${format} would be written from a summary` };
+  }
+  if ((lead.text || '').length < minChars) {
+    return { format: 'A', changed: true, reason: `the lead source text is only ${lead.text.length} characters (under ${minChars}), too thin for a ${format}` };
+  }
+  return { format, changed: false, reason: '' };
+}
+
+module.exports = { chooseFormat, selectStories, applyResearchFallback };
