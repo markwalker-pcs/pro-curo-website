@@ -72,7 +72,14 @@ let client = null;
 function getClient() {
   if (client) return client;
   const Anthropic = require('@anthropic-ai/sdk').default || require('@anthropic-ai/sdk');
-  client = new Anthropic({ maxRetries: 3, timeout: 15 * 60 * 1000 });
+  // An organisation-level key (not scoped to a workspace) must name the
+  // workspace on every request; a workspace-scoped key needs no header.
+  const workspace = (process.env.ANTHROPIC_WORKSPACE_ID || '').trim();
+  client = new Anthropic({
+    maxRetries: 3,
+    timeout: 15 * 60 * 1000,
+    defaultHeaders: workspace ? { 'anthropic-workspace-id': workspace } : undefined
+  });
   return client;
 }
 

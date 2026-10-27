@@ -11,6 +11,8 @@ name: Blog fortnightly editor
 #
 # Secrets and variables (repository settings, never in source):
 #   secrets.ANTHROPIC_API_KEY            model access (required)
+#   secrets.ANTHROPIC_WORKSPACE_ID       only if the key is organisation-level, not
+#                                        workspace-scoped (the API then needs the id)
 #   secrets.BLOG_GITHUB_TOKEN            fine-grained PAT (contents + pull requests, this repo)
 #                                        used to push the branch and open the PR, so that
 #                                        the deploy workflow builds the preview. Without
@@ -88,6 +90,9 @@ jobs:
         working-directory: ${{ env.TOOL_DIR }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Only needed when the key is an organisation-level key rather than a
+          # workspace-scoped one (the API then requires the workspace id header).
+          ANTHROPIC_WORKSPACE_ID: ${{ secrets.ANTHROPIC_WORKSPACE_ID || vars.ANTHROPIC_WORKSPACE_ID }}
           BLOG_BANNED_NAMES: ${{ secrets.BLOG_BANNED_NAMES || vars.BLOG_BANNED_NAMES }}
         run: |
           set -euo pipefail
