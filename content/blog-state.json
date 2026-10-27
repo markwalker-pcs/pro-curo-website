@@ -1,0 +1,27 @@
+{
+  "issue": 1,
+  "lastFormat": "A",
+  "issues": [
+    {
+      "issue": 1,
+      "format": "A",
+      "slug": "hta-annual-report-ce-marked-devices-biobank-networks",
+      "year": 2026,
+      "title": "HTA annual report, CE marked devices and biobank networks",
+      "date": "2026-10-27",
+      "snapshot": "2026-10-27",
+      "coveredLinks": [
+        "https://www.gov.uk/government/publications/human-tissue-authority-annual-report-and-accounts-2025-to-2026",
+        "https://www.gov.uk/government/publications/framework-agreement-between-dhsc-and-the-human-tissue-authority-2026-to-2029",
+        "https://www.the-scientist.com/cell-culture-contamination-sources-detection-and-control-75147",
+        "https://www.gov.uk/government/consultations/medical-devices-regulations-targeted-consultation-on-the-indefinite-recognition-of-ce-marked-devices",
+        "https://www.biobanking.com/university-of-western-australia-launches-human-milk-research-biobank/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=university-of-western-australia-launches-human-milk-research-biobank",
+        "https://www.biobanking.com/brazil-establishes-national-biobank-network-to-strengthen-health-research/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=brazil-establishes-national-biobank-network-to-strengthen-health-research",
+        "https://www.bbmri-eric.eu/news-events/montenegro-portugal-and-ukraine-join-bbmri-eric/",
+        "https://www.gov.uk/government/news/uk-regulator-brings-new-ai-and-medtech-agenda-to-advamed",
+        "https://www.bbmri-eric.eu/news-events/bbmri-eric-and-repo4eu-join-forces-to-bring-precision-drug-repurposing-closer-to-patients/"
+      ],
+      "status": "proposed"
+    }
+  ]
+}

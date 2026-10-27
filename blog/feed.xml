@@ -5,13 +5,28 @@
     <link>https://www.pro-curo.com/blog/</link>
     <description>Sample Matters, the Pro-curo fortnightly briefing, from Pro-curo Software Limited.</description>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 23 Oct 2026 08:59:15 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 09:48:55 GMT</lastBuildDate>
     <atom:link href="https://www.pro-curo.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://www.pro-curo.com/img/logo-icon.jpg</url>
       <title>Sample Matters</title>
       <link>https://www.pro-curo.com/blog/</link>
     </image>
-
+    <item>
+      <title>HTA annual report, CE marked devices and biobank networks</title>
+      <link>https://www.pro-curo.com/blog/2026/hta-annual-report-ce-marked-devices-biobank-networks.html</link>
+      <guid isPermaLink="true">https://www.pro-curo.com/blog/2026/hta-annual-report-ce-marked-devices-biobank-networks.html</guid>
+      <pubDate>Tue, 27 Oct 2026 09:48:55 GMT</pubDate>
+      <description>The HTA ran 226 planned regulatory assessments in 2025/26 and kept two-person unannounced inspections in the post-mortem sector because of ongoing high levels of risk, incidents and shortfalls. The HTARI incident reporting system went live for the Anatomy sector on 1 December 2025, and a multi-year Codes of Practice review plus SoHO preparation for Northern Ireland from August 2027 mean guidance that local procedures cite will be revised. The government intends to recognise CE marked medical and IVD devices in Great Britain indefinitely, with UK responsible person, MHRA registration and post-market surveillance duties still applying to manufacturers.</description>
+      <category>Briefing</category>
+      <category>hta</category>
+      <category>inspection</category>
+      <category>biobanking</category>
+      <category>soho</category>
+      <category>medical-devices</category>
+      <category>storage</category>
+      <enclosure url="https://www.pro-curo.com/blog/2026/img/hta-annual-report-ce-marked-devices-biobank-networks.png" length="133360" type="image/png"/>
+      <media:content url="https://www.pro-curo.com/blog/2026/img/hta-annual-report-ce-marked-devices-biobank-networks.png" medium="image" type="image/png" width="1200" height="627"/>
+    </item>
   </channel>
 </rss>
