@@ -134,7 +134,7 @@ function formatBrief(cfg, format) {
 
 function sourcesBlock(researched) {
   return researched.map((r, i) =>
-    `--- SOURCE ${i + 1} ---\nTitle: ${r.title}\nPublisher: ${r.source}\nURL: ${r.link}\nPublished: ${r.isoDate}\nFetched text: ${r.fetched ? 'yes' : 'no (feed summary only)'}\n\n${r.text}\n`).join('\n');
+    `--- SOURCE ${i + 1} ---\nTitle: ${r.title}\nPublisher: ${r.source}\nURL: ${r.link}\nPublished: ${r.isoDate}\nFetched text: ${r.fetched ? 'yes' : 'no (feed summary only)'}${r.attachments && r.attachments.length ? '\nAttachments read: ' + r.attachments.map(a => `${a.title} (${a.pages} of ${a.totalPages} pages)`).join('; ') : ''}\n\n${r.text}\n`).join('\n');
 }
 
 async function draftArticle(cfg, { format, issue, lead, also, researched, snapshotDate, previousTitles }) {
