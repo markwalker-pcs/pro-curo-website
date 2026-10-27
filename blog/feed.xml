@@ -5,13 +5,27 @@
     <link>https://www.pro-curo.com/blog/</link>
     <description>Sample Matters, the Pro-curo fortnightly briefing, from Pro-curo Software Limited.</description>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 23 Oct 2026 08:59:15 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 08:15:35 GMT</lastBuildDate>
     <atom:link href="https://www.pro-curo.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://www.pro-curo.com/img/logo-icon.jpg</url>
       <title>Sample Matters</title>
       <link>https://www.pro-curo.com/blog/</link>
     </image>
-
+    <item>
+      <title>HTA annual report, CE marking and BBMRI-ERIC growth</title>
+      <link>https://www.pro-curo.com/blog/2026/hta-annual-report-ce-marking-bbmri-eric.html</link>
+      <guid isPermaLink="true">https://www.pro-curo.com/blog/2026/hta-annual-report-ce-marking-bbmri-eric.html</guid>
+      <pubDate>Tue, 27 Oct 2026 08:15:35 GMT</pubDate>
+      <description>The HTA has begun a multi-year review of its Codes of Practice, which the report says will involve renewing guidance for the sectors it regulates, and is trialling new approaches to managing Corrective and Preventive Action Plans. The government intends to recognise CE marked devices certified under EU MDR and EU IVDR in Great Britain indefinitely, with the existing 30 June 2028 and 30 June 2030 dates in force until the legislation is made. BBMRI-ERIC now spans around 500 biobanks and has agreed to simplify access to samples and data for drug repurposing research, which puts consent and access terms for secondary use in focus.</description>
+      <category>Briefing</category>
+      <category>hta</category>
+      <category>inspection</category>
+      <category>biobanking</category>
+      <category>soho</category>
+      <category>medical-devices</category>
+      <enclosure url="https://www.pro-curo.com/blog/2026/img/hta-annual-report-ce-marking-bbmri-eric.png" length="129801" type="image/png"/>
+      <media:content url="https://www.pro-curo.com/blog/2026/img/hta-annual-report-ce-marking-bbmri-eric.png" medium="image" type="image/png" width="1200" height="627"/>
+    </item>
   </channel>
 </rss>
