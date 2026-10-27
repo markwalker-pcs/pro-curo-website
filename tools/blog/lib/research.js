@@ -4,10 +4,20 @@
 // Polite: honours robots.txt for our user agent, 15 s timeout, one fetch per
 // URL, text only. Fetched text is held in memory for the run and is never
 // written into the repository.
+//
+// When a source page links to PDF attachments (GOV.UK publication pages list
+// them in `.gem-c-attachment` blocks, usually on assets.publishing.service.gov.uk)
+// the first one or two are downloaded too, capped at MAX_PDF_BYTES each, and
+// their text (capped at MAX_CHARS each) is appended to the source record, so a
+// report is read from the document itself and not from the landing page's
+// metadata. The PDF bytes stay in memory; nothing is written to disk.
 
 const { stripTags, log } = require('./util');
 
 const MAX_CHARS = 16000;
+const MAX_PDF_BYTES = 5 * 1024 * 1024;
+const MAX_ATTACHMENTS = 2;
+const MAX_PDF_PAGES = 400;
 const robotsCache = new Map();
 
 async function fetchText(url, userAgent, timeoutMs = 15000) {
@@ -21,6 +31,39 @@ async function fetchText(url, userAgent, timeoutMs = 15000) {
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.text();
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+// Download a binary attachment into memory, refusing anything over maxBytes
+// (checked against Content-Length first, then while the body streams in).
+async function fetchBytes(url, userAgent, { timeoutMs = 30000, maxBytes = MAX_PDF_BYTES } = {}) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, {
+      headers: { 'User-Agent': userAgent, Accept: 'application/pdf,*/*' },
+      redirect: 'follow',
+      signal: ctrl.signal
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const declared = Number(res.headers.get('content-length') || 0);
+    if (declared > maxBytes) throw new Error(`attachment is ${Math.round(declared / 1024 / 1024)} MB, over the ${Math.round(maxBytes / 1024 / 1024)} MB cap`);
+    const chunks = [];
+    let total = 0;
+    const reader = res.body.getReader();
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      total += value.byteLength;
+      if (total > maxBytes) {
+        ctrl.abort();
+        throw new Error(`attachment exceeded the ${Math.round(maxBytes / 1024 / 1024)} MB cap`);
+      }
+      chunks.push(value);
+    }
+    return Buffer.concat(chunks.map(c => Buffer.from(c.buffer, c.byteOffset, c.byteLength)));
   } finally {
     clearTimeout(t);
   }
@@ -75,6 +118,10 @@ async function robotsAllows(url, userAgent) {
   return allowedByRules(robotsCache.get(key), u.pathname + u.search);
 }
 
+function decodeEntities(s) {
+  return s.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/&#8217;/g, '’').replace(/&#8211;/g, '–').replace(/&nbsp;/g, ' ');
+}
+
 function htmlToText(html) {
   let s = String(html);
   s = s.replace(/<script[\s\S]*?<\/script>/gi, ' ')
@@ -86,15 +133,154 @@ function htmlToText(html) {
   if (main) s = main[0];
   s = s.replace(/<(p|div|br|li|h[1-6]|tr|section)[^>]*>/gi, '\n$&');
   s = stripTags(s.replace(/\n/g, ' \n '));
-  s = s.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/&#8217;/g, '’').replace(/&#8211;/g, '–');
+  s = decodeEntities(s);
   return s.replace(/\s*\n\s*/g, '\n').replace(/[ \t]+/g, ' ').trim();
 }
 
-// items: [{title, link, ...}] -> [{...item, text, fetched: bool, note}]
+// Welsh-language versions of GOV.UK documents are usually a separate
+// attachment whose title or file name says so. Skip those when an English
+// file is available.
+const WELSH_RE = /\b(welsh|cymraeg|cymru|fersiwn)\b|[-_.]cy(?:mraeg)?[-_.]|[-_]cy\.pdf$|[-_]w\.pdf$/i;
+
+// Find PDF attachments linked from a fetched page. GOV.UK publication pages
+// list them inside `.gem-c-attachment` blocks; any other absolute or
+// relative link ending in .pdf is considered after those. Returns
+// [{url, title, govuk: bool}] in preference order, de-duplicated, with Welsh
+// files pushed to the end.
+function findPdfAttachments(html, baseUrl, { max = MAX_ATTACHMENTS } = {}) {
+  const s = String(html);
+  const seen = new Map();
+  const found = [];
+  const anchorRe = /<a\b([^>]*?)href\s*=\s*(?:"([^"]*)"|'([^']*)')([^>]*)>([\s\S]*?)<\/a>/gi;
+  let m;
+  while ((m = anchorRe.exec(s))) {
+    const href = decodeEntities(m[2] != null ? m[2] : m[3] || '').trim();
+    if (!/\.pdf(?:[?#][^\s]*)?$/i.test(href)) continue;
+    let url;
+    try { url = new URL(href, baseUrl); } catch { continue; }
+    if (!/^https?:$/.test(url.protocol)) continue;
+    const key = url.href.replace(/[?#].*$/, '');
+    const attrs = `${m[1]} ${m[4]}`;
+    const anchorText = decodeEntities(stripTags(m[5])).replace(/\s+/g, ' ').trim();
+    if (seen.has(key)) {
+      // GOV.UK links each attachment twice (thumbnail, then title); keep the
+      // first link's place but take the title from whichever has text.
+      const prev = seen.get(key);
+      if (!prev.titled && anchorText) { prev.title = anchorText; prev.titled = true; prev.welsh = prev.welsh || WELSH_RE.test(anchorText); }
+      continue;
+    }
+    const before = s.slice(Math.max(0, m.index - 3000), m.index);
+    const govuk = /gem-c-attachment/i.test(before) || /gem-c-attachment|govuk-link/i.test(attrs) || /assets\.publishing\.service\.gov\.uk$/i.test(url.hostname);
+    const title = anchorText || url.pathname.split('/').pop();
+    const welsh = WELSH_RE.test(title) || WELSH_RE.test(url.pathname) || /\blang\s*=\s*["']?cy\b/i.test(attrs) || /hreflang\s*=\s*["']?cy\b/i.test(attrs);
+    const entry = { url: key, title, titled: !!anchorText, govuk, welsh };
+    seen.set(key, entry);
+    found.push(entry);
+  }
+  found.sort((a, b) => (a.welsh - b.welsh) || (b.govuk - a.govuk));
+  // Only fall back to Welsh files when there is nothing else at all.
+  const english = found.filter(a => !a.welsh);
+  // GOV.UK often lists the same document twice (print PDF plus a web
+  // accessible or large print copy). Reading it once is enough.
+  const chosen = [];
+  const seenTitles = new Set();
+  for (const a of (english.length ? english : found)) {
+    const canon = a.title.toLowerCase().replace(/\((?:[^)]*)\)/g, ' ').replace(/\b(web\s+)?accessible( version)?\b|\blarge print\b|\bprint( version)?\b|\bpdf\b/g, ' ').replace(/[^a-z0-9]+/g, ' ').trim();
+    if (canon && seenTitles.has(canon)) continue;
+    seenTitles.add(canon);
+    chosen.push(a);
+    if (chosen.length >= max) break;
+  }
+  return chosen.map(({ url, title, govuk }) => ({ url, title, govuk }));
+}
+
+let pdfjsPromise = null;
+function loadPdfjs() {
+  // Pure-JS build; no worker thread and no canvas needed for text extraction.
+  if (!pdfjsPromise) pdfjsPromise = import('pdfjs-dist/legacy/build/pdf.mjs');
+  return pdfjsPromise;
+}
+
+// Extract readable text from PDF bytes, page by page, stopping once maxChars
+// is reached. Returns {text, pages, totalPages, truncated}.
+async function extractPdfText(bytes, { maxChars = MAX_CHARS, maxPages = MAX_PDF_PAGES } = {}) {
+  const pdfjs = await loadPdfjs();
+  const data = bytes instanceof Uint8Array ? new Uint8Array(bytes.buffer, bytes.byteOffset, bytes.byteLength) : new Uint8Array(bytes);
+  const task = pdfjs.getDocument({ data, useSystemFonts: true, disableFontFace: true, isEvalSupported: false, verbosity: 0 });
+  const doc = await task.promise;
+  const out = [];
+  let chars = 0;
+  let pages = 0;
+  let truncated = false;
+  try {
+    const limit = Math.min(doc.numPages, maxPages);
+    for (let p = 1; p <= limit; p++) {
+      const page = await doc.getPage(p);
+      const content = await page.getTextContent();
+      let pageText = '';
+      for (const item of content.items) {
+        if (typeof item.str !== 'string') continue;
+        pageText += item.str;
+        pageText += item.hasEOL ? '\n' : ' ';
+      }
+      page.cleanup();
+      pageText = pageText.replace(/[ \t]+\n/g, '\n').replace(/[ \t]{2,}/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
+      pages++;
+      if (!pageText) continue;
+      if (chars + pageText.length > maxChars) {
+        out.push(pageText.slice(0, Math.max(0, maxChars - chars)));
+        chars = maxChars;
+        truncated = true;
+        break;
+      }
+      out.push(pageText);
+      chars += pageText.length + 2;
+    }
+    if (!truncated && doc.numPages > limit) truncated = true;
+    return { text: out.join('\n\n').trim().slice(0, maxChars), pages, totalPages: doc.numPages, truncated };
+  } finally {
+    await doc.destroy().catch(() => {});
+  }
+}
+
+// Fetch and read the chosen attachments for one source record. Returns
+// [{url, title, pages, totalPages, chars, truncated}] for the ones that were
+// read, and appends their text to rec.text as clearly labelled blocks.
+async function readAttachments(rec, attachments, userAgent, opts = {}) {
+  const read = [];
+  const fetchBytesImpl = opts.fetchBytes || fetchBytes;
+  const allows = opts.robotsAllows || robotsAllows;
+  for (const att of attachments) {
+    try {
+      if (!(await allows(att.url, userAgent))) {
+        log(`research: robots.txt disallows attachment ${att.url}`);
+        continue;
+      }
+      const bytes = await fetchBytesImpl(att.url, userAgent);
+      const extracted = await extractPdfText(bytes, { maxChars: MAX_CHARS });
+      if (extracted.text.length < 200) {
+        log(`research: attachment had little readable text, skipped ${att.url}`);
+        continue;
+      }
+      rec.text += `\n\n--- ATTACHMENT: ${att.title} (${att.url}) pages 1 to ${extracted.pages} of ${extracted.totalPages}${extracted.truncated ? ', text truncated' : ''} ---\n${extracted.text}`;
+      read.push({ url: att.url, title: att.title, pages: extracted.pages, totalPages: extracted.totalPages, chars: extracted.text.length, truncated: extracted.truncated });
+      log(`research: read attachment ${att.url} (${extracted.pages} of ${extracted.totalPages} pages, ${extracted.text.length} chars)`);
+    } catch (err) {
+      log(`research: attachment failed ${att.url} (${err.message})`);
+    }
+  }
+  return read;
+}
+
+function describeAttachments(read) {
+  return read.map(a => `${a.title} (${a.pages} of ${a.totalPages} pages${a.truncated ? ', truncated' : ''})`).join('; ');
+}
+
+// items: [{title, link, ...}] -> [{...item, text, fetched: bool, note, attachments}]
 async function research(items, userAgent, opts = {}) {
   const out = [];
   for (const item of items) {
-    const rec = { ...item, text: '', fetched: false, note: '' };
+    const rec = { ...item, text: '', fetched: false, note: '', attachments: [] };
     try {
       if (opts.offline) throw new Error('offline');
       if (!(await robotsAllows(item.link, userAgent))) {
@@ -104,6 +290,16 @@ async function research(items, userAgent, opts = {}) {
         rec.text = htmlToText(html).slice(0, MAX_CHARS);
         rec.fetched = rec.text.length > 200;
         if (!rec.fetched) rec.note = 'page returned little readable text; using the feed summary only';
+        const attachments = findPdfAttachments(html, item.link);
+        if (attachments.length) {
+          rec.attachments = await readAttachments(rec, attachments, userAgent, opts);
+          if (rec.attachments.length) {
+            rec.fetched = true;
+            rec.note = `read attachment${rec.attachments.length > 1 ? 's' : ''}: ${describeAttachments(rec.attachments)}`;
+          } else {
+            rec.note = [rec.note, `${attachments.length} PDF attachment${attachments.length > 1 ? 's' : ''} linked but none could be read`].filter(Boolean).join('; ');
+          }
+        }
       }
     } catch (err) {
       rec.note = `fetch failed (${err.message}); using the feed summary only`;
@@ -115,4 +311,4 @@ async function research(items, userAgent, opts = {}) {
   return out;
 }
 
-module.exports = { research, parseRobots, allowedByRules, htmlToText };
+module.exports = { research, parseRobots, allowedByRules, htmlToText, findPdfAttachments, extractPdfText, readAttachments, fetchBytes, MAX_CHARS, MAX_PDF_BYTES };
