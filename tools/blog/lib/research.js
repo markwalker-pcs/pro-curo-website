@@ -8,13 +8,27 @@
 // When a source page links to PDF attachments (GOV.UK publication pages list
 // them in `.gem-c-attachment` blocks, usually on assets.publishing.service.gov.uk)
 // the first one or two are downloaded too, capped at MAX_PDF_BYTES each, and
-// their text (capped at MAX_CHARS each) is appended to the source record, so a
-// report is read from the document itself and not from the landing page's
-// metadata. The PDF bytes stay in memory; nothing is written to disk.
+// their text is appended to the source record, so a report is read from the
+// document itself and not from the landing page's metadata. The PDF bytes stay
+// in memory; nothing is written to disk.
+//
+// Caps. A landing page is kept to `pageChars` and each attachment to
+// `attachmentChars` (defaults below; config/site.json `research` overrides
+// them). The attachment cap is set so that a long regulator report, such as an
+// 84-page annual report, is read in full. `applyResearchBudget` then holds
+// the text handed to the model across the whole run to `totalChars`, trimming
+// the least important sources first, so the bill stays bounded however many
+// documents a fortnight turns up.
 
 const { stripTags, log } = require('./util');
 
-const MAX_CHARS = 16000;
+const DEFAULT_LIMITS = Object.freeze({
+  pageChars: 60000,
+  attachmentChars: 250000,
+  totalChars: 600000
+});
+// Kept for callers that import the old name; it is the attachment cap.
+const MAX_CHARS = DEFAULT_LIMITS.attachmentChars;
 const MAX_PDF_BYTES = 5 * 1024 * 1024;
 const MAX_ATTACHMENTS = 2;
 const MAX_PDF_PAGES = 400;
@@ -250,6 +264,7 @@ async function readAttachments(rec, attachments, userAgent, opts = {}) {
   const read = [];
   const fetchBytesImpl = opts.fetchBytes || fetchBytes;
   const allows = opts.robotsAllows || robotsAllows;
+  const limits = resolveLimits(opts.limits);
   for (const att of attachments) {
     try {
       if (!(await allows(att.url, userAgent))) {
@@ -257,7 +272,7 @@ async function readAttachments(rec, attachments, userAgent, opts = {}) {
         continue;
       }
       const bytes = await fetchBytesImpl(att.url, userAgent);
-      const extracted = await extractPdfText(bytes, { maxChars: MAX_CHARS });
+      const extracted = await extractPdfText(bytes, { maxChars: limits.attachmentChars });
       if (extracted.text.length < 200) {
         log(`research: attachment had little readable text, skipped ${att.url}`);
         continue;
@@ -276,9 +291,20 @@ function describeAttachments(read) {
   return read.map(a => `${a.title} (${a.pages} of ${a.totalPages} pages${a.truncated ? ', truncated' : ''})`).join('; ');
 }
 
+function resolveLimits(given) {
+  const out = { ...DEFAULT_LIMITS };
+  for (const k of Object.keys(DEFAULT_LIMITS)) {
+    const v = given && Number(given[k]);
+    if (Number.isFinite(v) && v > 0) out[k] = Math.floor(v);
+  }
+  return out;
+}
+
 // items: [{title, link, ...}] -> [{...item, text, fetched: bool, note, attachments}]
+// opts.limits: {pageChars, attachmentChars} (see DEFAULT_LIMITS)
 async function research(items, userAgent, opts = {}) {
   const out = [];
+  const limits = resolveLimits(opts.limits);
   for (const item of items) {
     const rec = { ...item, text: '', fetched: false, note: '', attachments: [] };
     try {
@@ -287,7 +313,7 @@ async function research(items, userAgent, opts = {}) {
         rec.note = 'robots.txt disallows fetching this page; using the feed summary only';
       } else {
         const html = await fetchText(item.link, userAgent);
-        rec.text = htmlToText(html).slice(0, MAX_CHARS);
+        rec.text = htmlToText(html).slice(0, limits.pageChars);
         rec.fetched = rec.text.length > 200;
         if (!rec.fetched) rec.note = 'page returned little readable text; using the feed summary only';
         const attachments = findPdfAttachments(html, item.link);
@@ -311,4 +337,36 @@ async function research(items, userAgent, opts = {}) {
   return out;
 }
 
-module.exports = { research, parseRobots, allowedByRules, htmlToText, findPdfAttachments, extractPdfText, readAttachments, fetchBytes, MAX_CHARS, MAX_PDF_BYTES };
+// Hold the total research text to `totalChars`. Lead sources keep their text
+// first; the previous edition comes next; sources added later in the run
+// (the fallback's extra stories) give way first. A trimmed record keeps the
+// start of its text, gains a note, and is marked `trimmed` so the PR's
+// research list says so. Returns {researched, trimmed: [titles], total}.
+function applyResearchBudget(researched, limits) {
+  const { totalChars } = resolveLimits(limits);
+  const order = researched
+    .map((r, i) => ({ r, i, rank: r.isPreviousEdition ? 1 : (r.isExtra ? 2 : 0) }))
+    .sort((a, b) => a.rank - b.rank || a.i - b.i);
+  let remaining = totalChars;
+  const trimmed = [];
+  for (const { r } of order) {
+    const text = r.text || '';
+    if (text.length <= remaining) {
+      remaining -= text.length;
+      continue;
+    }
+    const keep = Math.max(0, remaining);
+    const marker = `
+
+[Text trimmed here to stay within the research budget: ${text.length - keep} of ${text.length} characters not shown]`;
+    r.text = text.slice(0, keep) + marker;
+    r.trimmed = true;
+    r.note = [r.note, `text trimmed to ${keep} characters by the research budget`].filter(Boolean).join('; ');
+    trimmed.push(r.title);
+    remaining = 0;
+  }
+  const total = researched.reduce((n, r) => n + (r.text || '').length, 0);
+  return { researched, trimmed, total };
+}
+
+module.exports = { research, applyResearchBudget, resolveLimits, DEFAULT_LIMITS, parseRobots, allowedByRules, htmlToText, findPdfAttachments, extractPdfText, readAttachments, fetchBytes, MAX_CHARS, MAX_PDF_BYTES };
