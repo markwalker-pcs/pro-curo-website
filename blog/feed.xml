@@ -5,13 +5,26 @@
     <link>https://www.pro-curo.com/blog/</link>
     <description>Sample Matters, the Pro-curo fortnightly briefing, from Pro-curo Software Limited.</description>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 23 Oct 2026 08:59:15 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 07:03:36 GMT</lastBuildDate>
     <atom:link href="https://www.pro-curo.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://www.pro-curo.com/img/logo-icon.jpg</url>
       <title>Sample Matters</title>
       <link>https://www.pro-curo.com/blog/</link>
     </image>
-
+    <item>
+      <title>HTA annual report 2025 to 2026 and the version you cite</title>
+      <link>https://www.pro-curo.com/blog/2026/hta-annual-report-document-version-control.html</link>
+      <guid isPermaLink="true">https://www.pro-curo.com/blog/2026/hta-annual-report-document-version-control.html</guid>
+      <pubDate>Tue, 27 Oct 2026 07:03:36 GMT</pubDate>
+      <description>The HTA added a Welsh translation and a web accessible PDF of its 2025 to 2026 annual report and accounts on 20 October 2026. The two English PDFs share one ISBN and one HC number but run to 84 and 82 pages, so page references may not match between them. Any team that cites regulator documents in procedures, governance papers or inspection packs faces the same version and traceability question.</description>
+      <category>Deep dive</category>
+      <category>hta</category>
+      <category>inspection</category>
+      <category>biobanking</category>
+      <category>quality-management</category>
+      <enclosure url="https://www.pro-curo.com/blog/2026/img/hta-annual-report-document-version-control.png" length="131553" type="image/png"/>
+      <media:content url="https://www.pro-curo.com/blog/2026/img/hta-annual-report-document-version-control.png" medium="image" type="image/png" width="1200" height="627"/>
+    </item>
   </channel>
 </rss>
