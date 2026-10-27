@@ -4,3 +4,6 @@
 # (that is a separate, large change - see CW005 §5 and HANDOVER-C006 watch-outs).
 tools/check-html-tails.sh text eol=lf
 .githooks/pre-commit text eol=lf
+
+# PDF test fixtures for the blog editor are binary; never CRLF-convert them.
+tools/blog/test/fixtures/*.pdf binary
