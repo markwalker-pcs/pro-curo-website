@@ -24,6 +24,12 @@
   "pageSize": 12,
   "repeatWindowIssues": 6,
   "weekParity": "even",
+  "research": {
+    "_comment": "Characters of source text read per landing page, per PDF attachment, and in total per run. The attachment cap reads a long regulator report in full; the total bounds the bill.",
+    "pageChars": 60000,
+    "attachmentChars": 250000,
+    "totalChars": 600000
+  },
   "scoring": {
     "threshold": 6,
     "minItems": 3,

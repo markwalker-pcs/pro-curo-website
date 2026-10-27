@@ -3,7 +3,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('fs');
 const path = require('path');
-const { findPdfAttachments, extractPdfText, readAttachments, MAX_CHARS } = require('../lib/research');
+const { findPdfAttachments, extractPdfText, readAttachments, applyResearchBudget, resolveLimits, DEFAULT_LIMITS, MAX_CHARS } = require('../lib/research');
 
 const fixture = name => path.join(__dirname, 'fixtures', name);
 const pageUrl = 'https://www.gov.uk/government/publications/human-tissue-authority-annual-report-and-accounts-2025-to-2026';
@@ -89,4 +89,52 @@ test('readAttachments honours robots.txt and survives a failed download', async 
   });
   assert.equal(read.length, 0);
   assert.equal(rec.text, 'Landing page text.');
+});
+
+test('attachment and page caps come from the config and default to a full report read', () => {
+  assert.equal(DEFAULT_LIMITS.attachmentChars, 250000);
+  assert.ok(DEFAULT_LIMITS.attachmentChars >= 84 * 1500, 'an 84-page report must fit');
+  assert.deepEqual(resolveLimits(undefined), DEFAULT_LIMITS);
+  assert.equal(resolveLimits({ attachmentChars: 1000 }).attachmentChars, 1000);
+  assert.equal(resolveLimits({ attachmentChars: 'x', pageChars: -5 }).pageChars, DEFAULT_LIMITS.pageChars);
+});
+
+test('readAttachments respects a per-attachment cap passed through opts.limits', async () => {
+  const rec = { text: '', fetched: true, note: '' };
+  const attachments = findPdfAttachments(html, pageUrl).slice(0, 1);
+  const read = await readAttachments(rec, attachments, 'Pro-curo-NewsBot/test', {
+    fetchBytes: async () => pdf,
+    robotsAllows: async () => true,
+    limits: { attachmentChars: 600 }
+  });
+  assert.equal(read.length, 1);
+  assert.equal(read[0].truncated, true);
+  assert.ok(read[0].chars <= 600);
+});
+
+test('the research budget trims extras first, then the previous edition, and never the lead before them', () => {
+  const mk = (title, n, extra = {}) => ({ title, link: title, fetched: true, note: '', text: 'x'.repeat(n), ...extra });
+  const researched = [mk('lead', 5000), mk('prev', 5000, { isPreviousEdition: true }), mk('extra', 5000, { isExtra: true })];
+  const r = applyResearchBudget(researched, { totalChars: 12000 });
+  assert.deepEqual(r.trimmed, ['extra']);
+  assert.equal(researched[0].text.length, 5000);
+  assert.equal(researched[1].text.length, 5000);
+  assert.ok(researched[2].text.startsWith('x'.repeat(2000)));
+  assert.ok(researched[2].text.includes('[Text trimmed here'));
+  assert.ok(researched[2].note.includes('research budget'));
+  assert.equal(researched[2].trimmed, true);
+
+  const tight = [mk('lead', 5000), mk('prev', 5000, { isPreviousEdition: true })];
+  const t = applyResearchBudget(tight, { totalChars: 6000 });
+  assert.deepEqual(t.trimmed, ['prev']);
+  assert.equal(tight[0].text.length, 5000);
+});
+
+test('the research budget leaves a run under the cap untouched', () => {
+  const researched = [{ title: 'a', text: 'abc', note: '' }, { title: 'b', text: 'def', note: '' }];
+  const r = applyResearchBudget(researched, { totalChars: 600000 });
+  assert.deepEqual(r.trimmed, []);
+  assert.equal(r.total, 6);
+  assert.equal(researched[0].text, 'abc');
+  assert.equal(researched[0].trimmed, undefined);
 });

@@ -26,7 +26,7 @@ const { loadTaxonomy, scoreSnapshot } = require('./lib/score');
 const { chooseFormat, selectStories, applyResearchFallback } = require('./lib/choose');
 const { findPreviousEdition } = require('./lib/editions');
 const { loadState, saveState, coveredLinks, recordIssue, loadArticles, saveArticle } = require('./lib/state');
-const { research } = require('./lib/research');
+const { research, applyResearchBudget } = require('./lib/research');
 const model = require('./lib/model');
 const { lintDraft, lintText } = require('./lib/lint');
 const { buildAll } = require('./lib/build');
@@ -158,10 +158,11 @@ async function main() {
 
   // 4 RESEARCH (lead stories, plus the previous edition of a recurring
   // regulator publication so the draft can compare substance with substance)
-  let researched = await research(stories.lead, cfg.userAgent, { offline: !!args.offline });
+  const researchOpts = { offline: !!args.offline, limits: cfg.research };
+  let researched = await research(stories.lead, cfg.userAgent, researchOpts);
   for (const lead of stories.lead.slice(0, 2)) {
     const prev = await findPreviousEdition(lead, cfg.userAgent, { offline: !!args.offline });
-    if (prev) researched.push(...(await research([prev], cfg.userAgent, { offline: !!args.offline })));
+    if (prev) researched.push(...(await research([prev], cfg.userAgent, researchOpts)));
   }
 
   // Format fallback: no deep dive or explainer without the primary text.
@@ -173,9 +174,13 @@ async function main() {
     const wider = selectStories(format, ranked, cfg);
     const have = new Set(researched.map(r => r.link));
     const extra = wider.lead.filter(s => !have.has(s.link));
-    if (extra.length) researched = researched.concat(await research(extra, cfg.userAgent, { offline: !!args.offline }));
+    if (extra.length) researched = researched.concat((await research(extra, cfg.userAgent, researchOpts)).map(r => ({ ...r, isExtra: true })));
     stories = { lead: wider.lead, also: wider.also };
   }
+
+  // Research budget: the model reads at most cfg.research.totalChars in all.
+  const budget = applyResearchBudget(researched, cfg.research);
+  log(`research: ${budget.total} characters of source text for the model${budget.trimmed.length ? '; trimmed ' + budget.trimmed.join(', ') : ''}`);
 
   // 5 DRAFT
   let draft = await model.draftArticle(cfg, {

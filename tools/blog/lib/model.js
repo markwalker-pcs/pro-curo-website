@@ -83,16 +83,25 @@ function getClient() {
   return client;
 }
 
-async function parseCall(cfg, { system, user, schema, effort, maxTokens }) {
+// `cached` is text that is identical across several calls in one run (the
+// source texts). It goes first in the system prompt with a one-hour cache
+// marker, so the draft, each claim check and each revision pay for reading
+// the sources once; the role-specific instructions follow it uncached.
+// The cache is a prefix match, so the cached block must come first and must
+// be byte-identical between calls.
+async function parseCall(cfg, { system, user, schema, effort, maxTokens, cached }) {
   const { zodOutputFormat } = require('@anthropic-ai/sdk/helpers/zod');
   const Anthropic = require('@anthropic-ai/sdk').default || require('@anthropic-ai/sdk');
   const c = getClient();
+  const systemBlocks = cached
+    ? [{ type: 'text', text: cached, cache_control: { type: 'ephemeral', ttl: '1h' } }, { type: 'text', text: system }]
+    : system;
   let response;
   try {
     response = await c.messages.parse({
       model: cfg.model,
       max_tokens: maxTokens || 16000,
-      system,
+      system: systemBlocks,
       messages: [{ role: 'user', content: user }],
       output_config: { effort: effort || 'high', format: zodOutputFormat(schema) }
     });
@@ -109,7 +118,10 @@ async function parseCall(cfg, { system, user, schema, effort, maxTokens }) {
   if (response.stop_reason === 'max_tokens') throw new Error('Model output was cut off at max_tokens.');
   if (!response.parsed_output) throw new Error('Model output did not match the expected schema.');
   const usage = response.usage || {};
-  log(`model ${cfg.model}: in ${usage.input_tokens || 0}, out ${usage.output_tokens || 0}`);
+  const cacheNote = (usage.cache_read_input_tokens || usage.cache_creation_input_tokens)
+    ? `, cache read ${usage.cache_read_input_tokens || 0}, cache write ${usage.cache_creation_input_tokens || 0}`
+    : '';
+  log(`model ${cfg.model}: in ${usage.input_tokens || 0}, out ${usage.output_tokens || 0}${cacheNote}`);
   return response.parsed_output;
 }
 
@@ -146,35 +158,35 @@ function formatBrief(cfg, format) {
 }
 
 function sourcesBlock(researched) {
-  return researched.map((r, i) =>
+  return 'SOURCE TEXTS for this issue. The same texts are supplied to every step of the run (drafting, claim checking, revising).\n\n' + researched.map((r, i) =>
     `--- SOURCE ${i + 1}${r.isPreviousEdition ? ' (PREVIOUS EDITION, supplied for comparison with the new one)' : ''} ---\nTitle: ${r.title}\nPublisher: ${r.source}\nURL: ${r.link}\nPublished: ${r.isoDate}\nFetched text: ${r.fetched ? 'yes' : 'no (feed summary only)'}${r.attachments && r.attachments.length ? '\nAttachments read: ' + r.attachments.map(a => `${a.title} (${a.pages} of ${a.totalPages} pages)`).join('; ') : ''}\n\n${r.text}\n`).join('\n');
 }
 
 async function draftArticle(cfg, { format, issue, lead, also, researched, snapshotDate, previousTitles }) {
   if (mockMode()) return loadMock('draft');
-  const system = `You are the writer for Sample Matters, ${cfg.seriesTagline}, published on pro-curo.com by Pro-curo Software Limited. Follow this editorial guide exactly.\n\n${editorialGuide()}\n\nIssue ${issue}, collected ${snapshotDate}. ${formatBrief(cfg, format)}\n\nYou must only state facts that appear in the source texts below. Link each claim to its source URL inside the body HTML using <a href="URL">. Quote at most one sentence per source, in quotation marks and attributed. Do not invent dates, figures, names or quotations. Where the fetched text is a feed summary only, say the detail comes from the summary and keep claims to what it states. Apply the relevance test from the guide to every story and every "why this matters" bullet: each must say what a reader would check, change or watch for, drawn from the substance of the source, never from how or where the document was published. Where a source is marked as a previous edition, write the comparison the guide asks for. Write the whole output in UK English with no em dashes. The disclosure line, reviewer line and not-advice line are added by the template, so do not write them.`;
+  const system = `You are the writer for Sample Matters, ${cfg.seriesTagline}, published on pro-curo.com by Pro-curo Software Limited. Follow this editorial guide exactly.\n\n${editorialGuide()}\n\nIssue ${issue}, collected ${snapshotDate}. ${formatBrief(cfg, format)}\n\nYou must only state facts that appear in the source texts given above. Link each claim to its source URL inside the body HTML using <a href="URL">. Quote at most one sentence per source, in quotation marks and attributed. Do not invent dates, figures, names or quotations. Where the fetched text is a feed summary only, say the detail comes from the summary and keep claims to what it states. Apply the relevance test from the guide to every story and every "why this matters" bullet: each must say what a reader would check, change or watch for, drawn from the substance of the source, never from how or where the document was published. Where a source is marked as a previous edition, write the comparison the guide asks for. Write the whole output in UK English with no em dashes. The disclosure line, reviewer line and not-advice line are added by the template, so do not write them.`;
   const alsoList = also.length
     ? `\n\nOther items from the fortnight for the "also this fortnight" list (summarise in one sentence each from the summary given, do not invent detail):\n${also.map(a => `- ${a.title} (${a.source}) ${a.link}\n  ${a.description || ''}`).join('\n')}`
     : '';
   const prev = previousTitles && previousTitles.length ? `\n\nTitles of recent issues, do not reuse them: ${previousTitles.join(' | ')}` : '';
-  const user = `Write issue ${issue} as format ${format}. Lead stories, with their fetched source text:\n\n${sourcesBlock(researched)}${alsoList}${prev}`;
-  return parseCall(cfg, { system, user, schema: DraftSchema, effort: 'high', maxTokens: 24000 });
+  const user = `Write issue ${issue} as format ${format} from the source texts given above (the lead stories).${alsoList}${prev}`;
+  return parseCall(cfg, { system, user, schema: DraftSchema, effort: 'high', maxTokens: 24000, cached: sourcesBlock(researched) });
 }
 
 // ---- Claim check ---------------------------------------------------------
 async function checkClaims(cfg, draft, researched) {
   if (mockMode()) return loadMock('claims');
-  const system = `You are a fact checker. List every factual claim in the article (dates, figures, names, what a document says, what an organisation did or will do, quotations). For each, decide whether the source texts provided support it. A claim is supported only if a source text states it or it follows directly from a stated fact. General background knowledge, inferences about motives and anything not in the sources is unsupported. Be strict. Write in UK English without em dashes.`;
-  const user = `ARTICLE TITLE: ${draft.title}\n\nWHY THIS MATTERS:\n${draft.whyThisMatters.map(b => '- ' + b).join('\n')}\n\nBODY HTML:\n${draft.bodyHtml}\n\n${draft.alsoThisFortnight.length ? 'ALSO THIS FORTNIGHT:\n' + draft.alsoThisFortnight.map(a => `- ${a.title}: ${a.summary} (${a.url})`).join('\n') + '\n\n' : ''}SOURCE TEXTS:\n\n${sourcesBlock(researched)}`;
-  return parseCall(cfg, { system, user, schema: ClaimCheckSchema, effort: 'high', maxTokens: 12000 });
+  const system = `You are a fact checker. List every factual claim in the article (dates, figures, names, what a document says, what an organisation did or will do, quotations). For each, decide whether the source texts given above support it. A claim is supported only if a source text states it or it follows directly from a stated fact. General background knowledge, inferences about motives and anything not in the sources is unsupported. Be strict. Write in UK English without em dashes.`;
+  const user = `ARTICLE TITLE: ${draft.title}\n\nWHY THIS MATTERS:\n${draft.whyThisMatters.map(b => '- ' + b).join('\n')}\n\nBODY HTML:\n${draft.bodyHtml}\n\n${draft.alsoThisFortnight.length ? 'ALSO THIS FORTNIGHT:\n' + draft.alsoThisFortnight.map(a => `- ${a.title}: ${a.summary} (${a.url})`).join('\n') + '\n\n' : ''}`;
+  return parseCall(cfg, { system, user, schema: ClaimCheckSchema, effort: 'high', maxTokens: 12000, cached: sourcesBlock(researched) });
 }
 
 // ---- Revision ------------------------------------------------------------
 async function reviseDraft(cfg, draft, unsupported, lintProblems, researched) {
   if (mockMode()) return loadMock('draft');
-  const system = `You are revising an article for Sample Matters, published by Pro-curo Software Limited. Follow this editorial guide exactly.\n\n${editorialGuide()}\n\nReturn the complete revised article in the same structure. Remove or rewrite every unsupported claim so that only facts in the source texts remain. Fix every lint problem listed. Keep everything else as close to the original as possible. UK English, no em dashes.`;
-  const user = `UNSUPPORTED CLAIMS TO REMOVE OR REWRITE:\n${unsupported.map(c => `- ${c.claim} (${c.evidence})`).join('\n') || '(none)'}\n\nLINT PROBLEMS TO FIX:\n${lintProblems.map(p => '- ' + p).join('\n') || '(none)'}\n\nCURRENT ARTICLE (JSON):\n${JSON.stringify(draft, null, 2)}\n\nSOURCE TEXTS:\n\n${sourcesBlock(researched)}`;
-  return parseCall(cfg, { system, user, schema: DraftSchema, effort: 'high', maxTokens: 24000 });
+  const system = `You are revising an article for Sample Matters, published by Pro-curo Software Limited. Follow this editorial guide exactly.\n\n${editorialGuide()}\n\nReturn the complete revised article in the same structure. Remove or rewrite every unsupported claim so that only facts in the source texts given above remain. Fix every lint problem listed. Keep everything else as close to the original as possible. UK English, no em dashes.`;
+  const user = `UNSUPPORTED CLAIMS TO REMOVE OR REWRITE:\n${unsupported.map(c => `- ${c.claim} (${c.evidence})`).join('\n') || '(none)'}\n\nLINT PROBLEMS TO FIX:\n${lintProblems.map(p => '- ' + p).join('\n') || '(none)'}\n\nCURRENT ARTICLE (JSON):\n${JSON.stringify(draft, null, 2)}`;
+  return parseCall(cfg, { system, user, schema: DraftSchema, effort: 'high', maxTokens: 24000, cached: sourcesBlock(researched) });
 }
 
 module.exports = { rankItems, draftArticle, checkClaims, reviseDraft, mockMode, DraftSchema, RankingSchema, ClaimCheckSchema };
