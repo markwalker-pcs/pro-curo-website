@@ -21,7 +21,9 @@
         "https://www.gov.uk/government/news/uk-regulator-brings-new-ai-and-medtech-agenda-to-advamed",
         "https://www.bbmri-eric.eu/news-events/bbmri-eric-and-repo4eu-join-forces-to-bring-precision-drug-repurposing-closer-to-patients/"
       ],
-      "status": "proposed"
+      "status": "published",
+      "publishedAt": "2026-10-27T14:20:40.673Z",
+      "pr": 21
     }
   ]
 }
