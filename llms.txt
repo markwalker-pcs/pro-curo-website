@@ -59,4 +59,5 @@ Pro-curo is developed by Pro-curo Software Ltd, a UK-based company specialising 
 
 Sample Matters is the Pro-curo fortnightly briefing: every two weeks one reviewed article on what the sector's news means for people who look after human tissue and biological sample collections. Index: https://www.pro-curo.com/blog/ RSS: https://www.pro-curo.com/blog/feed.xml
 
+- HTA annual report, CE marked devices and biobank networks (27 October 2026): https://www.pro-curo.com/blog/2026/hta-annual-report-ce-marked-devices-biobank-networks.html
 <!-- blog:end -->
