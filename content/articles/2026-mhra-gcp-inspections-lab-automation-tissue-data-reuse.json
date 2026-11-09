@@ -1,0 +1,88 @@
+{
+  "issue": 2,
+  "format": "A",
+  "slug": "mhra-gcp-inspections-lab-automation-tissue-data-reuse",
+  "year": 2026,
+  "title": "MHRA GCP inspections, lab automation and tissue data reuse",
+  "metaDescription": "MHRA GCP inspection guidance adds a new infringement notice, plus retention-driven tube disposal, HuBMAP provenance and specimen quality questions.",
+  "whyThisMatters": [
+    "The MHRA's GCP guidance names laboratories analysing clinical trial samples among the organisations that must comply, so its trial master file and dossier expectations reach sample teams as well as sponsors.",
+    "The clinical laboratory at the Hôpital Européen Georges Pompidou (AP-HP) sets each aliquot's destruction date from the legal retention period at registration, a model to compare with how a collection tracks retention deadlines today.",
+    "HuBMAP and a specimen supplier both treat provenance from donor to sample to derived data as the record that decides whether material can be trusted and reused."
+  ],
+  "bodyHtml": "<p>This fortnight the MHRA updated its good clinical practice inspection guidance with a new infringement notice. Several other items turned on the same practical question: can a collection show where each sample came from, what happened to it and when it should be disposed of. We also note UK Biobank's gradual reopening and a planned national cancer biobank network in Nigeria.</p><h2>MHRA adds an infringement notice to its GCP inspection guidance</h2><p>The <a href=\"https://www.gov.uk/guidance/clinical-trials-for-medicines-good-clinical-practice-inspections\">MHRA's GCP inspections guidance</a> was updated on 6 November 2026 to list an infringement notice issued on 21 July 2026 to RC ALS over an unauthorised clinical trial involving Neuralzeta/RCH4, which began without regulatory authorisation or a favourable ethics committee opinion. The notice required the immediate cessation of supply of the product and of all activities associated with the trial.</p><p><strong>What it means for sample custodians:</strong> the <a href=\"https://www.gov.uk/guidance/clinical-trials-for-medicines-good-clinical-practice-inspections\">same guidance</a> lists laboratories analysing samples from clinical trials (NHS, academic and commercial) among organisations that must comply with GCP, expects a requested inspection dossier within 30 days, and says inspectors need direct access to each electronic system that makes up the trial master file. A TMF too incomplete to inspect can be graded critical, and the <a href=\"https://assets.publishing.service.gov.uk/media/669e263afc8e12ac3edb00de/Celixir_infringement_notice.pdf\">2024 Celixir notice</a> cited essential documents missing from an eTMF managed by a contract research organisation. Teams holding trial samples may want to check they could give inspectors access to every system holding trial records.</p><h2>Retention dates set at registration in a hospital laboratory</h2><p>A <a href=\"https://www.biobanking.com/how-mbiolims-orchestrates-lab-automation-at-hegp/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=how-mbiolims-orchestrates-lab-automation-at-hegp\">sponsored trade press article written by the software supplier</a> describes how the clinical laboratory at the Hôpital Européen Georges Pompidou (AP-HP) links its laboratory information system, aliquoting and storage robots and a sample management system through file exchanges, so tubes are registered, retrieved and destroyed without manual re-entry. Each aliquot's retention deadline is calculated from the legal retention period at registration, and a weekly job identifies expired tubes, logs a destruction record and sends the barcodes to the storage robot for retrieval and disposal by a technician.</p><p><strong>What it means for sample custodians:</strong> several design choices in the <a href=\"https://www.biobanking.com/how-mbiolims-orchestrates-lab-automation-at-hegp/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=how-mbiolims-orchestrates-lab-automation-at-hegp\">article</a> apply whatever the system: every exchange leaves a time-stamped file, a file that fails to process raises an alert and is moved to a dedicated folder rather than dropped, and lineage between primary tube and aliquots is created on registration. Collections that track retention deadlines by hand may want to compare how a missed deadline or a failed import would be detected.</p><h2>HuBMAP sets out how it keeps tissue data traceable</h2><p>A paper published on 2 November 2026 in Nature Communications, as <a href=\"https://www.biobanking.com/nih-hubmap-data-portal-connects-over-9300-datasets-from-human-tissue-samples/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=nih-hubmap-data-portal-connects-over-9300-datasets-from-human-tissue-samples\">reported by Biobanking.com</a>, describes the NIH HuBMAP Data Portal, which as of August 2026 held 9,316 public datasets from 5,142 registered tissue samples across 501 donors, 26 data types and 29 organ classes. The portal links donors, samples, assays and datasets through a provenance model, standardised metadata schemas and recorded pipeline versions.</p><p><strong>What it means for sample custodians:</strong> the <a href=\"https://www.biobanking.com/nih-hubmap-data-portal-connects-over-9300-datasets-from-human-tissue-samples/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=nih-hubmap-data-portal-connects-over-9300-datasets-from-human-tissue-samples\">report</a> stresses that the sample count includes blocks, sections, organs and cell suspensions and is not an inventory of physical biospecimens, so counting conventions matter when collections are compared. One specimen can generate many datasets, which makes the parent and derivative record the thing that carries reuse value. The authors note that donor diversity is limited and automated cell-type annotation covers only heart, lung and kidney. We have read the trade press report, not the paper.</p><h2>Questions to put to a specimen supplier</h2><p>An <a href=\"https://www.biobanking.com/beyond-the-freezer-why-biospecimen-quality-is-critical-to-the-future-of-precision-oncology/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=beyond-the-freezer-why-biospecimen-quality-is-critical-to-the-future-of-precision-oncology\">opinion piece by the founder of a CAP-accredited oncology specimen provider</a> argues that fixation delays, inconsistent processing times and temperature fluctuations can alter specimens in ways that are not immediately apparent, and that clinical annotation matters as much as preservation. It also warns that the same specimen, or several from one donor, can circulate through different suppliers and end up as duplicates in a research cohort.</p><p><strong>What it means for sample custodians:</strong> the <a href=\"https://www.biobanking.com/beyond-the-freezer-why-biospecimen-quality-is-critical-to-the-future-of-precision-oncology/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=beyond-the-freezer-why-biospecimen-quality-is-critical-to-the-future-of-precision-oncology\">piece</a> lists questions on integrity, annotation, traceability, consent and quality systems, and notes that CAP biorepository accreditation is not required. Teams buying in material may want to check whether suppliers document chain of custody and how they handle potential duplicate specimens. The author has a commercial interest in the topic.</p><h2>Nigeria plans an eight-centre cancer biobank network</h2><p>Nigeria's National Institute for Cancer Research and Treatment is <a href=\"https://www.biobanking.com/nigeria-advances-plans-for-eight-center-national-cancer-biobank-network/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=nigeria-advances-plans-for-eight-center-national-cancer-biobank-network\">working with BioVana Research</a> on a National Cancer Biobank Network linking eight centres across six geopolitical zones, discussed at a workshop in Abuja on 22 October 2026. It named governance, quality standards, ethical safeguards, data management and sustainable financing as five priority areas.</p><blockquote>\"If Nigeria is to fully benefit from precision oncology, we must generate our own evidence, from Nigerian patients, for Nigerian patients.\" Professor Usman Malami Aliyu, NICRAT Director General</blockquote><p><strong>What it means for sample custodians:</strong> the <a href=\"https://www.biobanking.com/nigeria-advances-plans-for-eight-center-national-cancer-biobank-network/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=nigeria-advances-plans-for-eight-center-national-cancer-biobank-network\">trade press report</a> points to ISO 20387 and the ISBER Best Practices as references, and says the next milestones are shared procedures, quality controls and access mechanisms. Collections that may collaborate with the network can watch for those documents.</p><h2>UK Biobank begins to reopen</h2><p>According to a <a href=\"https://www.the-scientist.com/uk-biobank-to-restore-access-months-after-massive-data-leak-75197\">feed summary from The Scientist</a>, UK Biobank has been closed to researchers for much of 2026 following what the headline describes as a massive data leak, and is now gradually reopening. Only the summary was available to us, so we have no detail on the cause or the access conditions.</p><p><strong>What it means for sample custodians:</strong> anyone releasing donor-linked data can watch for a published account of how the leak occurred and which access controls change as <a href=\"https://www.the-scientist.com/uk-biobank-to-restore-access-months-after-massive-data-leak-75197\">access is restored</a>.</p>",
+  "alsoThisFortnight": [],
+  "sources": [
+    {
+      "title": "Clinical trials for medicines: Good clinical practice inspections",
+      "publisher": "MHRA",
+      "url": "https://www.gov.uk/guidance/clinical-trials-for-medicines-good-clinical-practice-inspections",
+      "type": "regulator"
+    },
+    {
+      "title": "Celixir Infringement Notice",
+      "publisher": "MHRA",
+      "url": "https://assets.publishing.service.gov.uk/media/669e263afc8e12ac3edb00de/Celixir_infringement_notice.pdf",
+      "type": "primary-document"
+    },
+    {
+      "title": "How MBioLIMS Orchestrates Lab Automation at HEGP",
+      "publisher": "Biobanking.com",
+      "url": "https://www.biobanking.com/how-mbiolims-orchestrates-lab-automation-at-hegp/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=how-mbiolims-orchestrates-lab-automation-at-hegp",
+      "type": "trade-press"
+    },
+    {
+      "title": "NIH HuBMAP Data Portal Connects Over 9,300 Datasets From Human Tissue Samples",
+      "publisher": "Biobanking.com",
+      "url": "https://www.biobanking.com/nih-hubmap-data-portal-connects-over-9300-datasets-from-human-tissue-samples/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=nih-hubmap-data-portal-connects-over-9300-datasets-from-human-tissue-samples",
+      "type": "trade-press"
+    },
+    {
+      "title": "Beyond the Freezer: Why Biospecimen Quality Is Critical to the Future of Precision Oncology",
+      "publisher": "Biobanking.com",
+      "url": "https://www.biobanking.com/beyond-the-freezer-why-biospecimen-quality-is-critical-to-the-future-of-precision-oncology/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=beyond-the-freezer-why-biospecimen-quality-is-critical-to-the-future-of-precision-oncology",
+      "type": "trade-press"
+    },
+    {
+      "title": "Nigeria Advances Plans for Eight-Center National Cancer Biobank Network",
+      "publisher": "Biobanking.com",
+      "url": "https://www.biobanking.com/nigeria-advances-plans-for-eight-center-national-cancer-biobank-network/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=nigeria-advances-plans-for-eight-center-national-cancer-biobank-network",
+      "type": "trade-press"
+    },
+    {
+      "title": "UK Biobank to Restore Access Months After Massive Data Leak",
+      "publisher": "The Scientist",
+      "url": "https://www.the-scientist.com/uk-biobank-to-restore-access-months-after-massive-data-leak-75197",
+      "type": "trade-press"
+    }
+  ],
+  "tags": [
+    "inspection",
+    "biobanking",
+    "storage",
+    "data-protection",
+    "traceability"
+  ],
+  "faq": [],
+  "social": {
+    "linkedin": "Laboratories analysing samples from clinical trials sit inside the MHRA's GCP inspection programme, and the regulator's inspection guidance changed again this fortnight.\n\nIssue 2 of Sample Matters covers:\n\n1. A new infringement notice on the MHRA GCP page, issued on 21 July 2026 over a clinical trial that began without regulatory authorisation or a favourable ethics opinion. The guidance expects direct access to every electronic system that makes up the trial master file.\n\n2. A hospital laboratory that calculates each aliquot's destruction date from the legal retention period at registration, with a weekly job flagging expired tubes for disposal.\n\n3. The NIH HuBMAP portal, which links 9,316 datasets back to 5,142 registered tissue samples through a provenance model, counting blocks and sections as samples.\n\nWe also cover questions to put to specimen suppliers, Nigeria's planned eight-centre cancer biobank network and UK Biobank's gradual reopening.\n\nHow does your team track sample retention deadlines today: automatically from registration, or by hand?",
+    "linkedinWeekTwo": "One detail from a hospital laboratory's automation project: when a data file fails to process, an alert is raised and the file is moved to a dedicated folder rather than silently dropped. A useful thing to check is what happens to a failed import in your own sample system.",
+    "facebook": "Sample Matters issue 2 is out. We look at the MHRA's latest GCP infringement notice, a hospital laboratory that sets each tube's destruction date when it is registered, how the NIH HuBMAP portal keeps tissue data traceable, questions to ask specimen suppliers, a planned cancer biobank network in Nigeria and UK Biobank's gradual reopening.",
+    "hashtags": [
+      "#Biobanking",
+      "#SampleManagement",
+      "#LabManagement",
+      "#ClinicalTrials",
+      "#GCP"
+    ],
+    "emailSubject": "MHRA GCP notice, retention dates and tissue data",
+    "emailPreheader": "A new MHRA infringement notice, automated tube retention and four more stories for sample custodians.",
+    "emailIntro": "The MHRA has added a new infringement notice to its GCP inspection guidance, which names laboratories analysing trial samples among the organisations it covers. This issue also looks at a hospital laboratory that sets destruction dates at registration, how HuBMAP keeps tissue data traceable, and UK Biobank's gradual reopening."
+  },
+  "datePublished": "2026-11-09T15:02:16.999Z",
+  "dateModified": "2026-11-09T15:02:16.999Z",
+  "snapshot": "2026-11-09",
+  "quietFortnight": false,
+  "status": "proposed",
+  "imageBytes": 134207
+}
