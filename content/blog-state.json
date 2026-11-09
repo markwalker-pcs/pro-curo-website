@@ -44,7 +44,9 @@
         "https://www.gov.uk/guidance/notify-mhra-about-a-clinical-investigation-for-a-medical-device",
         "https://www.biobanking.com/cleanroom-manufactured-tri-coded-sample-storage-tubes-azenta/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=cleanroom-manufactured-tri-coded-sample-storage-tubes-azenta"
       ],
-      "status": "proposed"
+      "status": "published",
+      "publishedAt": "2026-11-09T16:27:21.937Z",
+      "pr": 22
     }
   ]
 }

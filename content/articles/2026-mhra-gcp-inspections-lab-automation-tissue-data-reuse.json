@@ -83,6 +83,8 @@
   "dateModified": "2026-11-09T15:02:16.999Z",
   "snapshot": "2026-11-09",
   "quietFortnight": false,
-  "status": "proposed",
-  "imageBytes": 134207
+  "status": "published",
+  "imageBytes": 134207,
+  "publishedAt": "2026-11-09T16:27:21.937Z",
+  "pr": 22
 }
