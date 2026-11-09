@@ -5,13 +5,28 @@
     <link>https://www.pro-curo.com/blog/</link>
     <description>Sample Matters, the Pro-curo fortnightly briefing, from Pro-curo Software Limited.</description>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 27 Oct 2026 09:48:55 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 09 Nov 2026 15:02:16 GMT</lastBuildDate>
     <atom:link href="https://www.pro-curo.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://www.pro-curo.com/img/logo-icon.jpg</url>
       <title>Sample Matters</title>
       <link>https://www.pro-curo.com/blog/</link>
     </image>
+    <item>
+      <title>MHRA GCP inspections, lab automation and tissue data reuse</title>
+      <link>https://www.pro-curo.com/blog/2026/mhra-gcp-inspections-lab-automation-tissue-data-reuse.html</link>
+      <guid isPermaLink="true">https://www.pro-curo.com/blog/2026/mhra-gcp-inspections-lab-automation-tissue-data-reuse.html</guid>
+      <pubDate>Mon, 09 Nov 2026 15:02:16 GMT</pubDate>
+      <description>The MHRA&apos;s GCP guidance names laboratories analysing clinical trial samples among the organisations that must comply, so its trial master file and dossier expectations reach sample teams as well as sponsors. The clinical laboratory at the Hôpital Européen Georges Pompidou (AP-HP) sets each aliquot&apos;s destruction date from the legal retention period at registration, a model to compare with how a collection tracks retention deadlines today. HuBMAP and a specimen supplier both treat provenance from donor to sample to derived data as the record that decides whether material can be trusted and reused.</description>
+      <category>Briefing</category>
+      <category>inspection</category>
+      <category>biobanking</category>
+      <category>storage</category>
+      <category>data-protection</category>
+      <category>traceability</category>
+      <enclosure url="https://www.pro-curo.com/blog/2026/img/mhra-gcp-inspections-lab-automation-tissue-data-reuse.png" length="134207" type="image/png"/>
+      <media:content url="https://www.pro-curo.com/blog/2026/img/mhra-gcp-inspections-lab-automation-tissue-data-reuse.png" medium="image" type="image/png" width="1200" height="627"/>
+    </item>
     <item>
       <title>HTA annual report, CE marked devices and biobank networks</title>
       <link>https://www.pro-curo.com/blog/2026/hta-annual-report-ce-marked-devices-biobank-networks.html</link>

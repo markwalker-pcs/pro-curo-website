@@ -1,5 +1,5 @@
 {
-  "issue": 1,
+  "issue": 2,
   "lastFormat": "A",
   "issues": [
     {
@@ -24,6 +24,27 @@
       "status": "published",
       "publishedAt": "2026-10-27T14:20:40.673Z",
       "pr": 21
+    },
+    {
+      "issue": 2,
+      "format": "A",
+      "slug": "mhra-gcp-inspections-lab-automation-tissue-data-reuse",
+      "year": 2026,
+      "title": "MHRA GCP inspections, lab automation and tissue data reuse",
+      "date": "2026-11-09",
+      "snapshot": "2026-11-09",
+      "coveredLinks": [
+        "https://www.the-scientist.com/uk-biobank-to-restore-access-months-after-massive-data-leak-75197",
+        "https://www.biobanking.com/how-mbiolims-orchestrates-lab-automation-at-hegp/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=how-mbiolims-orchestrates-lab-automation-at-hegp",
+        "https://www.gov.uk/guidance/clinical-trials-for-medicines-good-clinical-practice-inspections",
+        "https://www.biobanking.com/nih-hubmap-data-portal-connects-over-9300-datasets-from-human-tissue-samples/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=nih-hubmap-data-portal-connects-over-9300-datasets-from-human-tissue-samples",
+        "https://www.biobanking.com/beyond-the-freezer-why-biospecimen-quality-is-critical-to-the-future-of-precision-oncology/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=beyond-the-freezer-why-biospecimen-quality-is-critical-to-the-future-of-precision-oncology",
+        "https://www.biobanking.com/nigeria-advances-plans-for-eight-center-national-cancer-biobank-network/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=nigeria-advances-plans-for-eight-center-national-cancer-biobank-network",
+        "https://labnews.co.uk/future-ready-refrigeration-in-the-age-of-modern-laboratories/",
+        "https://www.gov.uk/guidance/notify-mhra-about-a-clinical-investigation-for-a-medical-device",
+        "https://www.biobanking.com/cleanroom-manufactured-tri-coded-sample-storage-tubes-azenta/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=cleanroom-manufactured-tri-coded-sample-storage-tubes-azenta"
+      ],
+      "status": "proposed"
     }
   ]
 }
