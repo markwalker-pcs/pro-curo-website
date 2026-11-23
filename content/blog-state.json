@@ -67,7 +67,9 @@
         "https://www.gov.uk/government/news/new-mhra-service-to-support-medicines-innovation-and-strengthen-uk-manufacturing",
         "https://www.bbmri-eric.eu/news-events/bbmri-eric-contributes-to-european-parliament-event-eosc-and-the-fifth-freedom-enabling-knowledge-circulation-across-europe/"
       ],
-      "status": "proposed"
+      "status": "published",
+      "publishedAt": "2026-11-23T18:10:56.690Z",
+      "pr": 24
     }
   ]
 }
