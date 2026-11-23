@@ -1,0 +1,643 @@
+{
+  "date": "2026-11-23",
+  "collectedAt": "2026-11-23T17:15:37.689Z",
+  "windowDays": 14,
+  "since": "2026-11-09T17:15:37.689Z",
+  "via": "api",
+  "totalInFeed": 137,
+  "count": 70,
+  "sourceErrors": [],
+  "sourceWarnings": [],
+  "items": [
+    {
+      "title": "Decision: Orphan registered medicinal products",
+      "link": "https://www.gov.uk/government/publications/orphan-registered-medicinal-products",
+      "description": "A list of authorised orphan medicinal products registered by the UK licensing authority.",
+      "isoDate": "2026-11-23T17:02:52.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "Regulation: Improving Patient Information",
+      "link": "https://www.gov.uk/government/publications/improving-patient-information",
+      "description": "MHRA's Improving Patient Information project aims to modernise how medicines product information is delivered, making it more accessible, trusted, and future-ready.",
+      "isoDate": "2026-11-23T16:59:06.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "Official Statistics: Respiratory syncytial virus (RSV) maternal vaccination coverage in England: July 2026",
+      "link": "https://www.gov.uk/government/statistics/announcements/respiratory-syncytial-virus-rsv-maternal-vaccination-coverage-in-england-july-2026",
+      "description": "Insights on the vaccine uptake and commentary on the RSV (respiratory syncytial virus) vaccination programme for pregnant women.",
+      "isoDate": "2026-11-23T16:47:58.000Z",
+      "source": "UK Health Security Agency",
+      "sourceId": "ukhsa",
+      "category": "regulator"
+    },
+    {
+      "title": "Official Statistics: Respiratory syncytial virus (RSV) older adults vaccination coverage in England: October 2026",
+      "link": "https://www.gov.uk/government/statistics/announcements/respiratory-syncytial-virus-rsv-older-adults-vaccination-coverage-in-england-october-2026",
+      "description": "Insights on the vaccine uptake and commentary on the RSV (respiratory syncytial virus) vaccination programme for older adults.",
+      "isoDate": "2026-11-23T16:47:27.000Z",
+      "source": "UK Health Security Agency",
+      "sourceId": "ukhsa",
+      "category": "regulator"
+    },
+    {
+      "title": "Accredited official statistics: Gram-negative, MRSA, MSSA bacteraemia and C. difficile infections: monthly data, October 2025 to October 2026",
+      "link": "https://www.gov.uk/government/statistics/announcements/monthly-mandatory-surveillance-of-mrsa-mssa-gram-negative-bacteraemia-and-c-difficile-infections-october-2025-to-october-2026",
+      "description": "Mandatory surveillance of healthcare-associated infections (HCAI), which include methicillin-resistant Staphylococcus aureus (MRSA), Methicillin-sensitive Staphylococcus aureus (MSSA), Gram-negative bacteraemia such as Escherichia coli (E. coli), Klebsiella and Pseudomonas…",
+      "isoDate": "2026-11-23T16:47:04.000Z",
+      "source": "UK Health Security Agency",
+      "sourceId": "ukhsa",
+      "category": "regulator"
+    },
+    {
+      "title": "AI in Mental Health Airlock to support safe innovation",
+      "link": "https://www.gov.uk/government/news/ai-in-mental-health-airlock-to-support-safe-innovation",
+      "description": "A new regulatory sandbox will explore how safety approaches in innovative digital mental health technologies can be effectively evaluated and regulated.",
+      "isoDate": "2026-11-23T16:46:00.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "Guidance: Apply for the AI in Mental Health Airlock",
+      "link": "https://www.gov.uk/government/publications/apply-for-the-ai-in-mental-health-airlock",
+      "description": "The call for applications for the AI in Mental Health Airlock is now open.",
+      "isoDate": "2026-11-23T16:40:36.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "Decision: Medical devices given exceptional use authorisations",
+      "link": "https://www.gov.uk/government/publications/medical-devices-given-exceptional-use-authorisations",
+      "description": "List of manufacturers and their medical devices granted an exemption by MHRA. The list also includes manufacturers whose exemption expired or was cancelled.",
+      "isoDate": "2026-11-23T15:30:36.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "Official Statistics: National norovirus and rotavirus report, week 48 report: data to week 47 (data up to 22 November 2026)",
+      "link": "https://www.gov.uk/government/statistics/announcements/national-norovirus-and-rotavirus-report-week-48-report-data-to-week-47-data-up-to-22-november-2026",
+      "description": "Summary of norovirus and rotavirus laboratory surveillance and enteric virus outbreaks in England during the 2026 to 2027 season.",
+      "isoDate": "2026-11-23T12:57:05.000Z",
+      "source": "UK Health Security Agency",
+      "sourceId": "ukhsa",
+      "category": "regulator"
+    },
+    {
+      "title": "Guidance: GLP-1 medicines for weight loss and diabetes: what you need to know",
+      "link": "https://www.gov.uk/government/publications/glp-1-medicines-for-weight-loss-and-diabetes-what-you-need-to-know",
+      "description": "Guidance on the safe and effective use of GLP-1 medicines for weight loss and diabetes.",
+      "isoDate": "2026-11-23T11:54:03.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "Clinical trials for medicines: modifying a clinical trial approval",
+      "link": "https://www.gov.uk/guidance/clinical-trials-for-medicines-modifying-a-clinical-trial-approval",
+      "description": "Guidance on the various types of modifications that can be made to a clinical trial approval.",
+      "isoDate": "2026-11-23T11:09:45.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "A step towards modelling amyotrophic lateral sclerosis in primates",
+      "link": "https://elifesciences.org/articles/113568",
+      "description": "A new primate model offers a promising first step towards reproducing the spread of ALS pathology across synapses, although important differences from the stereotyped patterns observed in human disease remain to be addressed.",
+      "isoDate": "2026-11-23T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Pre-rRNA represses gene transcription in the XY body of male germ cells",
+      "link": "https://elifesciences.org/articles/112193",
+      "description": "Nucleolus is disassembled when the nuclear envelope breaks down during mitosis prophase. However, the dynamics of nucleolus in meiotic prophase remain unclear. Here, by tracking nucleolar components of spermatocytes in mice, we show that the nucleolus is fragmented even before…",
+      "isoDate": "2026-11-23T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "SATAY-based chemogenomic screening uncovers antifungal resistance mechanisms and key determinants of ATI-2307 and chitosan sensitivity",
+      "link": "https://elifesciences.org/articles/105333",
+      "description": "Multidrug-resistant fungal pathogens are a serious threat to public health and global food security. Mitigation requires the discovery of antifungal compounds with novel modes of action along with a comprehensive understanding of the molecular mechanisms governing antifungal…",
+      "isoDate": "2026-11-23T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "ATP8B1–TMEM30B flippase activity maintains stereocilia lipid asymmetry required for hearing",
+      "link": "https://elifesciences.org/articles/110466",
+      "description": "Sensory hair cells convert sound-induced vibrations into electrical signals through a process called mechano-electrical transduction (MET). While the protein components of the MET complex are well studied, increasing evidence indicates that MET channel properties are…",
+      "isoDate": "2026-11-23T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Building the UK’s life science ecosystem",
+      "link": "https://labnews.co.uk/building-the-uks-life-science-ecosystem-2/",
+      "description": "The UK is rich in scientific discovery, but turning breakthroughs into scalable companies remains a challenge. Katy Linkens speaks to Professor Kay Davies about capital, talent, innovation ecosystems, and why community may be just as important as investment. There is no doubt…",
+      "isoDate": "2026-11-22T23:52:43.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "Vibration, heat and power plays: Lab design determines scientific success",
+      "link": "https://labnews.co.uk/vibration-heat-and-power-plays-lab-design-determines-scientific-success/",
+      "description": "The very best equipment can be compromised from the outset if you fail to take proper care when fitting out your laboratory, cautions Brian J Ford. Conference chatter is always the same: we are guarded about progress (nobody wants to give away secrets before they’re officially…",
+      "isoDate": "2026-11-22T13:59:09.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "Innovate UK £1.54m award for automated radiopharmaceutical production project",
+      "link": "https://labnews.co.uk/innovate-uk-1-54m-award-for-automated-radiopharmaceutical-production-project/",
+      "description": "Medicines Discovery Catapult (MDC) and Astral Systems have secured £1.54m from Innovate UK to develop digital and automated laboratory processes for producing radiopharmaceuticals, with the aim of improving the speed, reliability and scalability of these increasingly important…",
+      "isoDate": "2026-11-22T13:05:43.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "New Gene Editing System Tracks When CRISPR Goes Rogue",
+      "link": "https://www.the-scientist.com/new-gene-editing-system-tracks-when-crispr-goes-rogue-75288",
+      "description": "CRISPR gene editing can make accidental cuts to the wrong genes. Superb-seq reveals these edits and their gene expression consequences, helping make CRISPR safer.",
+      "isoDate": "2026-11-21T05:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "FIP Consortium Secures $1.5 Million for Global Cat Biobank and Diagnostic Research",
+      "link": "https://www.biobanking.com/fip-consortium-secures-1-5-million-for-global-cat-biobank-and-diagnostic-research/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=fip-consortium-secures-1-5-million-for-global-cat-biobank-and-diagnostic-research",
+      "description": "New research funding: Morris Animal Foundation and EveryCat Health Foundation have awarded approximately $1.5 million to an international research consortium investigating feline infectious peritonitis (FIP). Global biobank initiative: Researchers plan to establish an…",
+      "isoDate": "2026-11-20T11:10:17.000Z",
+      "source": "Biobanking.com",
+      "sourceId": "biobanking",
+      "category": "biobanking"
+    },
+    {
+      "title": "Ramping-up hippocampal ripples and their neocortical coupling support human visual short-term memory",
+      "link": "https://elifesciences.org/articles/111304",
+      "description": "Emerging evidence suggests that the hippocampus contributes to visual short-term memory (VSTM). However, the neural mechanisms through which hippocampal activity supports the maintenance of VSTM representations remain largely unknown. Here, using intracranial EEG recordings from…",
+      "isoDate": "2026-11-20T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Calibrated analysis framework for nanopore direct RNA sequencing uncovers cell-specific m⁶A proportions at conserved sites",
+      "link": "https://elifesciences.org/articles/110672",
+      "description": "Nanopore direct RNA sequencing (DRS) coupled with Dorado modification-aware base calling enables mapping of epitranscriptomic modifications including N6-methyladenosine (m6A) at the level of individual RNAs. However, the sensitivity, specificity, and reproducibility of this…",
+      "isoDate": "2026-11-20T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Blood-derived dietary protein promotes sleep in the mosquito Aedes aegypti",
+      "link": "https://elifesciences.org/articles/110245",
+      "description": "Sleep is a ubiquitous, yet highly variable, behavior across species. The duration and timing of sleep are influenced by ecological demands and dietary context. In the mosquito Aedes aegypti, a blood-feeding insect with specialized nutritional requirements, the relationship…",
+      "isoDate": "2026-11-20T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Research: Outbreaks under monitoring in 2026",
+      "link": "https://www.gov.uk/government/publications/outbreaks-under-monitoring-in-2026",
+      "description": "Latest information on global disease events under monitoring.",
+      "isoDate": "2026-11-19T15:30:02.000Z",
+      "source": "UK Health Security Agency",
+      "sourceId": "ukhsa",
+      "category": "regulator"
+    },
+    {
+      "title": "Guidance: International Recognition Procedure",
+      "link": "https://www.gov.uk/government/publications/international-recognition-procedure",
+      "description": "How to use the procedure for medicines licensing applications.",
+      "isoDate": "2026-11-19T15:00:42.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "Latest weekly winter virus surveillance data",
+      "link": "https://www.gov.uk/government/news/latest-ukhsa-weekly-winter-virus-surveillance-data",
+      "description": "Report monitoring respiratory viruses for the 2026/27 season.",
+      "isoDate": "2026-11-19T14:00:05.000Z",
+      "source": "UK Health Security Agency",
+      "sourceId": "ukhsa",
+      "category": "regulator"
+    },
+    {
+      "title": "Research: GP out-of-hours syndromic surveillance: weekly bulletins for 2026",
+      "link": "https://www.gov.uk/government/publications/gp-out-of-hours-syndromic-surveillance-weekly-bulletins-for-2026",
+      "description": "The number of people contacting their GPs outside of surgery hours under the syndromic surveillance system.",
+      "isoDate": "2026-11-19T14:00:04.000Z",
+      "source": "UK Health Security Agency",
+      "sourceId": "ukhsa",
+      "category": "regulator"
+    },
+    {
+      "title": "Research: National ambulance syndromic surveillance: weekly bulletins 2026",
+      "link": "https://www.gov.uk/government/publications/national-ambulance-syndromic-surveillance-weekly-bulletins-2026",
+      "description": "The number of people calling ambulances each day, with results published every week under the syndromic surveillance system.",
+      "isoDate": "2026-11-19T14:00:04.000Z",
+      "source": "UK Health Security Agency",
+      "sourceId": "ukhsa",
+      "category": "regulator"
+    },
+    {
+      "title": "Research: Remote health advice: weekly bulletins for 2026",
+      "link": "https://www.gov.uk/government/publications/remote-health-advice-weekly-bulletins-for-2026",
+      "description": "Summary of the number of people calling NHS 111 for health advice within England on a weekly basis under the syndromic surveillance system.",
+      "isoDate": "2026-11-19T14:00:04.000Z",
+      "source": "UK Health Security Agency",
+      "sourceId": "ukhsa",
+      "category": "regulator"
+    },
+    {
+      "title": "Research: GP in-hours: weekly bulletins for 2026",
+      "link": "https://www.gov.uk/government/publications/gp-in-hours-weekly-bulletins-for-2026",
+      "description": "Monitors the number of people who visit their GP during surgery hours under the syndromic surveillance system.",
+      "isoDate": "2026-11-19T14:00:04.000Z",
+      "source": "UK Health Security Agency",
+      "sourceId": "ukhsa",
+      "category": "regulator"
+    },
+    {
+      "title": "Research: Emergency department: weekly bulletins for 2026",
+      "link": "https://www.gov.uk/government/publications/emergency-department-weekly-bulletins-for-2026",
+      "description": "The number of people going to emergency departments each day, with results published every week under the syndromic surveillance system.",
+      "isoDate": "2026-11-19T14:00:04.000Z",
+      "source": "UK Health Security Agency",
+      "sourceId": "ukhsa",
+      "category": "regulator"
+    },
+    {
+      "title": "NHS Pension Scheme: proposed changes for April 2027",
+      "link": "https://www.gov.uk/government/consultations/nhs-pension-scheme-proposed-changes-for-april-2027",
+      "description": "Seeks views on proposed technical changes to the NHS Pension Scheme regulations from April 2027.",
+      "isoDate": "2026-11-19T14:00:00.000Z",
+      "source": "Department of Health and Social Care",
+      "sourceId": "dhsc",
+      "category": "regulator"
+    },
+    {
+      "title": "MHRA appoints senior NHS executive as new Chief Finance and Commercial Officer",
+      "link": "https://www.gov.uk/government/news/mhra-appoints-senior-nhs-executive-as-new-chief-finance-and-commercial-officer",
+      "description": "The Medicines and Healthcare products Regulatory Agency (MHRA) has appointed a new Chief Financial and Commercial Officer to drive forward the financial aspects of its new five-year strategy.",
+      "isoDate": "2026-11-19T11:45:06.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "Guidance: The Innovative Devices Access Pathway (IDAP)",
+      "link": "https://www.gov.uk/government/publications/the-innovative-devices-access-pathway-idap",
+      "description": "The Innovative Devices Access Pathway (IDAP) pilot is designed to accelerate the development of innovative medical devices that meet an unmet clinical need in the NHS and support their integration into the UK market.",
+      "isoDate": "2026-11-19T09:23:27.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "Consultation on the regulation of Gene therapy medicinal products",
+      "link": "https://www.gov.uk/government/consultations/consultation-on-the-regulation-of-gene-therapy-medicinal-products",
+      "description": "We are seeking views on proposed updates to the definition of Gene therapy medicinal products to better reflect advances in science and manufacturing.",
+      "isoDate": "2026-11-19T09:00:04.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "Government backs modernisation of gene therapy definitions",
+      "link": "https://www.gov.uk/government/news/government-backs-modernisation-of-gene-therapy-definitions",
+      "description": "Proposed changes will provide clearer regulatory pathway for certain synthetic gene therapies, supporting life sciences innovation while maintaining safety.",
+      "isoDate": "2026-11-19T09:00:04.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "Research: Boys' and men's engagement with health programmes",
+      "link": "https://www.gov.uk/government/publications/boys-and-mens-engagement-with-health-programmes",
+      "description": "A rapid mapping review of available evidence on barriers and opportunities to boys' and men's engagement in health programmes.",
+      "isoDate": "2026-11-19T09:00:04.000Z",
+      "source": "Department of Health and Social Care",
+      "sourceId": "dhsc",
+      "category": "regulator"
+    },
+    {
+      "title": "Explainable machine learning-assisted exploration of chromatin dynamics reveals chromosome-specific response to serum starvation",
+      "link": "https://elifesciences.org/articles/108797",
+      "description": "Chromatin is dynamic at all length scales, influencing chromatin-based processes, such as gene expression. Even large-scale reorganization of whole chromosome territories has been reported upon specific signals, but the lack of suitable methods has prevented analysis of the…",
+      "isoDate": "2026-11-19T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Decreased astrocytic CCL5 by Mir324 ameliorates ischemic stroke injury via the CCR5/ERK/CREB pathway",
+      "link": "https://elifesciences.org/articles/101719",
+      "description": "Following ischemic stroke, Ccl5 mRNA expression increased, while Mir324 expression decreased in the peri-infarct cortex of middle cerebral artery occlusion (MCAO) mice. However, the roles of CCL5 and Mir324 in stroke remained largely unclear. Here, we show that inhibiting CCL5…",
+      "isoDate": "2026-11-19T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Rethinking laboratory sustainability",
+      "link": "https://elifesciences.org/articles/113403",
+      "description": "Green lab initiatives like My Green Lab and LEAF (Laboratory Efficiency Assessment Framework), are paving the way towards sustainable research by promoting resource efficiency, energy conservation, and waste reduction through behavioral changes. However, these initiatives focus…",
+      "isoDate": "2026-11-19T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Lab Talk News in Brief: new builds, contracts, acquisitions and grants",
+      "link": "https://labnews.co.uk/lab-talk-news-in-brief-new-builds-contracts-acquisitions-and-grants/",
+      "description": "Our sister site Laboratory Talk presents its latest News in Brief column, curating some of the latest commercial and research developments in the UK and abroad impacting the lab sector… Cranfield University has opened a new laboratory facility focused on energy transition and…",
+      "isoDate": "2026-11-18T13:00:13.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "Guidance: COVID-19 test validation approved products",
+      "link": "https://www.gov.uk/government/publications/covid-19-test-validation-approved-products",
+      "description": "Find out which COVID-19 test products have been approved.",
+      "isoDate": "2026-11-18T11:59:14.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "New MHRA service to support medicines innovation and strengthen UK manufacturing",
+      "link": "https://www.gov.uk/government/news/new-mhra-service-to-support-medicines-innovation-and-strengthen-uk-manufacturing",
+      "description": "AdvanceGxP will give developers earlier practical support for advanced manufacturing technologies, accelerating patient access to innovative medicines while strengthening UK manufacturing.",
+      "isoDate": "2026-11-18T11:47:12.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "Guidance: London Region I MHRA Regulatory Sandbox: call for expressions of interest",
+      "link": "https://www.gov.uk/government/publications/london-region-i-mhra-regulatory-sandbox-call-for-expressions-of-interest",
+      "description": "Expressions of interest are invited from AI-enabled medical device manufacturers and NHS provider organisations interested in participating in the London Region I MHRA Regulatory Sandbox.",
+      "isoDate": "2026-11-18T10:00:04.000Z",
+      "source": "MHRA",
+      "sourceId": "mhra",
+      "category": "regulator"
+    },
+    {
+      "title": "Official Statistics: UK Clinical Research Delivery key performance indicators: data to October 2026",
+      "link": "https://www.gov.uk/government/statistics/uk-clinical-research-delivery-key-performance-indicators-data-to-october-2026",
+      "description": "Report bringing together data on the delivery of globally competitive clinical research through the UK Clinical Research Delivery programme.",
+      "isoDate": "2026-11-18T09:30:00.000Z",
+      "source": "Department of Health and Social Care",
+      "sourceId": "dhsc",
+      "category": "regulator"
+    },
+    {
+      "title": "How a Stem Cell Biologist Probes Pancreatic Organoid Secrets",
+      "link": "https://www.the-scientist.com/how-a-stem-cell-biologist-probes-pancreatic-organoid-secrets-75279",
+      "description": "A stem cell lecture sparked Amanda Andersson-Rolf’s fascination with organoids. Today, she uses human pancreatic organoids to investigate how to regenerate the adult pancreas.",
+      "isoDate": "2026-11-18T05:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Human mitochondrial DNA variants influence telomere length",
+      "link": "https://elifesciences.org/articles/111391",
+      "description": "Telomere shortening is a hallmark of aging, yet telomere length (TL) varies considerably between individuals and is strongly influenced by inheritance. In mice, efficient mitochondrial function and low reactive oxygen species (ROS) production are essential for telomere…",
+      "isoDate": "2026-11-18T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Rhodopsin 7 is an ancestral non-canonical photoreceptor that shapes light-responsive behavior",
+      "link": "https://elifesciences.org/articles/109811",
+      "description": "Animals rely on light not only for vision but also to adapt behavior to their environment through non-image-forming pathways. In Drosophila, most rhodopsins mediate retinal image formation, but Rhodopsin 7 (RH7) is widely expressed in the brain and optic lobe, acting as a…",
+      "isoDate": "2026-11-18T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "A Gαq/11-IP3R1-ANO1 pacemaking axis underlies pressure-induced lymphatic chronotropy",
+      "link": "https://elifesciences.org/articles/109466",
+      "description": "The frequency of spontaneous lymphatic contractions is exquisitely sensitive to changes in intraluminal pressure, enabling lymph transport to be matched to the filling state of the lymphatic capillary network. The mechanistic basis of this mechanosensitive response was…",
+      "isoDate": "2026-11-18T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "Perceptual glimpses are locally accumulated and globally maintained at distinct processing levels",
+      "link": "https://elifesciences.org/articles/107980",
+      "description": "Making decisions often requires the integration of multiple pieces of information. An extensive body of research has investigated the neural architecture underpinning evidence accumulation in perceptual tasks where information is continuously present, but less is known about how…",
+      "isoDate": "2026-11-18T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "How Refrigerant Choice Affects Laboratory Centrifugation",
+      "link": "https://www.the-scientist.com/how-refrigerant-choice-affects-laboratory-centrifugation-75277",
+      "description": "Environmental and performance considerations for refrigerated centrifuges.",
+      "isoDate": "2026-11-17T21:50:48.196Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Whale snot collected by drones yields whole genomes in conservation first",
+      "link": "https://labnews.co.uk/whale-snot-collected-by-drones-yields-whole-genomes-in-conservation-first/",
+      "description": "Researchers at the University of St Andrews have sequenced whole genomes from humpback whales using DNA collected from their exhaled breath, in a development that could offer a less invasive approach to monitoring whale populations. The technique uses small drones fitted with…",
+      "isoDate": "2026-11-17T18:28:22.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "London life sciences receives multimillion investment in research space and innovation",
+      "link": "https://labnews.co.uk/london-life-sciences-receives-multimillion-investment-in-research-space-and-innovation/",
+      "description": "More than £500m in financing and investment has been announced for London’s science, technology and innovation sectors, with new funding for specialist laboratory facilities and projects aimed at translating research into commercial applications. The announcements, made during…",
+      "isoDate": "2026-11-17T17:58:27.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "BBMRI-ERIC contributes to European Parliament event: EOSC and the Fifth Freedom: Enabling Knowledge Circulation Across Europe",
+      "link": "https://www.bbmri-eric.eu/news-events/bbmri-eric-contributes-to-european-parliament-event-eosc-and-the-fifth-freedom-enabling-knowledge-circulation-across-europe/",
+      "description": "Prof. Jens K. Habermann, BBMRI-ERIC Director General, is contributing unique insights as a panellist for the high-level policy event “EOSC and the Fifth Freedom: Enabling Knowledge Circulation Across Europe”. The […]",
+      "isoDate": "2026-11-17T08:30:17.000Z",
+      "source": "BBMRI-ERIC",
+      "sourceId": "bbmri-eric",
+      "category": "biobanking"
+    },
+    {
+      "title": "The Mind of a Worm: How Scientists Mapped the C. elegans Connectome",
+      "link": "https://www.the-scientist.com/the-mind-of-a-worm-how-scientists-mapped-the-c-elegans-connectome-75274",
+      "description": "Forty years ago, researchers completed the first neuronal connectome in Caenorhabditis elegans, opening doors to explore connectomics in many other organisms.",
+      "isoDate": "2026-11-17T05:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Transposons contribute to splice-isoform diversity in the Drosophila brain",
+      "link": "https://elifesciences.org/articles/110625",
+      "description": "The extraordinary complexity of the brain depends in part on the vast diversity of mRNA isoforms it expresses, often in a cell-type specific manner. In a recent study, we found that intronic transposable elements (TEs) are spliced into neural transcripts and diversify the splice…",
+      "isoDate": "2026-11-17T00:00:00.000Z",
+      "source": "eLife Sciences",
+      "sourceId": "elife",
+      "category": "science"
+    },
+    {
+      "title": "NHP Biospecimens, Cell Resources, and Biobanking for Reproducible Biomedical Research",
+      "link": "https://www.biobanking.com/nhp-biospecimens-cell-resources-and-biobanking-for-reproducible-biomedical-research/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=nhp-biospecimens-cell-resources-and-biobanking-for-reproducible-biomedical-research",
+      "description": "Creative Biolabs provides research resources spanning non-human primate (NHP) biospecimen collection, specialized epithelial and skin cell lines, and FFPE and frozen tissue biobanking. These resources support more consistent experimental workflows, enable complementary in vitro…",
+      "isoDate": "2026-11-16T14:20:53.000Z",
+      "source": "Biobanking.com",
+      "sourceId": "biobanking",
+      "category": "biobanking"
+    },
+    {
+      "title": "Cell Line Identity Crisis Haunts Biomedical Research",
+      "link": "https://www.the-scientist.com/cell-line-identity-crisis-haunts-biomedical-research-75266",
+      "description": "Misidentified cell lines have misled researchers for decades, wasting time and money, and potentially derailing promising therapeutic discoveries.",
+      "isoDate": "2026-11-16T05:10:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Draft Rules on Animal Testing Threaten India’s Advanced Therapy Ambitions",
+      "link": "https://www.the-scientist.com/draft-rules-on-animal-testing-threaten-india-s-advanced-therapy-ambitions-75265",
+      "description": "Proposed new rules increase the scope of animal use and may threaten the progress and self-reliance on human-specific emerging therapies in India.",
+      "isoDate": "2026-11-16T05:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Lab Babble: Cocktail of delights",
+      "link": "https://labnews.co.uk/lab-babble-cocktail-of-delights/",
+      "description": "Russ Swan wistfully recalls when chemistry was kids’ play. One of the best gifts I received as a child was a chemistry set. It included some glassware and chemical samples including copper sulphate, potassium permanganate and magnesium ribbon. These could be augmented by a…",
+      "isoDate": "2026-11-15T22:34:00.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "The design challenge of instrument reliability in automated labs",
+      "link": "https://labnews.co.uk/the-design-challenge-of-instrument-reliability-in-automated-labs/",
+      "description": "As laboratories become more connected, data reliability is becoming a systems issue. Where once instrument performance was shaped by the wider lab environment, now the interaction between instruments within integrated systems is itself a key influence upon planning, explain Eric…",
+      "isoDate": "2026-11-15T22:15:43.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "PubMed Indexing of Scientific Reports Halted Amid Journal Reevaluation",
+      "link": "https://www.the-scientist.com/pubmed-indexing-of-scientific-reports-halted-amid-journal-reevaluation-75268",
+      "description": "The US National Library of Medicine has paused indexing Scientific Reports articles in MEDLINE while it conducts a review of the journal.",
+      "isoDate": "2026-11-15T05:00:00.000Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    },
+    {
+      "title": "Durham researchers uncover unusual light-emitting properties in organic molecules",
+      "link": "https://labnews.co.uk/durham-researchers-uncover-unusual-light-emitting-properties-in-organic-molecules/",
+      "description": "Researchers at Durham University have identified unusual light-emitting properties in two carbon-based molecules, with findings that could inform the development of future photonic materials. The two studies, published in Nature Communications, investigate how molecular…",
+      "isoDate": "2026-11-14T18:19:22.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "Gates Foundation renews £2m funding for Scottish drug discovery technology",
+      "link": "https://labnews.co.uk/gates-foundation-renews-2m-funding-for-scottish-drug-discovery-technology/",
+      "description": "Scottish biotechnology company PhaSER Biomedical has secured a $2.7m (£2m), two-year grant renewal from the Gates Foundation to support research into treatments for some of the world’s most neglected diseases. The funding extends PhaSER’s role in the Global Health Discovery…",
+      "isoDate": "2026-11-14T18:09:38.000Z",
+      "source": "Lab News",
+      "sourceId": "lab-news",
+      "category": "lab"
+    },
+    {
+      "title": "Invitation for tender: Professional Congress Organiser (PCO) Services for the BBMRI-ERIC Annual Congress 2028, 2029 and 2030",
+      "link": "https://www.bbmri-eric.eu/news-events/invitation-for-tender-professional-congress-organiser-pco-services-for-the-bbmri-eric-annual-congress-2028-2029-and-2030/",
+      "description": "Issued by BBMRI-ERIC &#38; ESBB Tender reference: [BBMRI-ERIC/PCO/2026-11] Issue date: 15 November 2026 Objective of the invitation BBMRI-ERIC &#38; ESBB invite qualified Professional Congress Organisers (PCOs) to submit a proposal […]",
+      "isoDate": "2026-11-13T14:36:04.000Z",
+      "source": "BBMRI-ERIC",
+      "sourceId": "bbmri-eric",
+      "category": "biobanking"
+    },
+    {
+      "title": "The Biobank of the Institute of Hematology and Blood Transfusion (IHBT) achieves accreditation according to ISO 20387",
+      "link": "https://www.bbmri-eric.eu/news-events/the-biobank-of-the-institute-of-hematology-and-blood-transfusion-ihbt-achieves-accreditation-according-to-iso-20387/",
+      "description": "The Biobank of the Institute of Hematology and Blood Transfusion (IHBT) in Prague has achieved accreditation in accordance with the ČSN EN ISO 20378 standard, an internationally recognised standard that […]",
+      "isoDate": "2026-11-12T14:45:31.000Z",
+      "source": "BBMRI-ERIC",
+      "sourceId": "bbmri-eric",
+      "category": "biobanking"
+    },
+    {
+      "title": "The HCB-IDIBAPS Biobank applies for the BBMRI-ERIC Quality Label",
+      "link": "https://www.bbmri-eric.eu/news-events/the-hcb-idibaps-biobank-applies-for-the-bbmri-eric-quality-label/",
+      "description": "The HCB-IDIBAPS Biobank has obtained ISO 20387 accreditation, an international standard specifically designed for biobanks that certifies their technical competence, impartiality and the quality of biological sample management processes and associated […]",
+      "isoDate": "2026-11-12T14:40:24.000Z",
+      "source": "BBMRI-ERIC",
+      "sourceId": "bbmri-eric",
+      "category": "biobanking"
+    },
+    {
+      "title": "The Andalusian Public Health System (SSPA) Biobank achieves the BBMRI-ERIC Quality Label",
+      "link": "https://www.bbmri-eric.eu/news-events/the-andalusian-public-health-system-sspa-biobank-achieves-the-bbmri-eric-quality-label/",
+      "description": "After receiving the ISO 20387 accreditation for the deposition, quality control and distribution of human pluripotent stem cell lines as a Node of the Spanish ISCIII National Stem Cell Bank, […]",
+      "isoDate": "2026-11-12T14:24:14.000Z",
+      "source": "BBMRI-ERIC",
+      "sourceId": "bbmri-eric",
+      "category": "biobanking"
+    },
+    {
+      "title": "UK Biobank Launches Major Blood Proteomics Study to Investigate Early Signs of Neurodegenerative Diseases",
+      "link": "https://www.biobanking.com/uk-biobank-blood-proteomics-neurodegenerative-diseases/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=uk-biobank-blood-proteomics-neurodegenerative-diseases",
+      "description": "Large-Scale Proteomics: The project aims to analyze hundreds of brain-related proteins across tens of thousands of stored UK Biobank blood samples. Earlier Disease Insights: Highly sensitive protein measurements could help researchers investigate molecular changes associated…",
+      "isoDate": "2026-11-10T19:45:13.000Z",
+      "source": "Biobanking.com",
+      "sourceId": "biobanking",
+      "category": "biobanking"
+    },
+    {
+      "title": "What to Ask a Sample Tube Supplier",
+      "link": "https://www.the-scientist.com/what-to-ask-a-sample-tube-supplier-75260",
+      "description": "A tube’s material and construction can affect what leaches into stored samples.",
+      "isoDate": "2026-11-10T17:21:03.976Z",
+      "source": "The Scientist",
+      "sourceId": "the-scientist",
+      "category": "science"
+    }
+  ]
+}

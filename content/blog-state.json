@@ -1,5 +1,5 @@
 {
-  "issue": 2,
+  "issue": 3,
   "lastFormat": "A",
   "issues": [
     {
@@ -47,6 +47,27 @@
       "status": "published",
       "publishedAt": "2026-11-09T16:27:21.937Z",
       "pr": 22
+    },
+    {
+      "issue": 3,
+      "format": "A",
+      "slug": "gene-therapy-definitions-ukb-prism-iso-20387-scope",
+      "year": 2026,
+      "title": "Gene therapy definitions, UKB-PRISM and ISO 20387 scope",
+      "date": "2026-11-23",
+      "snapshot": "2026-11-23",
+      "coveredLinks": [
+        "https://www.bbmri-eric.eu/news-events/the-hcb-idibaps-biobank-applies-for-the-bbmri-eric-quality-label/",
+        "https://www.bbmri-eric.eu/news-events/the-andalusian-public-health-system-sspa-biobank-achieves-the-bbmri-eric-quality-label/",
+        "https://www.the-scientist.com/cell-line-identity-crisis-haunts-biomedical-research-75266",
+        "https://www.bbmri-eric.eu/news-events/the-biobank-of-the-institute-of-hematology-and-blood-transfusion-ihbt-achieves-accreditation-according-to-iso-20387/",
+        "https://www.biobanking.com/uk-biobank-blood-proteomics-neurodegenerative-diseases/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=uk-biobank-blood-proteomics-neurodegenerative-diseases",
+        "https://www.gov.uk/government/consultations/consultation-on-the-regulation-of-gene-therapy-medicinal-products",
+        "https://www.gov.uk/government/news/government-backs-modernisation-of-gene-therapy-definitions",
+        "https://www.gov.uk/government/news/new-mhra-service-to-support-medicines-innovation-and-strengthen-uk-manufacturing",
+        "https://www.bbmri-eric.eu/news-events/bbmri-eric-contributes-to-european-parliament-event-eosc-and-the-fifth-freedom-enabling-knowledge-circulation-across-europe/"
+      ],
+      "status": "proposed"
     }
   ]
 }
