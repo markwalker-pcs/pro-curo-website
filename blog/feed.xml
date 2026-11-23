@@ -5,13 +5,28 @@
     <link>https://www.pro-curo.com/blog/</link>
     <description>Sample Matters, the Pro-curo fortnightly briefing, from Pro-curo Software Limited.</description>
     <language>en-gb</language>
-    <lastBuildDate>Mon, 09 Nov 2026 15:02:16 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 23 Nov 2026 17:15:37 GMT</lastBuildDate>
     <atom:link href="https://www.pro-curo.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://www.pro-curo.com/img/logo-icon.jpg</url>
       <title>Sample Matters</title>
       <link>https://www.pro-curo.com/blog/</link>
     </image>
+    <item>
+      <title>Gene therapy definitions, UKB-PRISM and ISO 20387 scope</title>
+      <link>https://www.pro-curo.com/blog/2026/gene-therapy-definitions-ukb-prism-iso-20387-scope.html</link>
+      <guid isPermaLink="true">https://www.pro-curo.com/blog/2026/gene-therapy-definitions-ukb-prism-iso-20387-scope.html</guid>
+      <pubDate>Mon, 23 Nov 2026 17:15:37 GMT</pubDate>
+      <description>The MHRA intends to legislate so that gene therapy classification follows mechanism rather than cell type, so facilities holding engineered cells or modified microbial material for developers should watch for the draft regulations and guidance. UK Biobank&apos;s UKB-PRISM study shows stored blood samples gaining new research value, which depends on sound preanalytical, identification and storage records. BBMRI-ERIC&apos;s fast track lets ISO 20387-accredited biobanks gain the Quality Label without another audit, and one Andalusian biobank received the Label for its accredited stem cell scope, so that scope is worth defining deliberately.</description>
+      <category>Briefing</category>
+      <category>biobanking</category>
+      <category>cell-therapy</category>
+      <category>storage</category>
+      <category>accreditation</category>
+      <category>mhra</category>
+      <enclosure url="https://www.pro-curo.com/blog/2026/img/gene-therapy-definitions-ukb-prism-iso-20387-scope.png" length="135234" type="image/png"/>
+      <media:content url="https://www.pro-curo.com/blog/2026/img/gene-therapy-definitions-ukb-prism-iso-20387-scope.png" medium="image" type="image/png" width="1200" height="627"/>
+    </item>
     <item>
       <title>MHRA GCP inspections, lab automation and tissue data reuse</title>
       <link>https://www.pro-curo.com/blog/2026/mhra-gcp-inspections-lab-automation-tissue-data-reuse.html</link>

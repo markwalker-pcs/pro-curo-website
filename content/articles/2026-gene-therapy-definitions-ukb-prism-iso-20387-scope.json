@@ -1,0 +1,88 @@
+{
+  "issue": 3,
+  "format": "A",
+  "slug": "gene-therapy-definitions-ukb-prism-iso-20387-scope",
+  "year": 2026,
+  "title": "Gene therapy definitions, UKB-PRISM and ISO 20387 scope",
+  "metaDescription": "MHRA gene therapy definitions confirmed, UK Biobank's UKB-PRISM proteomics study, and what ISO 20387 accreditation scope means for biobanks.",
+  "whyThisMatters": [
+    "The MHRA intends to legislate so that gene therapy classification follows mechanism rather than cell type, so facilities holding engineered cells or modified microbial material for developers should watch for the draft regulations and guidance.",
+    "UK Biobank's UKB-PRISM study shows stored blood samples gaining new research value, which depends on sound preanalytical, identification and storage records.",
+    "BBMRI-ERIC's fast track lets ISO 20387-accredited biobanks gain the Quality Label without another audit, and one Andalusian biobank received the Label for its accredited stem cell scope, so that scope is worth defining deliberately."
+  ],
+  "bodyHtml": "<p>The MHRA has confirmed it will legislate for new gene therapy definitions, and UK Biobank has launched a proteomics study built on stored blood samples. In Europe, three biobanks reported progress on ISO 20387 accreditation and the BBMRI-ERIC Quality Label, and each case shows how accreditation scope is drawn.</p><h2>MHRA to proceed with new gene therapy definitions</h2><p>The MHRA and the Department of Health in Northern Ireland received 48 consultation responses, with 83 per cent (40 of 48) supporting the proposals, and <a href=\"https://www.gov.uk/government/consultations/consultation-on-the-regulation-of-gene-therapy-medicinal-products\">intend to proceed with secondary legislation</a> to rewrite the definition of a gene therapy medicinal product (GTMP) in the Human Medicines Regulations 2012. Under the policy in the <a href=\"https://assets.publishing.service.gov.uk/media/6afb2b87f3111cee0574e09e/Government_response_-_Consultation_on_the_regulation_of_gene_therapy_medicinal_products.pdf\">government response dated 17 November 2026</a>, a GTMP no longer needs to be biological in origin: it qualifies if it contains recombinant or synthetic nucleic acid that is transcribed or translated, or if it edits a target genome in a sequence-specific manner, while antisense oligonucleotides, siRNAs, purely epigenetic modulators and vaccines against infectious diseases stay outside.</p><p><strong>What it means for sample custodians:</strong> the <a href=\"https://assets.publishing.service.gov.uk/media/6afb2b87f3111cee0574e09e/Government_response_-_Consultation_on_the_regulation_of_gene_therapy_medicinal_products.pdf\">response says</a> classification turns on mechanism rather than cell type, so a product may fall within the framework whether the activity occurs in patient cells, donor cells, engineered microbial systems or bacteria. Facilities that hold donor cells, engineered cell lines or modified microbial material for therapy developers may want to note which projects could sit inside the revised definition, and watch for the draft regulations and any guidance, which the MHRA says it will consider as the proposals are implemented. The UK text also omits the \"long lasting\" expression criterion in the EU's proposed definition, a divergence the MHRA and DoH describe as a deliberate policy choice.</p><h2>UK Biobank launches UKB-PRISM on stored blood</h2><p><a href=\"https://www.biobanking.com/uk-biobank-blood-proteomics-neurodegenerative-diseases/\">Biobanking.com reports</a> that UKB-PRISM, announced on 2 November 2026, brings together UK Biobank, Nightingale Health and Alamar Biosciences to measure about 220 brain-related proteins in stored UK Biobank blood samples, with data expected to reach approved researchers from 2027. Our source is trade press, and the scale is unsettled: the partners' announcement cites 80,000 samples, while UK Biobank's own announcement refers to 75,000 participants in its main text and 60,000 in another section.</p><p><strong>What it means for sample custodians:</strong> the <a href=\"https://www.biobanking.com/uk-biobank-blood-proteomics-neurodegenerative-diseases/\">Biobanking.com analysis</a> argues that programmes like this put weight on specimen integrity, consistent preanalytical procedures, reliable sample identification and well-documented collection and storage histories. Collections that may be offered for retrospective molecular work are worth checking on exactly those points before an access request arrives, and the count discrepancy is a reminder to state clearly whether a figure means samples or participants.</p><h2>Spanish biobanks use the Quality Label fast track</h2><p>The HCB-IDIBAPS Biobank has gained ISO 20387 accreditation, the fourth biobank in Spain to do so, with a scope that includes a Neurological Tissue Bank, and <a href=\"https://www.bbmri-eric.eu/news-events/the-hcb-idibaps-biobank-applies-for-the-bbmri-eric-quality-label/\">has applied for the BBMRI-ERIC audited Quality Label</a> through the fast-track procedure open to ISO 20387-accredited biobanks. The Andalusian Public Health System Biobank, accredited for the deposition, quality control and distribution of human pluripotent stem cell lines as a node of the Spanish ISCIII National Stem Cell Bank, <a href=\"https://www.bbmri-eric.eu/news-events/the-andalusian-public-health-system-sspa-biobank-achieves-the-bbmri-eric-quality-label/\">has received the Label for that scope</a> and is working to extend its accreditation to more procedures and materials.</p><p><strong>What it means for sample custodians:</strong> Andrea Wutte, Head of Quality Management at BBMRI-ERIC, <a href=\"https://www.bbmri-eric.eu/news-events/the-andalusian-public-health-system-sspa-biobank-achieves-the-bbmri-eric-quality-label/\">said</a>: \"Through our fast-track route, we make it easy for accredited biobanks to receive this additional recognition without undergoing another audit, and I hope many more will follow this example.\" The Andalusian Label was awarded for the accredited stem cell scope. Teams planning ISO 20387 may want to decide early which collections, materials and procedures sit inside scope; the Andalusian team expects its extension to be more straightforward because it builds on earlier work.</p><h2>Prague haematology biobank accredited for three sample types</h2><p>The Biobank of the Institute of Hematology and Blood Transfusion (IHBT) in Prague <a href=\"https://www.bbmri-eric.eu/news-events/the-biobank-of-the-institute-of-hematology-and-blood-transfusion-ihbt-achieves-accreditation-according-to-iso-20387/\">achieved accreditation in June 2026</a>, covering plasma, DNA and viable leukocytes held for research into haematological and oncological diseases. Deputy Head Dr Adéla Benešová says it is one of two biobanks in the Czech BBMRI.CZ network accredited so far.</p><p><strong>What it means for sample custodians:</strong> the accreditation was granted for three named material types, including viable cells alongside plasma and DNA. For anyone scoping an application, a current list of each material type held, with the processing and storage procedures that apply to it, makes it easier to see which materials are ready to include.</p><h2>On our radar</h2><ul><li><a href=\"https://www.the-scientist.com/cell-line-identity-crisis-haunts-biomedical-research-75266\">The Scientist</a> looks at how misidentified cell lines have misled researchers for decades, wasting time and money; only the feed summary was available to us.</li><li><a href=\"https://www.biobanking.com/uk-biobank-blood-proteomics-neurodegenerative-diseases/\">Biobanking.com notes</a> that UK Biobank metabolomic data covering approximately 500,000 participants became available to approved researchers in January 2026, and UKB-PRISM data will sit alongside it.</li></ul>",
+  "alsoThisFortnight": [],
+  "sources": [
+    {
+      "title": "Consultation on the regulation of Gene therapy medicinal products",
+      "publisher": "MHRA",
+      "url": "https://www.gov.uk/government/consultations/consultation-on-the-regulation-of-gene-therapy-medicinal-products",
+      "type": "regulator"
+    },
+    {
+      "title": "Government response: Consultation on the regulation of gene therapy medicinal products",
+      "publisher": "MHRA",
+      "url": "https://assets.publishing.service.gov.uk/media/6afb2b87f3111cee0574e09e/Government_response_-_Consultation_on_the_regulation_of_gene_therapy_medicinal_products.pdf",
+      "type": "primary-document"
+    },
+    {
+      "title": "UK Biobank Launches Major Blood Proteomics Study to Investigate Early Signs of Neurodegenerative Diseases",
+      "publisher": "Biobanking.com",
+      "url": "https://www.biobanking.com/uk-biobank-blood-proteomics-neurodegenerative-diseases/",
+      "type": "trade-press"
+    },
+    {
+      "title": "The HCB-IDIBAPS Biobank applies for the BBMRI-ERIC Quality Label",
+      "publisher": "BBMRI-ERIC",
+      "url": "https://www.bbmri-eric.eu/news-events/the-hcb-idibaps-biobank-applies-for-the-bbmri-eric-quality-label/",
+      "type": "other"
+    },
+    {
+      "title": "The Andalusian Public Health System (SSPA) Biobank achieves the BBMRI-ERIC Quality Label",
+      "publisher": "BBMRI-ERIC",
+      "url": "https://www.bbmri-eric.eu/news-events/the-andalusian-public-health-system-sspa-biobank-achieves-the-bbmri-eric-quality-label/",
+      "type": "other"
+    },
+    {
+      "title": "The Biobank of the Institute of Hematology and Blood Transfusion (IHBT) achieves accreditation according to ISO 20387",
+      "publisher": "BBMRI-ERIC",
+      "url": "https://www.bbmri-eric.eu/news-events/the-biobank-of-the-institute-of-hematology-and-blood-transfusion-ihbt-achieves-accreditation-according-to-iso-20387/",
+      "type": "other"
+    },
+    {
+      "title": "Cell Line Identity Crisis Haunts Biomedical Research",
+      "publisher": "The Scientist",
+      "url": "https://www.the-scientist.com/cell-line-identity-crisis-haunts-biomedical-research-75266",
+      "type": "trade-press"
+    }
+  ],
+  "tags": [
+    "biobanking",
+    "cell-therapy",
+    "storage",
+    "accreditation",
+    "mhra"
+  ],
+  "faq": [],
+  "social": {
+    "linkedin": "The MHRA intends to legislate so that gene therapy classification follows mechanism rather than biological origin or cell type. That matters for anyone holding donor cells, engineered cell lines or modified microbial material for therapy developers.\n\nThree points from this fortnight's Sample Matters:\n\n1. The MHRA and the Department of Health in Northern Ireland will proceed with secondary legislation after 83 per cent of 48 respondents backed new gene therapy definitions covering synthetic nucleic acids and sequence-specific genome editing.\n\n2. UK Biobank's UKB-PRISM study will measure about 220 brain-related proteins in stored blood samples, a reminder that archived collections gain research value only when preanalytical, identification and storage records hold up.\n\n3. BBMRI-ERIC's fast track lets ISO 20387-accredited biobanks gain the Quality Label without another audit, and one Andalusian biobank received the Label for its accredited stem cell scope.\n\nHow is your team deciding which collections and materials go inside an accreditation scope?",
+    "linkedinWeekTwo": "A biobank in Prague gained accreditation for three named material types: plasma, DNA and viable leukocytes. Scope was set material by material. For teams planning ISO 20387, a current list of each material type held, with the processing and storage procedures that apply to it, is a practical place to start.",
+    "facebook": "This fortnight's Sample Matters covers the MHRA's plan to update the legal definition of gene therapy medicines, a new UK Biobank study measuring brain-related proteins in stored blood samples, and three European biobanks moving forward on ISO 20387 accreditation and the BBMRI-ERIC Quality Label. Each story sets out what it means for people who look after sample collections.",
+    "hashtags": [
+      "#Biobanking",
+      "#SampleManagement",
+      "#GeneTherapy",
+      "#ISO20387",
+      "#LabManagement"
+    ],
+    "emailSubject": "Gene therapy definitions and ISO 20387 scope",
+    "emailPreheader": "The MHRA confirms new gene therapy definitions, UK Biobank launches UKB-PRISM, and three biobanks advance on accreditation.",
+    "emailIntro": "The MHRA will legislate for new gene therapy definitions that classify products by mechanism, which matters for anyone holding engineered cells or modified microbial material for developers. We also look at UK Biobank's new proteomics study on stored blood and what three European accreditations show about scoping ISO 20387."
+  },
+  "datePublished": "2026-11-23T17:15:37.689Z",
+  "dateModified": "2026-11-23T17:15:37.689Z",
+  "snapshot": "2026-11-23",
+  "quietFortnight": false,
+  "status": "proposed",
+  "imageBytes": 135234
+}
